@@ -1,0 +1,16 @@
+@model Dictionary<string, string>
+<div class="tag-selector">  
+  <label>Tags</label>
+  <div class="selected-tags"></div>
+  <input list="available-tags" placeholder="Type ..." autofocus/>  
+  <select name="" multiple>
+    @foreach(var pair in Model) {
+      <option value="@pair.Value" label="@pair.Key" />
+    }
+  </select>
+  <datalist id="available-tags">
+    @foreach(var pair in Model) {
+      <option value="@pair.Value" label="@pair.Key" />
+    }
+  </datalist>
+</div>

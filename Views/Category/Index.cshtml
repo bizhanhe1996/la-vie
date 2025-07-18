@@ -27,7 +27,7 @@
                         <td><span class="badge primary">@category.ProductsCount</span></td>
                         <td>
                             <div class="flex gap-2">
-                                @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Category" }, { "Id", category.Id.ToString() } })                                
+                                @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Category" }, { "Id", category.Id.ToString() } })
                                 @await Html.PartialAsync("Components/_DeleteButton", new Dictionary<string,string> (){ { "Controller","Category"},{ "Id", category.Id.ToString()} })
                     </div>
                 </td>

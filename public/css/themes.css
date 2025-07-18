@@ -12,6 +12,7 @@
   --theme-input-background: var(--gray-200);
   --theme-input-color: var(--gray-500);
   --theme-input-shadow-color: var(--blue-200);
+  --theme-input-label-color: var(--gray-600);
   /* tables */
   --theme-table-row-even: var(--gray-200);
   --theme-table-row-odd: var(--gray-300);
@@ -35,6 +36,7 @@
   --theme-input-background: var(--gray-600);
   --theme-input-color: var(--gray-400);
   --theme-input-shadow-color: var(--blue-400);
+  --theme-input-label-color: var(--gray-400);
   /* tables */
   --theme-table-row-even: var(--gray-600);
   --theme-table-row-odd: var(--gray-700);

@@ -61,3 +61,43 @@ const toggleSubmenu = (elm) => {
   elm.nextElementSibling.style.height = height == "auto" ? "0" : "auto";
   [...elm.children].at(-1).classList.toggle("rotate-180");
 };
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("div.tag-selector input").forEach((input) => {
+    input.addEventListener("keydown", (event) => {
+      const input = event.target;
+      let query;
+      if (event.key === "Enter") {
+        event.preventDefault();
+        query = input.value;
+        const matches = [...input.nextElementSibling.children].filter(
+          (option) => {
+            return option.label.toLowerCase().includes(query.toLowerCase());
+          }
+        );
+        if (matches.length === 1) {
+          matches[0].selected = true;
+          const selectedTagNode = document.createElement("span");
+          selectedTagNode.classList.add("tag");
+          selectedTagNode.innerHTML = matches[0].label;
+          input.previousElementSibling.append(selectedTagNode);
+          selectedTagNode.addEventListener("click", (event) => {
+            event.target.parentNode.parentNode.querySelector(
+              `select option[label=${selectedTagNode.innerHTML}]`
+            ).selected = false;
+            event.target.remove();
+          });
+          input.value = null;
+        }
+      } else if (event.key == "Backspace") {
+        const candidate = [...input.previousElementSibling.children]?.at(-1);
+        if (candidate) {
+          input.parentNode.querySelector(
+            `select option[label=${candidate.innerHTML}]`
+          ).selected = false;
+          candidate.remove();
+        }
+      }
+    });
+  });
+});

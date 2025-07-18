@@ -8,7 +8,15 @@
     <div class="row">
         <div class="col-6 fc">
             <div class="p-4 border border-gray-300 bg-gray-50 rounded w-320 max-w-320">
-                <h1 class="font-bold mb-8 text-gray-500">Register</h1>
+                
+                <div class="flex justify-between mb-4">
+                    <h1 class="font-bold text-gray-500">Register</h1>
+                    <a href="@Context.Request.Headers["Referer"]" class="flex items-center text-gray-500">
+                        <i class="material-icons">keyboard_arrow_left</i>
+                        <small>Back</small>
+                    </a>
+                </div>
+                
                 <form class="form" asp-action="Register" method="POST">
                     <div class="mb-8">
                         <fieldset>

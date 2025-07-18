@@ -20,7 +20,7 @@ form.form {
       top: -16px;
       transform: translateY(50%);
       margin-inline-start: 4px;
-      color: var(--gray-500);
+      color: var(--theme-input-label-color);
       background: linear-gradient(
         0,
         var(--theme-input-background) 4px,

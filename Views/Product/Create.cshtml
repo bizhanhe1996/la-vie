@@ -10,10 +10,10 @@
 </div>
 
 <form class="form" asp-action="@mode" method="POST">
-  <div class="flex flex-col gap-2">
+  
     <fieldset>
       <label asp-for="Name" required>Name</label>
-      <input asp-for="Name" autofocus required />
+      <input asp-for="Name"  required />
       <span class="error" asp-validation-for="Name"></span>
     </fieldset>
     <fieldset>
@@ -32,17 +32,8 @@
       </select>
       <span class="error" asp-validation-for="Category"></span>
     </fieldset>
-    <fieldset>
-      <label asp-for="SelectedTagsIds">Tags</label>
-      <select asp-for="SelectedTagsIds" multiple>
-        @foreach (var tag in ViewBag.Tags)
-        {
-          <option value="@tag.Id">@tag.Name</option>
-        }
-      </select>
-    </fieldset>
-  </div>
-  <div class="flex justify-end">
+    @await Html.PartialAsync("Components/_TagSelector", (Dictionary<string, string>) ViewBag.Tags)
+  <div class="flex justify-end mt-4">
     @await Html.PartialAsync("Components/_SubmitButton")
   </div>
 </form>

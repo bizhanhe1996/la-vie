@@ -1,0 +1,81 @@
+div.tag-selector {
+  position: relative;
+  transition: box-shadow 0.25s ease, background 0.3s ease;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  background: var(--theme-input-background);
+  padding-inline-start: 0.25rem;
+  border-radius: 0.25rem;
+  &:focus-within {
+    box-shadow: 0 0 0px 4px var(--theme-input-shadow-color);
+    & > label {
+      background: linear-gradient(
+        0,
+        var(--theme-input-background) 4px,
+        transparent 4px
+      );
+      top: -24px;
+    }
+  }
+
+  label {
+    position: absolute;
+    user-select: none;
+    top: -16px;
+    transform: translateY(50%);
+    margin-inline-start: 4px;
+    color: var(--theme-input-label-color);
+    background: linear-gradient(
+      0,
+      var(--theme-input-background) 4px,
+      transparent 4px
+    );
+    padding: 0 4px;
+    height: 16px;
+    font-size: 12px;
+    transition: top 0.3s ease;
+    &[required]::after {
+      content: "R";
+      position: absolute;
+      color: red;
+      font-size: xx-small;
+    }
+  }
+
+  input::-webkit-calendar-picker-indicator {
+    display: none !important;
+    appearance: none;
+  }
+  input {
+    background: none;
+    border: none;
+    margin-inline-start: 0.25rem;
+    flex: 1;
+    color: var(--theme-input-color);
+    padding: 8px;
+    &:focus {
+      outline: none;
+    }
+  }
+  div.selected-tags {
+    span.tag {
+      user-select: none;
+      font-size: small;
+      color: var(--theme-input-color);
+      border: 1px solid var(--theme-input-color);
+      padding: 2px 6px;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      margin-inline-start: 0.25rem;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      &:hover {
+        color: var(--red-500);
+        border-color: var(--red-500);
+      }
+    }
+  }
+  select {
+    display: none;
+  }
+}

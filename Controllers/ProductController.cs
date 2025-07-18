@@ -36,6 +36,7 @@ public class ProductController : BaseController
     public IActionResult Create()
     {
         SetCreateBreadcrumbs();
+        SetViewMode(VIEW_MODES.CREATE);
         return SetCategories().SetTags().View();
     }
 
@@ -108,7 +109,9 @@ public class ProductController : BaseController
 
     private ProductController SetTags()
     {
-        ViewBag.Tags = context.Tags.ToList();
+        var Tags = new Dictionary<string, string>();
+        context.Tags.ToList().ForEach(t => Tags.Add(t.Name, t.Id.ToString()));
+        ViewBag.Tags = Tags;
         return this;
     }
 
