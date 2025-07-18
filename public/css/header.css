@@ -1,0 +1,38 @@
+header {
+  color: var(--theme-text-light);
+  background: var(--theme-header-background);
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding-inline-start: 1rem;
+  user-select: none;
+  div {
+    margin-inline-end: 0.5rem;
+    img#profile-image {
+      height: 36px;
+      border-radius: 50%;
+      aspect-ratio: 1;
+      width: auto;
+      transition: filter 0.3s ease;
+      cursor: pointer;
+      &:hover {
+        filter: sepia(1);
+      }
+    }
+  }
+  div#drop-down {
+    top: 80%;
+    right: 80%;
+    transform-origin: top right;
+    position: absolute;
+    border-radius: 0.25rem;
+    background: var(--gray-200);
+    z-index: 4;
+    transition: transform 0.3s ease-in-out;
+    padding: 0.5rem;
+    height: 256px;
+    min-height: 256px;
+    width:128px;
+    max-width: 196px;
+  }
+}

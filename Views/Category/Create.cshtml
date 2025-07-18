@@ -1,0 +1,31 @@
+@model SampleProject.Models.Category;
+@{
+    string mode = ViewBag.ViewMode.ToString() == "UPDATE" ? "Update" : "Create";
+    ViewData["Title"] = mode + " a new category";
+}
+
+<div class="flex justify-between items-center mb-3">
+    @await Html.PartialAsync("Components/_Breadcrumbs")
+    @await Html.PartialAsync("Components/_BackButton")
+</div>
+
+<form class="form" asp-action="@mode" method="POST">
+    <div class="flex flex-col gap-2">
+        <fieldset>
+            <label asp-for="Title" required>Title</label>
+            <input asp-for="Title" autofocus required />
+        </fieldset>
+        <fieldset>
+            <label asp-for="Slug">Slug</label>
+            <input asp-for="Slug" />
+        </fieldset>
+        <fieldset>
+            <label asp-for="Description">Description</label>
+            <textarea asp-for="Description"></textarea>
+        </fieldset>
+    </div>
+    @* Buttons *@
+    <div class="flex justify-end">
+        @await Html.PartialAsync("Components/_SubmitButton")
+    </div>
+</form>

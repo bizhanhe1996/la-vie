@@ -1,0 +1,48 @@
+@model SampleProject.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_AuthLayout";
+}
+
+<main class="h-screen flex items-center bg-gray-100">
+    <div class="row">
+        <div class="col-6 fc">
+            <div class="p-4 border border-gray-300 bg-gray-50 rounded w-320 max-w-320">
+                <div class="fc flex-col gap-4 mb-4 user-select-none">
+                    <i class="material-icons text-teal-500" style="font-size:6rem" >star</i>
+                    <h1 class="text-teal-500 font-bold">LA VIE</h1>
+                </div>
+                <form class="form" asp-action="Login" method="POST">
+                    <div class="mb-8">
+                        <fieldset>
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" autofocus required/>
+                            <span asp-validation-for="Email" ></span>
+                        </fieldset>
+                        <fieldset>
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" type="password" required/>
+                            <span asp-validation-for="Password"></span>
+                        </fieldset>
+                        <div class="flex gap-2 items-center mb-4">
+                            <div class="checkbox">
+                                <input type="checkbox" asp-for="RememberMe"/>
+                                <i class="material-icons">check</i>
+                            </div>
+                            <label class="text-gray-500 form-check-label" asp-for="RememberMe">Remember me</label>
+                        </div>
+                    </div>
+                    <button class="btn upd w-full mb-4" type="submit">
+                        <span>Login</span>
+                        <i class="material-icons">login</i>
+                    </button>
+                    <a class="text-gray-500 text-sm block" href="@Url.Action("Register", "Account")">No account? Register</a>
+                </form>
+            </div>
+        </div>
+        <div class="col-6 fc sm-hidden">
+            <img width="75%" src="/images/login.png" draggable="false" class="user-select-none" />
+        </div>
+    </div>
+</main>

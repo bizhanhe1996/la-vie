@@ -1,0 +1,10 @@
+<ul class="breadcrumbs">
+    @foreach (var item in ViewBag.Path)
+    {
+        <li>
+            <a asp-controller="@item.Controller" asp-action="@item.Action">
+                @item.Title
+            </a>
+        </li>
+    }
+</ul>

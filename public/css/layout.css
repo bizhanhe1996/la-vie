@@ -1,0 +1,36 @@
+html.panel {
+  background: var(--theme-section-background);
+  transition: background 0.3s ease;
+  body {
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 48px 1fr 36px;
+    position: relative;
+    main {
+      display: grid;
+      grid-template-columns: 196px 1fr;
+      transition: grid-template-columns 0.5s ease;
+    }
+    footer {
+      background-color: var(--theme-footer-background);
+      color: var(--theme-text-light);
+      font-size: small;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+    div#black-overlay {
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 4;
+      position: absolute;
+      transition: opacity 0.3s ease;      
+      display: none;
+      opacity: 0;
+      backdrop-filter: blur(0.1rem);
+    }
+  }
+}

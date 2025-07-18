@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr" class="light panel">
+
+@* Head *@
+@await Html.PartialAsync("Panel/_Head.cshtml")
+
+<body>
+    @* Header *@
+    @await Html.PartialAsync("Panel/_Header.cshtml")
+    @* Main *@
+    <main role="main">
+        @* Aside *@
+        @await Html.PartialAsync("Panel/_Aside.cshtml")
+        <section class="p-3">
+            @RenderBody()
+        </section>
+    </main>
+    @* Footer *@
+    @await Html.PartialAsync("Panel/_Footer.cshtml")
+    @* Modals *@
+    <div id="black-overlay" onclick="toggleAsideMobile()"></div>
+    @* JS Here *@
+    <script src="/js/app.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

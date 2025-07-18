@@ -1,0 +1,30 @@
+ul.breadcrumbs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  gap: 0.25rem;
+  li {
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    &:last-of-type {
+      color: var(--gray-600);
+    }
+  }
+  li:not(:last-child)::after {
+    content: "chevron_right";
+    color: var(--theme-aside-background);
+    display: inline-flex;
+    font-size: 1.25rem;
+    font-family: "Material Icons";
+    margin-inline-start: 0.25rem;
+    :html[dir="rtl"] {
+      & {
+        content: "chevron_left";
+      }
+    }
+  }
+}

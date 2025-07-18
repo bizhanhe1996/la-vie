@@ -1,0 +1,64 @@
+.btn {
+  padding: 6px 8px;
+  font-size: 14px;
+  margin-inline-end: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  border: none;
+  color: var(--gray-100);
+  border-radius: 4px;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  span, i {
+    font-size: 16px;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    div.click-wave {
+      animation: click-effect 0.3s ease;
+    }
+  }
+  &.add {
+    background-color: var(--green-500);
+    &:focus {
+      box-shadow: 0 0 0px 4px var(--green-200);
+    }
+    &:hover {
+      background-color: var(--green-700);
+    }
+  }
+  &.upd {
+    background-color: var(--blue-500);
+    &:focus {
+      box-shadow: 0 0 0px 4px var(--blue-200);
+    }
+    &:hover {
+      background-color: var(--blue-700);
+    }
+  }
+  &.del {
+    background-color: var(--red-500);
+    &:focus {
+      box-shadow: 0 0 0px 4px var(--red-200);
+    }
+    &:hover {
+      background-color: var(--red-700);
+    }
+  }
+  &.back {
+    background-color: var(--gray-500);
+    &:focus {
+      box-shadow: 0 0 0px 4px var(--gray-200);
+    }
+    &:hover {
+      background-color: var(--gray-700);
+    }
+  }
+}

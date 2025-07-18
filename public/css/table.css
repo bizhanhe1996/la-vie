@@ -1,0 +1,39 @@
+.table {
+  overflow: hidden;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 0.5rem;
+  border: none;
+  thead {
+    background-color: var(--theme-table-thead);
+    color: var(--theme-table-row-even);
+    th {
+      font-weight: 700;
+      border: 1px solid var(--theme-section-background);
+      padding: 0.25rem;
+    }
+  }
+  tbody {
+    tr {
+      transition: background-color 0.15s;
+      td {
+        border: 1px solid var(--theme-section-background);
+        padding: 0.25rem;
+        color: var(--theme-table-td-text);
+      }
+      &:hover {
+        background-color: var(--theme-section-background) !important;
+      }
+    }
+  }
+  &.striped {
+    tbody {
+      tr:nth-child(odd) {
+        background-color: var(--theme-table-row-odd);
+      }
+      tr:nth-child(even) {
+        background-color: var(--theme-table-row-even);
+      }
+    }
+  }
+}

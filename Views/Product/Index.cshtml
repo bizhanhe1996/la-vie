@@ -1,0 +1,64 @@
+@model List<SampleProject.Models.Product>;
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="flex justify-between items-center mb-3">
+    @await Html.PartialAsync("Components/_Breadcrumbs")
+    @await Html.PartialAsync("Components/_CreateButton", "Product")
+</div>
+
+@if (Model.Count > 0)
+{
+    <div class="overflow-x-auto">
+        <table class="table striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Tags</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.Price</td>
+                        <td>
+                            <span class="badge primary">
+                                @product.Category?.Title
+                            </span>
+                        </td>
+                        <td>
+                            @if (product.ProductTags != null)
+                            {
+                                @foreach (var tag in product.ProductTags)
+                                {
+                                    <span class="badge secondary" title="@tag.Tag.Description">#@tag.Tag.Name</span>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <div class="flex gap-2">
+                                @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Product" }, { "Id", product.Id.ToString() } })
+                                @await Html.PartialAsync("Components/_DeleteButton", new Dictionary<string,string> (){ { "Controller","Product"},{ "Id", product.Id.ToString()} })
+                    </div>
+                </td>
+            </tr>
+                        }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert">
+        <i class="material-icons">warning</i>
+        <p>No product defined yet!</p>
+    </div>   
+}

@@ -1,0 +1,46 @@
+@model List<SampleProject.Models.Category>;
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="flex justify-between items-center mb-3">
+    @await Html.PartialAsync("Components/_Breadcrumbs")
+    @await Html.PartialAsync("Components/_CreateButton", "Category")
+</div>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="overflow-x-auto">
+        <table class="table striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Products</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.Title</td>
+                        <td><span class="badge primary">@category.ProductsCount</span></td>
+                        <td>
+                            <div class="flex gap-2">
+                                @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Category" }, { "Id", category.Id.ToString() } })                                
+                                @await Html.PartialAsync("Components/_DeleteButton", new Dictionary<string,string> (){ { "Controller","Category"},{ "Id", category.Id.ToString()} })
+                    </div>
+                </td>
+            </tr>
+                        }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert">
+        <i class="material-icons">warning</i>
+        <p>No category defined yet!</p>
+    </div>   
+}

@@ -1,0 +1,77 @@
+@{
+    List<Dictionary<string, string>> items = [
+    new() {
+{"title","Home"},
+{"icon","home"},
+{"controller","Home"},
+{"action","Index"},
+},
+new() {
+{"title", "Users"},
+{"icon","person"},
+{"controller","User"},
+{"action","Index"},
+},
+new() {
+{"title", "Categories"},
+{"icon","category"},
+{"controller","Category"},
+{"action","Index"},
+},
+new() {
+{"title", "Tags"},
+{"icon","tag"},
+{"controller","Tag"},
+{"action","Index"},
+},
+new() {
+{"title", "Products"},
+{"icon","shopping_bag"},
+{"controller","Product"},
+{"action","Index"},
+},
+];
+}
+<aside>
+    <ul>
+        @foreach (var item in items)
+        {
+            <li>
+                <a asp-controller="@item["controller"]" asp-action="@item["action"]">
+                    <i class="material-icons">@item["icon"]</i>
+                    <span>@item["title"]</span>
+                    <div class="click-wave"></div>
+                </a>
+            </li>
+        }
+        <li>
+            <div class="submenu-title" onclick="toggleSubmenu(this)">
+                <i class="material-icons">settings</i>
+                <span>Settings</span>
+                <i class="material-icons arrow-down">keyboard_arrow_down</i>
+            </div>
+            <ul class="submenu-items">
+                <li>
+                    @* Direction *@
+                    <a onclick="toggleDirection(this)">
+                        <i class="material-icons">format_textdirection_r_to_l</i>
+                        <span>RTL</span>
+                    </a>
+                </li>
+                <li>
+                    @* Theme *@
+                    <a onclick="toggleTheme(this)">
+                        <i class="material-icons">dark_mode</i>
+                        <span>Dark</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a onclick="toggleAside(this)">
+                <i class="material-icons transition-transform">chevron_left</i>
+                <span>Collapse</span>
+            </a>
+        </li>
+        <ul>
+</aside>

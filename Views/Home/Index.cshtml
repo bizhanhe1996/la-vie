@@ -1,0 +1,45 @@
+﻿@{
+    // page title
+    ViewData["Title"] = "Home Page";
+
+    // cards
+    Dictionary<string, Dictionary<string, string>> cards = new();
+    cards.Add("Messages", new() {
+{"message", "Sina, Saeed, Sepehr, ..."},
+{"icon","message"},
+{"class","info"},
+{"count","79"},
+});
+    cards.Add("Tasks", new() {
+{"message", "Article, Book, ..."},
+{"icon","check_circle"},
+{"class","primary"},
+{"count","9"},
+});
+    cards.Add("Events", new() {
+{"message", "Sina, Saeed, Sepehr, ..."},
+{"icon","event"},
+{"class","gray"},
+{"count","43"},
+});
+    cards.Add("Notes", new() {
+{"message", "Sina, Saeed, Sepehr, ..."},
+{"icon","notes"},
+{"class","danger"},
+{"count","12"},
+});
+}
+
+<div class="grid sm-grid-cols-1 md-grid-cols-2 lg-grid-cols-4 gap-3">
+    @foreach (var pair in cards)
+    {
+        <div class="card card-@pair.Value["class"]">
+            <strong>@pair.Value["count"]</strong>
+            <b>@pair.Key</b>
+            <p>@pair.Value["message"]</p>
+            <i class="material-icons">@pair.Value["icon"]</i>
+            <div class="click-wave"></div>
+        </div>
+    }
+    
+</div>

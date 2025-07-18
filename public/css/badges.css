@@ -1,0 +1,17 @@
+span.badge {
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-text-light);
+    user-select: none;
+    &.primary {
+        background: var(--blue-500);
+    }
+    &.secondary {
+        background: var(--gray-500);
+    }
+}

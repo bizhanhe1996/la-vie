@@ -1,0 +1,7 @@
+@model Dictionary<string, string>
+
+<a class="btn upd" asp-controller="@Model["Controller"]" asp-action="Update" asp-route-id="@Model["Id"]">
+    <i class="material-icons">edit</i>
+    <span>Update</span>
+    <div class="click-wave"></div>
+</a>
