@@ -45,11 +45,11 @@ const toggleAsideMobile = async () => {
     aside.style.marginInlineStart = "0px";
     blackOverlayClassList.toggle("block");
     window.setTimeout(() => {
-      blackOverlayClassList.toggle("opacity-full");
+      blackOverlayClassList.toggle("opacity-100");
     }, 1);
   } else {
     aside.style.marginInlineStart = "-100%";
-    blackOverlayClassList.toggle("opacity-full");
+    blackOverlayClassList.toggle("opacity-100");
     window.setTimeout(() => {
       blackOverlayClassList.toggle("block");
     }, 300);

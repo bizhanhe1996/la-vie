@@ -20,6 +20,9 @@
         border: 1px solid var(--theme-section-background);
         padding: 0.25rem;
         color: var(--theme-table-td-text);
+        .btn {
+          padding: 2px 4px;
+        }
       }
       &:hover {
         background-color: var(--theme-section-background) !important;

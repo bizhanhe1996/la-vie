@@ -1,4 +1,5 @@
 <header class="box-shadow">
+    @* left section *@
     <i onclick="toggleAsideMobile()" id="aside-toggle-mobile" class="material-icons">dehaze</i>
     <div class="flex gap-2 items-center">
         <i class="material-icons text-teal-500">star</i>
@@ -6,18 +7,19 @@
             LA VIE
         </a>
     </div>
+    @* right section *@
     <div class="ms-auto flex flex-row gap-2 items-center">
-        <a onclick="toggleTheme(this)">
+        <a class="hidden md:flex" onclick="toggleTheme(this)">
             <i class="material-icons">dark_mode</i>
         </a>
-        <a onclick="toggleDirection(this)">
+        <a class="hidden md:flex" onclick="toggleDirection(this)">
             <i class="material-icons">format_textdirection_r_to_l</i>
         </a>
-        <div class="flex flex-col gap-1 m-auto justify-center">
+        <div class="flex flex-col m-auto justify-center">
             <span class="font-bold">@ViewBag.ActiveUser.FullName</span>
-            <span class="text-right text-xsm">@ViewBag.ActiveUser.Email</span>
+            <span class="text-right text-xs">@ViewBag.ActiveUser.Email</span>
         </div>
-        <div class="relative" onclick="this.children[1].classList.toggle('scale-1')">
+        <div class="relative" onclick="this.children[1].classList.toggle('scale-100')">
             <img id="profile-image" src="/images/profile.jpeg" draggable="false" />
             <div class="scale-0" id="drop-down">
                 <form asp-controller="Account" asp-action="Logout" method="POST">

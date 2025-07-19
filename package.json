@@ -1,0 +1,31 @@
+{
+  "name": "la-vie",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "twc": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/minified-tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bizhanhe1996/la-vie.git"
+  },
+  "keywords": [
+    "ASP.NET Core",
+    "C#",
+    "Admin Template"
+  ],
+  "author": "bizhan.he1996@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bizhanhe1996/la-vie/issues"
+  },
+  "homepage": "https://github.com/bizhanhe1996/la-vie#readme",
+  "description": "Admin template for ASP.NET Core MVC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11"
+  }
+}
