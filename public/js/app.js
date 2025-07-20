@@ -62,6 +62,14 @@ const toggleSubmenu = (elm) => {
   [...elm.children].at(-1).classList.toggle("rotate-180");
 };
 
+const toggleConfirm = (message, elm) => {
+  if(window.confirm(message)) {
+
+    elm.querySelector('a').click()
+  }
+}
+
+
 window.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("div.tag-selector input").forEach((input) => {
     input.addEventListener("keydown", (event) => {

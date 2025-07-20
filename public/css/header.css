@@ -20,19 +20,5 @@ header {
       }
     }
   }
-  div#drop-down {
-    top: 80%;
-    right: 80%;
-    transform-origin: top right;
-    position: absolute;
-    border-radius: 0.25rem;
-    background: var(--gray-200);
-    z-index: 4;
-    transition: transform 0.3s ease-in-out;
-    padding: 0.5rem;
-    height: 256px;
-    min-height: 256px;
-    width:128px;
-    max-width: 196px;
-  }
+
 }

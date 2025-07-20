@@ -1,3 +1,4 @@
+using Bogus;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +21,17 @@ public class CategoryController : BaseController
         this.context = context;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
+        int totalCount = await context.Products.CountAsync();
+
         SetIndexBreadcrumbs();
-        List<Category> categories = context.Categories.Include(c => c.Products).ToList();
+        List<Category> categories = await context
+            .Categories.OrderBy(c => c.Id)
+            .Skip((page - 1) * size)
+            .Take(size)
+            .Include(c => c.Products)
+            .ToListAsync();
         return View(categories);
     }
 
@@ -90,6 +98,23 @@ public class CategoryController : BaseController
         return await Delete<Category>(context, id);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Seed()
+    {
+        var faker = new Faker<Category>()
+            .RuleFor(
+                c => c.Title,
+                f => f.Random.AlphaNumeric(6).ToLower() + f.Commerce.Categories(1).First()
+            )
+            .RuleFor(c => c.Slug, (f, c) => MakeCategorySlug(c.Title))
+            .RuleFor(c => c.Description, f => f.Lorem.Sentence(12));
+        var fakeCategories = faker.Generate(100);
+
+        context.Categories.AddRange(fakeCategories);
+        await context.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+
     private bool CheckUniqueConstraint(Category category)
     {
         bool isTaken = context.Categories.Any(c => c.Title == category.Title);
@@ -98,5 +123,16 @@ public class CategoryController : BaseController
             ModelState.AddModelError("Name", "This title is already taken.");
         }
         return isTaken;
+    }
+
+    private string MakeCategorySlug(string title)
+    {
+        return title
+            .ToLowerInvariant()
+            .Replace(" ", "-")
+            .Replace(",", "")
+            .Replace(".", "")
+            .Replace("/", "")
+            .Replace("'", "");
     }
 }
