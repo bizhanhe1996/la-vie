@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using SampleProject.Data;
 using SampleProject.Enums;
 using SampleProject.Models;
-using SampleProject.Structs;
 
 namespace SampleProject.Controllers;
 
@@ -23,7 +22,24 @@ public class CategoryController : BaseController
 
     public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
-        int totalCount = await context.Products.CountAsync();
+        int totalCount = await context.Categories.CountAsync();
+        int pagesCount = totalCount / size;
+
+        // guards
+        if (page <= 0)
+        {
+            page = 1;
+        }
+
+        if (page > pagesCount)
+        {
+            page = pagesCount;
+        }
+
+        // pagination calculations
+        ViewBag.CurrentPage = page;
+        ViewBag.Pages = pagesCount;
+        ViewBag.Page = page;
 
         SetIndexBreadcrumbs();
         List<Category> categories = await context

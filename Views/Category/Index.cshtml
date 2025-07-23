@@ -5,8 +5,7 @@
 
 <div class="flex justify-between items-center mb-3">
     @await Html.PartialAsync("Components/_Breadcrumbs")
-
-
+    @* admin options *@
     <div class="ms-auto relative me-2">
         <button class="btn upd" onclick="this.nextElementSibling.classList.toggle('scale-100')">
             <span>Admin Options</span>
@@ -58,11 +57,41 @@
                             <div class="flex gap-2">
                                 @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Category" }, { "Id", category.Id.ToString() } })
                                 @await Html.PartialAsync("Components/_DeleteButton", new Dictionary<string,string> (){ { "Controller","Category"},{ "Id", category.Id.ToString()} })
-                    </div>
-                </td>
-            </tr>
-                        }
+                            </div>
+                        </td>
+                    </tr>
+                }
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="100%">
+                        
+                        <div class="flex justify-between">
+                            <a class="pagination-button @(ViewBag.Page == 1? "disabled":null)" asp-controller="Category" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)">
+                                <i class="material-icons">chevron_left</i>
+                                <span>Previous</span>
+                            </a>
+                            <div>
+                                @for(int i = 1; i <= ViewBag.Pages; i++) {
+                                    if (i == ViewBag.Page) {
+                                        <a class="pagination-link text-blue-500! font-bold" asp-controller="Category" asp-action="Index" asp-route-page="@i">
+                                            @i
+                                        </a>
+                                    } else {
+                                        <a class="pagination-link" asp-controller="Category" asp-action="Index" asp-route-page="@i">
+                                            @i
+                                        </a>
+                                    }
+                                }
+                            </div>
+                            <a class="pagination-button @(ViewBag.Pages == ViewBag.Page? "disabled":null)" asp-controller="Category" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage+1)">
+                                <span>Next</span>
+                                <i class="material-icons">chevron_right</i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 }

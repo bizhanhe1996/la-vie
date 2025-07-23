@@ -42,3 +42,7 @@
 .block {
   display: block !important;
 }
+
+.disabled {
+  opacity: 0.5;
+}

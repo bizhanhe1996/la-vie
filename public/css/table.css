@@ -29,6 +29,52 @@
       }
     }
   }
+  tfoot {
+    background-color: var(--theme-table-thead);
+    color: var(--theme-table-row-even);
+    tr {
+      td {
+        padding: 0.25rem;
+        a.pagination-button {
+          display: flex;
+          align-items: center;
+          border-radius: 0.25rem;
+          font-size: small;
+          color:var(--theme-table-tr-even);
+          padding: 0 0.25rem;
+          cursor: default;
+          i {
+            transition: margin 0.3s ease;
+          }
+          &:first-of-type:not(.disabled):hover {
+            & i {
+              margin-inline-end: 0.25rem;
+            }
+          }
+          &:last-of-type:not(.disabled):hover {
+            & i {
+              margin-inline-start: 0.25rem;
+            }
+          }
+        }
+        a.pagination-button:not(.disabled) {
+          cursor: pointer;
+        }
+        a.pagination-link {
+          color:var(--theme-table-tr-even);
+          margin-inline-end: 0.5rem;
+          cursor: pointer;
+          font-size: small;
+          transition: font-size 0.1s ease;
+          &:hover {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+
   &.striped {
     tbody {
       tr:nth-child(odd) {
