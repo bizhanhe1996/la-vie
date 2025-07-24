@@ -22,32 +22,47 @@ public class CategoryController : BaseController
 
     public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
-        int totalCount = await context.Categories.CountAsync();
-        int pagesCount = totalCount / size;
-
-        // guards
-        if (page <= 0)
-        {
-            page = 1;
-        }
-
-        if (page > pagesCount)
-        {
-            page = pagesCount;
-        }
-
-        // pagination calculations
-        ViewBag.CurrentPage = page;
-        ViewBag.Pages = pagesCount;
-        ViewBag.Page = page;
-
+        // Breadcrumnbs
         SetIndexBreadcrumbs();
+        // pagination calculations
+        int totalCount = await context.Categories.CountAsync();
+        int pagesCount;
+        int skipCount = 0;
+        int takeCount = 0;
+        if (size == -1)
+        {
+            ViewBag.Pages = 1;
+            ViewBag.Page = 1;
+            ViewBag.PageSize = -1;
+            skipCount = 0;
+            takeCount = totalCount;
+        }
+        else if (size >= 10 && size <= 50)
+        {
+            pagesCount = totalCount / size;
+            if (page <= 0)
+            {
+                page = 1;
+            }
+            if (page > pagesCount)
+            {
+                page = pagesCount;
+            }
+            ViewBag.Pages = pagesCount;
+            ViewBag.Page = page;
+            ViewBag.PageSize = size;
+            skipCount = (page - 1) * size;
+            takeCount = size;
+        }
+        
+        // DB Operations
         List<Category> categories = await context
             .Categories.OrderBy(c => c.Id)
-            .Skip((page - 1) * size)
-            .Take(size)
+            .Skip(skipCount)
+            .Take(takeCount)
             .Include(c => c.Products)
             .ToListAsync();
+        // View
         return View(categories);
     }
 

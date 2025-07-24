@@ -3,33 +3,62 @@
     ViewData["Title"] = "Categories";
 }
 
+<script>
+
+    const changePageSize = (controller, selectElement) => {
+        window.localStorage.setItem('pagination-size',selectElement.value);
+        window.location.href = '/' + controller + '?page=1&size=' + selectElement.value;
+    }
+
+
+
+</script>
+
 <div class="flex justify-between items-center mb-3">
+    @* breadcrumbs *@
     @await Html.PartialAsync("Components/_Breadcrumbs")
-    @* admin options *@
-    <div class="ms-auto relative me-2">
-        <button class="btn upd" onclick="this.nextElementSibling.classList.toggle('scale-100')">
-            <span>Admin Options</span>
-            <i class="material-icons">keyboard_arrow_down</i>
-        </button>
-        <div class="absolute overflow-hidden bg-white shadow-lg shadow-gray-600 w-full scale-0 transition-transform origin-top rounded z-2 top-[125%]">
-            <ul class="flex flex-col gap-3 p-3">
-                <li>
-                    <button class="btn add w-full" onclick="toggleConfirm('Are you sure?', this)">
-                        <a class="hidden" asp-controller="Category" asp-action="Seed"></a>
-                        <i class="material-icons">keyboard_arrow_down</i>
-                        <span>Seed</span>
-                    </button>   
-                </li>
-                <li>
-                    <button class="btn del w-full" onclick="toggleConfirm('Are you sure?', () => window.location.href = '/Category/Truncate'))">
-                        <i class="material-icons">keyboard_arrow_down</i>
-                        <span>Truncate</span>
-                    </button>
-                </li>
-            </ul>
+    @* buttons *@
+    <div class="flex gap-2 items-center">
+        @* page size *@
+        <form class="form min-w-16">
+            <fieldset class="mb-0!">
+                <select id="pagination-size" onchange="changePageSize('Category', this)">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="-1">All</option>
+                </select>
+            </fieldset>
+        </form>
+        @* admin options *@
+        <div class="relative">
+            <button class="btn upd" onclick="this.nextElementSibling.classList.toggle('scale-100')">
+                <span>Admin Options</span>
+                <i class="material-icons">keyboard_arrow_down</i>
+            </button>
+            <div class="absolute overflow-hidden bg-white shadow-lg shadow-gray-600 w-full scale-0 transition-transform origin-top rounded z-2 top-[125%]">
+                <ul class="flex flex-col gap-3 p-3">
+                    <li>
+                        <button class="btn add w-full" onclick="toggleConfirm('Are you sure?', this)">
+                            <a class="hidden" asp-controller="Category" asp-action="Seed"></a>
+                            <i class="material-icons">keyboard_arrow_down</i>
+                            <span>Seed</span>
+                        </button>   
+                    </li>
+                    <li>
+                        <button class="btn del w-full" onclick="toggleConfirm('Are you sure?', () => window.location.href = '/Category/Truncate'))">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                            <span>Truncate</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    @await Html.PartialAsync("Components/_CreateButton", "Category")
+        @* create button *@
+        @await Html.PartialAsync("Components/_CreateButton", "Category")
+    </div>    
 </div>
 
 @if (Model != null && Model.Count > 0)
@@ -38,7 +67,7 @@
         <table class="table striped">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>Title</th>
                     <th>Slug</th>
                     <th>Products</th>
@@ -46,17 +75,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var category in Model)
-                {
+                @for(int i = 0; i < Model.Count; i++) {
                     <tr>
-                        <td>@category.Id</td>
-                        <td>@category.Title</td>
-                        <td>@category.Slug</td>
-                        <td><span class="bg-blue-500 text-gray-100 px-2 py-1 aspect-square! rounded-full text-sm select-none cursor-pointer">@category.ProductsCount</span></td>
+                        <td>@((ViewBag.Page-1)*10 + i +1)</td>
+                        <td>@Model[i].Title</td>
+                        <td>@Model[i].Slug</td>
+                        <td><span class="bg-blue-500 text-gray-100 px-2 py-1 aspect-square! rounded-full text-sm select-none cursor-pointer">@Model[i].ProductsCount</span></td>
                         <td>
                             <div class="flex gap-2">
-                                @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Category" }, { "Id", category.Id.ToString() } })
-                                @await Html.PartialAsync("Components/_DeleteButton", new Dictionary<string,string> (){ { "Controller","Category"},{ "Id", category.Id.ToString()} })
+                                @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Category" }, { "Id", @Model[i].Id.ToString() } })
+                                @await Html.PartialAsync("Components/_DeleteButton", new Dictionary<string,string> (){ { "Controller","Category"},{ "Id", @Model[i].Id.ToString()} })
                             </div>
                         </td>
                     </tr>
@@ -65,9 +93,14 @@
             <tfoot>
                 <tr>
                     <td colspan="100%">
-                        
                         <div class="flex justify-between">
-                            <a class="pagination-button @(ViewBag.Page == 1? "disabled":null)" asp-controller="Category" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)">
+                            <a 
+                                class="pagination-button @(ViewBag.Page == 1? "disabled":null)" 
+                                asp-controller="@(ViewBag.Page == 1? null:"Category")" 
+                                asp-action="@(ViewBag.Page == 1? null:"Index")" 
+                                asp-route-page="@(ViewBag.Page-1)" 
+                                asp-route-size="@(ViewBag.Page == 1? null: ViewBag.PageSize)"
+                            >
                                 <i class="material-icons">chevron_left</i>
                                 <span>Previous</span>
                             </a>
@@ -84,7 +117,7 @@
                                     }
                                 }
                             </div>
-                            <a class="pagination-button @(ViewBag.Pages == ViewBag.Page? "disabled":null)" asp-controller="Category" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage+1)">
+                            <a class="pagination-button @(ViewBag.Pages == ViewBag.Page? "disabled":null)" asp-controller="Category" asp-action="Index" asp-route-page="@(ViewBag.Page+1)" asp-route-size="@ViewBag.PageSize">
                                 <span>Next</span>
                                 <i class="material-icons">chevron_right</i>
                             </a>

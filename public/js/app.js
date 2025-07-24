@@ -108,4 +108,9 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  document.querySelectorAll("select#pagination-size").forEach(select => {
+    select.value = window.localStorage.getItem("pagination-size");
+  });
+
 });
