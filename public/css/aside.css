@@ -50,7 +50,7 @@ aside {
 
 i#aside-toggle-mobile {
   display: none;
-  color: var(--text-light);
+  color: #f3f4f6;
   margin-inline-end: 0.5rem;
   cursor: pointer;
 }

@@ -1,5 +1,5 @@
 @model Dictionary<string, string>;
 
-<a class="text-red-500" asp-controller="@Model["Controller"]" asp-action="Delete" asp-route-id="@Model["Id"]">
+<a class="btn del" asp-controller="@Model["Controller"]" asp-action="Delete" asp-route-id="@Model["Id"]">
     <i class="material-icons">delete</i>
 </a>

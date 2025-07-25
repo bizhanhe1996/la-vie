@@ -1,4 +1,5 @@
-@model List<SampleProject.Models.Category>;
+@model List<SampleProject.Models.Category>
+@using SampleProject.ViewModels;
 @{
     ViewData["Title"] = "Categories";
 }
@@ -64,7 +65,7 @@
                         <td>@((ViewBag.Page-1)*10 + i +1)</td>
                         <td>@Model[i].Title</td>
                         <td>@Model[i].Slug</td>
-                        <td><span class="bg-blue-500 text-gray-100 px-2 py-1 aspect-square! rounded-full text-sm select-none cursor-pointer">@Model[i].ProductsCount</span></td>
+                        <td><span class="badge primary">@Model[i].ProductsCount</span></td>
                         <td>
                             <div class="flex gap-2">
                                 @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Category" }, { "Id", @Model[i].Id.ToString() } })
@@ -77,37 +78,7 @@
             <tfoot>
                 <tr>
                     <td colspan="100%">
-                        <div class="flex justify-between">
-                            @* previous page *@
-                            <a
-                                class="pagination-button @(ViewBag.Page == 1? "disabled":null)" 
-                                href="@(ViewBag.Page == 1? "#" : $"/Category?page={ViewBag.Page-1}&size={ViewBag.PageSize}")"
-                            >
-                                <i class="material-icons">chevron_left</i>
-                                <span>Previous</span>
-                            </a>
-                            @* pages *@
-                            <div>
-                                @for(int i = 1; i <= ViewBag.Pages; i++) {
-                                    <a 
-                                        class="pagination-link @(i == ViewBag.Page ? "text-blue-500! font-bold":null)"
-                                        asp-controller="Category" 
-                                        asp-action="Index" 
-                                        asp-route-page="@i"
-                                        asp-route-size="@ViewBag.PageSize"
-                                    >
-                                        @i
-                                    </a>
-                                }
-                            </div>
-                            @* next page *@
-                            <a class="pagination-button @(ViewBag.Pages == ViewBag.Page? "disabled":null)" 
-                                href="@(ViewBag.Page == ViewBag.Pages? "#" : $"/Category?page={ViewBag.Page+1}&size={ViewBag.PageSize}")"
-                            >
-                                <span>Next</span>
-                                <i class="material-icons">chevron_right</i>
-                            </a>
-                        </div>
+                        @await Html.PartialAsync("Components/_Pagination", "Category")
                     </td>
                 </tr>
             </tfoot>

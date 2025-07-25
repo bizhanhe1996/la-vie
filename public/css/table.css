@@ -22,6 +22,16 @@
         color: var(--theme-table-td-text);
         .btn {
           padding: 2px 4px;
+          background: transparent;
+          i {
+            font-size: 1.25rem;
+          }
+          &.upd {
+            color: var(--theme-color-primary);
+          }
+          &.del {
+            color: var(--theme-color-danger);
+          }
         }
       }
       &:hover {

@@ -1,7 +1,6 @@
 .btn {
   padding: 6px 8px;
   font-size: 14px;
-  margin-inline-end: 0.25rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -11,10 +10,11 @@
   border-radius: 4px;
   user-select: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
-  span, i {
+  span,
+  i {
     font-size: 16px;
   }
   &:focus {
@@ -25,40 +25,35 @@
       animation: click-effect 0.3s ease;
     }
   }
+  &:hover {
+    filter: brightness(125%);
+  }
   &.add {
-    background-color: var(--green-500);
+    background-color: var(--theme-color-success);
     &:focus {
-      box-shadow: 0 0 0px 4px var(--green-200);
-    }
-    &:hover {
-      background-color: var(--green-700);
+      box-shadow: 0 0 0px 4px
+        color-mix(in srgb, var(--theme-color-success) 80%, white 40%);
     }
   }
   &.upd {
-    background-color: var(--blue-500);
+    background-color: var(--theme-color-primary);
     &:focus {
-      box-shadow: 0 0 0px 4px var(--blue-200);
-    }
-    &:hover {
-      background-color: var(--blue-700);
+      box-shadow: 0 0 0px 4px
+        color-mix(in srgb, var(--theme-color-primary) 80%, white 40%);
     }
   }
   &.del {
-    background-color: var(--red-500);
+    background-color: var(--theme-color-danger);
     &:focus {
-      box-shadow: 0 0 0px 4px var(--red-200);
-    }
-    &:hover {
-      background-color: var(--red-700);
+      box-shadow: 0 0 0px 4px
+        color-mix(in srgb, var(--theme-color-danger) 80%, white 40%);
     }
   }
   &.back {
-    background-color: var(--gray-500);
+    background-color: var(--theme-color-secondary);
     &:focus {
-      box-shadow: 0 0 0px 4px var(--gray-200);
-    }
-    &:hover {
-      background-color: var(--gray-700);
+      box-shadow: 0 0 0px 4px
+        color-mix(in srgb, var(--theme-color-secondary) 80%, white 40%);
     }
   }
 }

@@ -1,0 +1,33 @@
+@model string
+
+<div class="flex justify-between">
+    @* previous page *@
+    <a
+        class="pagination-button @(ViewBag.Page == 1? "disabled" : null)" 
+        href="@(ViewBag.Page == 1? "#" : $"/{Model}?page={ViewBag.Page-1}&size={ViewBag.PageSize}")"
+    >
+        <i class="material-icons">chevron_left</i>
+        <span>Previous</span>
+    </a>
+    @* pages *@
+    <div>
+        @for(int i = 1; i <= ViewBag.Pages; i++) {
+            <a 
+                class="pagination-link @(i == ViewBag.Page ? "text-blue-500! font-bold":null)"
+                asp-controller="@Model" 
+                asp-action="Index" 
+                asp-route-page="@i"
+                asp-route-size="@ViewBag.PageSize"
+            >
+                @i
+            </a>
+        }
+    </div>
+    @* next page *@
+    <a class="pagination-button @(ViewBag.Pages == ViewBag.Page? "disabled":null)" 
+        href="@(ViewBag.Page == ViewBag.Pages? "#" : $"/{Model}?page={ViewBag.Page+1}&size={ViewBag.PageSize}")"
+    >
+        <span>Next</span>
+        <i class="material-icons">chevron_right</i>
+    </a>
+</div>

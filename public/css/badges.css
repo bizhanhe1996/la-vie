@@ -9,9 +9,9 @@ span.badge {
     color: var(--theme-text-light);
     user-select: none;
     &.primary {
-        background: var(--blue-500);
+        background: var(--theme-color-primary);
     }
     &.secondary {
-        background: var(--gray-500);
+        background: var(--theme-color-secondary);
     }
 }

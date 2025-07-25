@@ -5,21 +5,24 @@ using SampleProject.Data;
 using SampleProject.Enums;
 using SampleProject.Models;
 using SampleProject.Structs;
+using SampleProject.Utils;
 
 namespace SampleProject.Controllers;
 
 public class BaseController : Controller
 {
-    private string Controller { set; get; }
-    private string IndexTitle { set; get; }
-    protected readonly UserManager<User> _userManager;
-
     public BaseController(string controller, string indexTitle, UserManager<User> userManager)
     {
         this.Controller = controller;
         this.IndexTitle = indexTitle;
         this._userManager = userManager;
+        this.Paginator = new(this);
     }
+
+    private string Controller { set; get; }
+    private string IndexTitle { set; get; }
+    protected readonly UserManager<User> _userManager;
+    protected readonly Paginator Paginator;
 
     protected Controller SetViewMode(VIEW_MODES viewMode)
     {
