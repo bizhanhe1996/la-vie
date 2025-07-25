@@ -63,12 +63,16 @@ const toggleSubmenu = (elm) => {
 };
 
 const toggleConfirm = (message, elm) => {
-  if(window.confirm(message)) {
-
-    elm.querySelector('a').click()
+  if (window.confirm(message)) {
+    elm.querySelector("a").click();
   }
-}
+};
 
+const changePageSize = (controller, selectElement) => {
+  window.localStorage.setItem("pagination-size", selectElement.value);
+  window.location.href =
+    "/" + controller + "?page=1&size=" + selectElement.value;
+};
 
 window.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("div.tag-selector input").forEach((input) => {
@@ -109,8 +113,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.querySelectorAll("select#pagination-size").forEach(select => {
+  document.querySelectorAll("select#pagination-size").forEach((select) => {
     select.value = window.localStorage.getItem("pagination-size");
   });
-
 });

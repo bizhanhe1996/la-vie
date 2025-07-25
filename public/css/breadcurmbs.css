@@ -7,12 +7,9 @@ ul.breadcrumbs {
   user-select: none;
   gap: 0.25rem;
   li {
-    color: var(--gray-400);
+    color: var(--theme-table-td-text);
     display: flex;
     align-items: center;
-    &:last-of-type {
-      color: var(--gray-600);
-    }
   }
   li:not(:last-child)::after {
     content: "chevron_right";

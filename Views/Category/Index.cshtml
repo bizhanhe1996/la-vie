@@ -2,18 +2,6 @@
 @{
     ViewData["Title"] = "Categories";
 }
-
-<script>
-
-    const changePageSize = (controller, selectElement) => {
-        window.localStorage.setItem('pagination-size',selectElement.value);
-        window.location.href = '/' + controller + '?page=1&size=' + selectElement.value;
-    }
-
-
-
-</script>
-
 <div class="flex justify-between items-center mb-3">
     @* breadcrumbs *@
     @await Html.PartialAsync("Components/_Breadcrumbs")
@@ -23,19 +11,17 @@
         <form class="form min-w-16">
             <fieldset class="mb-0!">
                 <select id="pagination-size" onchange="changePageSize('Category', this)">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
+                    @foreach(var i in new int[]{10,20,30,40,50}) {
+                        <option value="@i">@i</option>
+                    }
                     <option value="-1">All</option>
                 </select>
             </fieldset>
         </form>
         @* admin options *@
         <div class="relative">
-            <button class="btn upd" onclick="this.nextElementSibling.classList.toggle('scale-100')">
-                <span>Admin Options</span>
+            <button class="btn upd min-w-32" onclick="this.nextElementSibling.classList.toggle('scale-100')">
+                <span>Actions</span>
                 <i class="material-icons">keyboard_arrow_down</i>
             </button>
             <div class="absolute overflow-hidden bg-white shadow-lg shadow-gray-600 w-full scale-0 transition-transform origin-top rounded z-2 top-[125%]">
@@ -67,11 +53,9 @@
         <table class="table striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Slug</th>
-                    <th>Products</th>
-                    <th>Actions</th>
+                    @foreach(var th in new string[] {"#","Title","Slug","Products","Actions"}) {
+                        <th>@th</th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -94,30 +78,32 @@
                 <tr>
                     <td colspan="100%">
                         <div class="flex justify-between">
-                            <a 
+                            @* previous page *@
+                            <a
                                 class="pagination-button @(ViewBag.Page == 1? "disabled":null)" 
-                                asp-controller="@(ViewBag.Page == 1? null:"Category")" 
-                                asp-action="@(ViewBag.Page == 1? null:"Index")" 
-                                asp-route-page="@(ViewBag.Page-1)" 
-                                asp-route-size="@(ViewBag.Page == 1? null: ViewBag.PageSize)"
+                                href="@(ViewBag.Page == 1? "#" : $"/Category?page={ViewBag.Page-1}&size={ViewBag.PageSize}")"
                             >
                                 <i class="material-icons">chevron_left</i>
                                 <span>Previous</span>
                             </a>
+                            @* pages *@
                             <div>
                                 @for(int i = 1; i <= ViewBag.Pages; i++) {
-                                    if (i == ViewBag.Page) {
-                                        <a class="pagination-link text-blue-500! font-bold" asp-controller="Category" asp-action="Index" asp-route-page="@i">
-                                            @i
-                                        </a>
-                                    } else {
-                                        <a class="pagination-link" asp-controller="Category" asp-action="Index" asp-route-page="@i">
-                                            @i
-                                        </a>
-                                    }
+                                    <a 
+                                        class="pagination-link @(i == ViewBag.Page ? "text-blue-500! font-bold":null)"
+                                        asp-controller="Category" 
+                                        asp-action="Index" 
+                                        asp-route-page="@i"
+                                        asp-route-size="@ViewBag.PageSize"
+                                    >
+                                        @i
+                                    </a>
                                 }
                             </div>
-                            <a class="pagination-button @(ViewBag.Pages == ViewBag.Page? "disabled":null)" asp-controller="Category" asp-action="Index" asp-route-page="@(ViewBag.Page+1)" asp-route-size="@ViewBag.PageSize">
+                            @* next page *@
+                            <a class="pagination-button @(ViewBag.Pages == ViewBag.Page? "disabled":null)" 
+                                href="@(ViewBag.Page == ViewBag.Pages? "#" : $"/Category?page={ViewBag.Page+1}&size={ViewBag.PageSize}")"
+                            >
                                 <span>Next</span>
                                 <i class="material-icons">chevron_right</i>
                             </a>
