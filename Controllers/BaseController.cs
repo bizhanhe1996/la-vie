@@ -6,17 +6,19 @@ using LaVie.Enums;
 using LaVie.Models;
 using LaVie.Structs;
 using LaVie.Utils;
+using LaVie.Filters;
 
 namespace LaVie.Controllers;
 
-public class BaseController : Controller
+[ServiceFilter(typeof(EnvInjectorFilter))]
+public class BaseController : Controller, IActionFilter
 {
     public BaseController(string controller, string indexTitle, UserManager<User> userManager)
     {
-        this.Controller = controller;
-        this.IndexTitle = indexTitle;
-        this._userManager = userManager;
-        this.Paginator = new(this);
+        Controller = controller;
+        IndexTitle = indexTitle;
+        _userManager = userManager;
+        Paginator = new(this);
     }
 
     private string Controller { set; get; }

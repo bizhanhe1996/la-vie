@@ -4,16 +4,25 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using LaVie.Data;
 using LaVie.Models;
+using LaVie.Filters;
 
 WebApplicationOptions options = new() { WebRootPath = "public" };
 
 // building a builder
 var builder = WebApplication.CreateBuilder(options);
 
+// Environment variables
 Env.Load();
 
 // adding services
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    // Filters
+    options.Filters.Add<EnvInjectorFilter>();
+});
+
+// DI Container
+builder.Services.AddSingleton<EnvInjectorFilter>();
 
 // SQLite
 builder.Services.AddDbContext<MyAppContext>(options =>

@@ -1,12 +1,12 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using LaVie.Models;
 using LaVie.ViewModels;
+using LaVie.Filters;
 
 namespace LaVie.Controllers;
 
-[AllowAnonymous]
+[ServiceFilter(typeof(EnvInjectorFilter))]
 public class AccountController : Controller
 {
     private readonly SignInManager<User> _signInManager;
@@ -21,6 +21,7 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Register()
     {
+        SetEnvironemtVariables();
         return View();
     }
 
@@ -54,6 +55,7 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Login()
     {
+        SetEnvironemtVariables();
         return View();
     }
 
@@ -123,5 +125,10 @@ public class AccountController : Controller
             }
         }
         Console.WriteLine("\n\n");
+    }
+
+    private void SetEnvironemtVariables()
+    {
+        ViewData["ENV_PROJECT_NAME"] = Environment.GetEnvironmentVariable("ENV_PROJECT_NAME");
     }
 }
