@@ -1,4 +1,4 @@
-namespace SampleProject.Structs;
+namespace LaVie.Structs;
 
 public struct BreadcrumbItem
 {

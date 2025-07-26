@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
-namespace SampleProject.Models;
+namespace LaVie.Models;
 
 public class User : IdentityUser<int>
 {

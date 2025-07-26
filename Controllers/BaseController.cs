@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using SampleProject.Data;
-using SampleProject.Enums;
-using SampleProject.Models;
-using SampleProject.Structs;
-using SampleProject.Utils;
+using LaVie.Data;
+using LaVie.Enums;
+using LaVie.Models;
+using LaVie.Structs;
+using LaVie.Utils;
 
-namespace SampleProject.Controllers;
+namespace LaVie.Controllers;
 
 public class BaseController : Controller
 {

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SampleProject.Models;
+namespace LaVie.Models;
 
 public class Product : BaseModel
 {

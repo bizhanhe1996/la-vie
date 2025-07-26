@@ -1,6 +1,6 @@
-namespace SampleProject.Utils;
+namespace LaVie.Utils;
 
-using SampleProject.Controllers;
+using LaVie.Controllers;
 
 public class Paginator
 {

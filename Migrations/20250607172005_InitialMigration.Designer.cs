@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SampleProject.Data;
+using LaVie.Data;
 
 #nullable disable
 
-namespace SampleProject.Migrations
+namespace LaVie.Migrations
 {
     [DbContext(typeof(MyAppContext))]
     [Migration("20250607172005_InitialMigration")]
@@ -19,7 +19,7 @@ namespace SampleProject.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
 
-            modelBuilder.Entity("SampleProject.Models.User", b =>
+            modelBuilder.Entity("LaVie.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

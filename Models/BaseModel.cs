@@ -1,3 +1,3 @@
-namespace SampleProject.Models;
+namespace LaVie.Models;
 
 public class BaseModel { }

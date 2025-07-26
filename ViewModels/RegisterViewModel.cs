@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SampleProject.ViewModels;
+namespace LaVie.ViewModels;
 
 public class RegisterViewModel
 {

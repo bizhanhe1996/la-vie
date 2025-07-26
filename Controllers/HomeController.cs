@@ -2,9 +2,9 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SampleProject.Models;
+using LaVie.Models;
 
-namespace SampleProject.Controllers;
+namespace LaVie.Controllers;
 
 [Authorize]
 public class HomeController : BaseController

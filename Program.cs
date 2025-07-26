@@ -2,8 +2,8 @@
 using DotNetEnv;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SampleProject.Data;
-using SampleProject.Models;
+using LaVie.Data;
+using LaVie.Models;
 
 WebApplicationOptions options = new() { WebRootPath = "public" };
 

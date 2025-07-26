@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SampleProject.Models;
-using SampleProject.ViewModels;
+using LaVie.Models;
+using LaVie.ViewModels;
 
-namespace SampleProject.Controllers;
+namespace LaVie.Controllers;
 
 [AllowAnonymous]
 public class AccountController : Controller

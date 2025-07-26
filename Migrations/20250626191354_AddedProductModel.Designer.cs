@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SampleProject.Data;
+using LaVie.Data;
 
 #nullable disable
 
-namespace SampleProject.Migrations
+namespace LaVie.Migrations
 {
     [DbContext(typeof(MyAppContext))]
     [Migration("20250626191354_AddedProductModel")]
@@ -19,7 +19,7 @@ namespace SampleProject.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
 
-            modelBuilder.Entity("SampleProject.Models.Category", b =>
+            modelBuilder.Entity("LaVie.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace SampleProject.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Product", b =>
+            modelBuilder.Entity("LaVie.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace SampleProject.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.User", b =>
+            modelBuilder.Entity("LaVie.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,9 +82,9 @@ namespace SampleProject.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Product", b =>
+            modelBuilder.Entity("LaVie.Models.Product", b =>
                 {
-                    b.HasOne("SampleProject.Models.Category", "Category")
+                    b.HasOne("LaVie.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -93,7 +93,7 @@ namespace SampleProject.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Category", b =>
+            modelBuilder.Entity("LaVie.Models.Category", b =>
                 {
                     b.Navigation("Products");
                 });

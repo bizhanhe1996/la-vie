@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SampleProject.Data;
+using LaVie.Data;
 
 #nullable disable
 
-namespace SampleProject.Migrations
+namespace LaVie.Migrations
 {
     [DbContext(typeof(MyAppContext))]
     [Migration("20250715161607_RemoveUserName")]
@@ -146,7 +146,7 @@ namespace SampleProject.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Category", b =>
+            modelBuilder.Entity("LaVie.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -173,7 +173,7 @@ namespace SampleProject.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Product", b =>
+            modelBuilder.Entity("LaVie.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -199,7 +199,7 @@ namespace SampleProject.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.ProductTag", b =>
+            modelBuilder.Entity("LaVie.Models.ProductTag", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("INTEGER");
@@ -214,7 +214,7 @@ namespace SampleProject.Migrations
                     b.ToTable("ProductTags");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Tag", b =>
+            modelBuilder.Entity("LaVie.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -235,7 +235,7 @@ namespace SampleProject.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.User", b =>
+            modelBuilder.Entity("LaVie.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -307,7 +307,7 @@ namespace SampleProject.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("SampleProject.Models.User", null)
+                    b.HasOne("LaVie.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -316,7 +316,7 @@ namespace SampleProject.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("SampleProject.Models.User", null)
+                    b.HasOne("LaVie.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -331,7 +331,7 @@ namespace SampleProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SampleProject.Models.User", null)
+                    b.HasOne("LaVie.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -340,16 +340,16 @@ namespace SampleProject.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("SampleProject.Models.User", null)
+                    b.HasOne("LaVie.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Product", b =>
+            modelBuilder.Entity("LaVie.Models.Product", b =>
                 {
-                    b.HasOne("SampleProject.Models.Category", "Category")
+                    b.HasOne("LaVie.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -358,15 +358,15 @@ namespace SampleProject.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.ProductTag", b =>
+            modelBuilder.Entity("LaVie.Models.ProductTag", b =>
                 {
-                    b.HasOne("SampleProject.Models.Product", "Product")
+                    b.HasOne("LaVie.Models.Product", "Product")
                         .WithMany("ProductTags")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SampleProject.Models.Tag", "Tag")
+                    b.HasOne("LaVie.Models.Tag", "Tag")
                         .WithMany("ProductTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -377,17 +377,17 @@ namespace SampleProject.Migrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Category", b =>
+            modelBuilder.Entity("LaVie.Models.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Product", b =>
+            modelBuilder.Entity("LaVie.Models.Product", b =>
                 {
                     b.Navigation("ProductTags");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Tag", b =>
+            modelBuilder.Entity("LaVie.Models.Tag", b =>
                 {
                     b.Navigation("ProductTags");
                 });

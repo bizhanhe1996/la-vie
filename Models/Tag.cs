@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace SampleProject.Models;
+namespace LaVie.Models;
 
 public class Tag : BaseModel
 {

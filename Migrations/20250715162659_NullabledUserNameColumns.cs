@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace SampleProject.Migrations
+namespace LaVie.Migrations
 {
     /// <inheritdoc />
     public partial class NullabledUserNameColumns : Migration

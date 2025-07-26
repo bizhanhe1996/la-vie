@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SampleProject.Models;
+namespace LaVie.Models;
 
 public class ProductTag
 {

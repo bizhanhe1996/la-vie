@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SampleProject.Models;
+using LaVie.Models;
 
-namespace SampleProject.Data;
+namespace LaVie.Data;
 
 public class MyAppContext(DbContextOptions<MyAppContext> options)
     : IdentityDbContext<User, IdentityRole<int>, int>(options)

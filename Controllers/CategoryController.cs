@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SampleProject.Data;
-using SampleProject.Enums;
-using SampleProject.Models;
+using LaVie.Data;
+using LaVie.Enums;
+using LaVie.Models;
 
-namespace SampleProject.Controllers;
+namespace LaVie.Controllers;
 
 [Authorize]
 public class CategoryController : BaseController
