@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -10,7 +11,7 @@ using LaVie.Filters;
 
 namespace LaVie.Controllers;
 
-[ServiceFilter(typeof(EnvInjectorFilter))]
+[ServiceFilter(typeof(GlobalsInjectorFilter))]
 public class BaseController : Controller, IActionFilter
 {
     public BaseController(string controller, string indexTitle, UserManager<User> userManager)
@@ -125,6 +126,17 @@ public class BaseController : Controller, IActionFilter
         if (User.Identity.IsAuthenticated)
         {
             ViewBag.ActiveUser = _userManager.GetUserAsync(User).Result;
+            SetActiveUserRole(context);
         }
+    }
+
+    private void SetActiveUserRole(ActionExecutingContext context)
+    {
+        var roles = context.HttpContext.User.Claims
+                    .Where(c => c.Type == ClaimTypes.Role)
+                    .Select(c => c.Value)
+                    .ToList();
+
+        ViewBag.ActiveUserRole = roles[0];
     }
 }

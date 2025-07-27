@@ -18,11 +18,11 @@ Env.Load();
 builder.Services.AddControllersWithViews(options =>
 {
     // Filters
-    options.Filters.Add<EnvInjectorFilter>();
+    options.Filters.Add<GlobalsInjectorFilter>();
 });
 
 // DI Container
-builder.Services.AddSingleton<EnvInjectorFilter>();
+builder.Services.AddSingleton<GlobalsInjectorFilter>();
 
 // SQLite
 builder.Services.AddDbContext<MyAppContext>(options =>
@@ -42,6 +42,19 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 // building the application
 var app = builder.Build();
+
+// seeding Roles
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
+    string[] roles = ["Admin" ,"User"];
+    foreach (var role in roles){
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole<int>(role));
+        }
+    }
+}
 
 // configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment() == false)
@@ -63,3 +76,7 @@ app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Inde
 
 // running the application
 app.Run();
+
+
+  
+

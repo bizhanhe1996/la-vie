@@ -6,16 +6,18 @@ using LaVie.Filters;
 
 namespace LaVie.Controllers;
 
-[ServiceFilter(typeof(EnvInjectorFilter))]
+[ServiceFilter(typeof(GlobalsInjectorFilter))]
 public class AccountController : Controller
 {
     private readonly SignInManager<User> _signInManager;
     private readonly UserManager<User> _userManager;
+    private readonly RoleManager<IdentityRole<int>> _roleManager;
 
-    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
+    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<IdentityRole<int>> roleManager)
     {
         _signInManager = signInManager;
         _userManager = userManager;
+        _roleManager = roleManager;
     }
 
     [HttpGet]
@@ -42,6 +44,7 @@ public class AccountController : Controller
 
         if (result.Succeeded)
         {
+            await _userManager.AddToRoleAsync(user, "User");
             await _signInManager.SignInAsync(user, isPersistent: false);
             return RedirectToAction("Index", "Home");
         }

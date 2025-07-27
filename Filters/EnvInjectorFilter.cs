@@ -4,7 +4,7 @@ using DotNetEnv;
 
 namespace LaVie.Filters;
 
-public class EnvInjectorFilter : IActionFilter
+public class GlobalsInjectorFilter : IActionFilter
 {
     public void OnActionExecuted(ActionExecutedContext context)
     {

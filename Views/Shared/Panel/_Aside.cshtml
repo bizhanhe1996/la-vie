@@ -1,37 +1,58 @@
 @{
+
     List<Dictionary<string, string>> items = [
-    new() {
-{"title","Home"},
-{"icon","home"},
-{"controller","Home"},
-{"action","Index"},
-},
-new() {
-{"title", "Users"},
-{"icon","person"},
-{"controller","User"},
-{"action","Index"},
-},
-new() {
-{"title", "Categories"},
-{"icon","category"},
-{"controller","Category"},
-{"action","Index"},
-},
-new() {
-{"title", "Tags"},
-{"icon","tag"},
-{"controller","Tag"},
-{"action","Index"},
-},
-new() {
-{"title", "Products"},
-{"icon","shopping_bag"},
-{"controller","Product"},
-{"action","Index"},
-},
-];
+        new() {
+            {"title","Home"},
+            {"icon","home"},
+            {"controller","Home"},
+            {"action","Index"},
+            {"roles", "all"}
+        },
+        new() {
+            {"title", "Users"},
+            {"icon","person"},
+            {"controller","User"},
+            {"action","Index"},
+            {"roles", "admin"}
+        },
+        new() {
+            {"title", "Permissions"},
+            {"icon","check_box"},
+            {"controller","Permission"},
+            {"action","Index"},
+            {"roles", "admin"}
+        },
+        new() {
+            {"title", "Roles"},
+            {"icon","key"},
+            {"controller","Role"},
+            {"action","Index"},
+            {"roles", "admin"}
+        },
+        new() {
+            {"title", "Categories"},
+            {"icon","category"},
+            {"controller","Category"},
+            {"action","Index"},
+            {"roles", "admin,manager"}
+        },
+        new() {
+            {"title", "Tags"},
+            {"icon","tag"},
+            {"controller","Tag"},
+            {"action","Index"},
+            {"roles", "admin,manager"}
+        },
+        new() {
+            {"title", "Products"},
+            {"icon","shopping_bag"},
+            {"controller","Product"},
+            {"action","Index"},
+            {"roles", "admin,manager"}
+        },
+    ];
 }
+
 <aside>
     <ul>
         @foreach (var item in items)

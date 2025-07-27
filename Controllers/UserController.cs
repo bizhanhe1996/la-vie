@@ -2,15 +2,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LaVie.Controllers;
 using LaVie.Data;
 using LaVie.Enums;
 using LaVie.Models;
-using LaVie.Structs;
 
 namespace LaVie.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class UserController : BaseController
 {
     protected readonly MyAppContext context;
