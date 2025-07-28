@@ -15,7 +15,7 @@
         <fieldset>
             <label asp-for="Name" required>Name</label>
             <input asp-for="Name" required autofocus>
-            @if (ViewData.ModelState.ContainsKey("Name") && ViewData.ModelState["Name"].Errors.Count > 0)
+            @if (ViewData.ModelState.ContainsKey("Name") && ViewData.ModelState["Name"]?.Errors?.Count > 0)
             {
                 <span class="error" asp-validation-for="Name"></span>
             }
@@ -23,7 +23,7 @@
         <fieldset>
             <label asp-for="Description">Description</label>
             <textarea asp-for="Description"></textarea>
-            @if (ViewData.ModelState.ContainsKey("Description") && ViewData.ModelState["Description"].Errors?.Count > 0)
+            @if (ViewData.ModelState.ContainsKey("Description") && ViewData.ModelState["Description"]?.Errors?.Count > 0)
             {
                 <span class="error" asp-validation-for="Description"></span>
             }

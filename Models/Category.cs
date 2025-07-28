@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using LaVie.Interfaces;
 
 namespace LaVie.Models;
 
-public class Category : BaseModel
+public class Category : IModel
 {
     public int Id { set; get; }
 

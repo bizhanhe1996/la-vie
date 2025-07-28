@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using LaVie.Data;
 using LaVie.Models;
 using LaVie.Filters;
+using LaVie.Seeders;
 
 WebApplicationOptions options = new() { WebRootPath = "public" };
 
@@ -43,17 +44,18 @@ builder.Services.Configure<IdentityOptions>(options =>
 // building the application
 var app = builder.Build();
 
-// seeding Roles
+// seeding claims and roles
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
-    string[] roles = ["Admin" ,"User"];
-    foreach (var role in roles){
-        if (!await roleManager.RoleExistsAsync(role))
-        {
-            await roleManager.CreateAsync(new IdentityRole<int>(role));
-        }
-    }
+    
+    // seeding roles
+    var rolesSeeder = new RolesSeeder(roleManager);
+    await rolesSeeder.Seed();
+
+    // seeding claims
+    
+
 }
 
 // configure the HTTP request pipeline.
@@ -65,7 +67,9 @@ if (app.Environment.IsDevelopment() == false)
 }
 
 // middlewares are used here
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment()) {
+    app.UseHttpsRedirection();
+}
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();

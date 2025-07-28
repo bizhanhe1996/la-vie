@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
+using LaVie.Interfaces;
 
 namespace LaVie.Models;
 
-public class User : IdentityUser<int>
+public class User : IdentityUser<int>, IModel
 {
     // must be present to prevent error
     public User() { }
