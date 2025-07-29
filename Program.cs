@@ -49,12 +49,8 @@ using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
     
-    // seeding roles
-    var rolesSeeder = new RolesSeeder(roleManager);
-    await rolesSeeder.Seed();
-
-    // seeding claims
-    
+    var identitySeeder = new IdentitySeeder(roleManager);
+    await identitySeeder.Seed();
 
 }
 
