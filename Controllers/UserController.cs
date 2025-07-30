@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using LaVie.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using LaVie.Models;
 
 namespace LaVie.Controllers;
 
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin,Manager")]
 public class UserController : BaseController
 {
     protected readonly MyAppContext context;
@@ -19,6 +20,7 @@ public class UserController : BaseController
         this.context = context;
     }
 
+    [Authorize(Roles = "Admin,Manager")]
     public async Task<IActionResult> Index()
     {
         var users = await context.Users.ToListAsync();
@@ -27,6 +29,7 @@ public class UserController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public IActionResult Create()
     {
         SetCreateBreadcrumbs();
@@ -35,22 +38,31 @@ public class UserController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(User user)
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Create(UserViewModel userViewModel)
     {
         if (ModelState.IsValid)
         {
-            var newUser = context.Users.Add(user);
-            await context.SaveChangesAsync();
+
+            var user = new User(userViewModel.FirstName, userViewModel.LastName);
+            user.Email = userViewModel.Email;
+
+            var result = await _userManager.CreateAsync(user, userViewModel.RawPassword);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, userViewModel.Role);
+            }
             return RedirectToAction("Index");
         }
         else
         {
             SetCreateBreadcrumbs();
             SetViewMode(VIEW_MODES.CREATE);
-            return View(user);
+            return View(userViewModel);
         }
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(int Id)
     {
         var user = await context.Users.FindAsync(Id);
@@ -67,6 +79,7 @@ public class UserController : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(User user)
     {
         if (ModelState.IsValid)
@@ -83,6 +96,7 @@ public class UserController : BaseController
         }
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         return await Delete<User>(this.context, id);

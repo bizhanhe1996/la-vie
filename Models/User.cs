@@ -12,8 +12,8 @@ public class User : IdentityUser<int>, IModel
 
     public User(string firstName, string lastName)
     {
-        this.FirstName = firstName;
-        this.LastName = lastName;
+        FirstName = firstName;
+        LastName = lastName;
     }
 
     [PersonalData]
@@ -37,4 +37,5 @@ public class User : IdentityUser<int>, IModel
 
     [NotMapped]
     public string FullName => $"{FirstName} {LastName}";
+
 }

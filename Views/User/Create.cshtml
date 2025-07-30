@@ -1,4 +1,4 @@
-@model LaVie.Models.User;
+@model LaVie.ViewModels.UserViewModel;
 @{
     string mode = ViewBag.ViewMode.ToString() == "UPDATE" ? "Update" : "Create";
     ViewData["Title"] = mode + " a new user";
@@ -19,6 +19,18 @@
         <fieldset>
             <label class="label required" asp-for="LastName">Last Name</label>
             <input class="input" asp-for="LastName" required />
+        </fieldset>
+        <fieldset>
+            <label class="label required" asp-for="Email">Email</label>
+            <input type="email" class="input" asp-for="Email" required />
+        </fieldset>
+        <fieldset>
+            <label class="label required" asp-for="RawPassword">Password</label>
+            <input type="password" class="input" asp-for="RawPassword" required />
+        </fieldset>
+        <fieldset>
+            <label class="label required" asp-for="RawPasswordRepeat">Password Repeat</label>
+            <input type="password" class="input" asp-for="RawPasswordRepeat" required />
         </fieldset>
     </div>
     @* Buttons *@

@@ -6,65 +6,69 @@
             {"icon","home"},
             {"controller","Home"},
             {"action","Index"},
-            {"roles", "all"}
+            {"roles", "All"}
         },
         new() {
             {"title", "Users"},
             {"icon","person"},
             {"controller","User"},
             {"action","Index"},
-            {"roles", "admin"}
+            {"roles", "Admin,Manager"}
         },
         new() {
             {"title", "Permissions"},
             {"icon","check_box"},
             {"controller","Permission"},
             {"action","Index"},
-            {"roles", "admin"}
+            {"roles", "Admin"}
         },
         new() {
             {"title", "Roles"},
             {"icon","key"},
             {"controller","Role"},
             {"action","Index"},
-            {"roles", "admin"}
+            {"roles", "Admin"}
         },
         new() {
             {"title", "Categories"},
             {"icon","category"},
             {"controller","Category"},
             {"action","Index"},
-            {"roles", "admin,manager"}
+            {"roles", "Admin,Manager"}
         },
         new() {
             {"title", "Tags"},
             {"icon","tag"},
             {"controller","Tag"},
             {"action","Index"},
-            {"roles", "admin,manager"}
+            {"roles", "Admin,Manager"}
         },
         new() {
             {"title", "Products"},
             {"icon","shopping_bag"},
             {"controller","Product"},
             {"action","Index"},
-            {"roles", "admin,manager"}
+            {"roles", "Admin,Manager"}
         },
     ];
 }
 
 <aside>
     <ul>
+        
         @foreach (var item in items)
         {
-            <li>
-                <a asp-controller="@item["controller"]" asp-action="@item["action"]">
-                    <i class="material-icons">@item["icon"]</i>
-                    <span>@item["title"]</span>
-                    <div class="click-wave"></div>
-                </a>
-            </li>
+            @if (item["roles"].Contains(ViewBag.ActiveUserRole) || item["roles"] == "All") {
+                <li>
+                    <a asp-controller="@item["controller"]" asp-action="@item["action"]">
+                        <i class="material-icons">@item["icon"]</i>
+                        <span>@item["title"]</span>
+                        <div class="click-wave"></div>
+                    </a>
+                </li>
+            }
         }
+        @* settibgs *@
         <li>
             <div class="submenu-title" onclick="toggleSubmenu(this)">
                 <i class="material-icons">settings</i>
