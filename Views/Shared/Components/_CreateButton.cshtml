@@ -1,6 +1,11 @@
 @model string;
-<a class="btn add" asp-controller="@Model" asp-action="Create">
-    <i class="material-icons">add</i>
-    <span class="hidden md:block">@Model</span>
-    <div class="click-wave"></div>
-</a>
+
+@if (User.HasClaim(c => c.Type == "Permission" && c.Value == $"{Model}.Create"))
+{
+    <a class="btn add" asp-controller="@Model" asp-action="Create">
+        <i class="material-icons">add</i>
+        <span class="hidden md:block">@Model</span>
+        <div class="click-wave"></div>
+    </a>
+
+}

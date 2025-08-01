@@ -45,12 +45,12 @@
                         </td>
                         <td>
                             <div class="flex gap-2">
-                                @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Product" }, { "Id", product.Id.ToString() } })
-                                @await Html.PartialAsync("Components/_DeleteButton", new Dictionary<string,string> (){ { "Controller","Product"},{ "Id", product.Id.ToString()} })
-                    </div>
-                </td>
-            </tr>
-                        }
+                                @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Product", product.Id))
+                                @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("ProductUser",product.Id))
+                            </div>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -60,5 +60,5 @@ else
     <div class="alert">
         <i class="material-icons">warning</i>
         <p>No product defined yet!</p>
-    </div>   
+    </div>
 }

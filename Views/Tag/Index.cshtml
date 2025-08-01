@@ -27,16 +27,14 @@
                         <td>@tag.Name</td>
                         <td>@tag.Description</td>
                         <td>
-
                             <span class="badge primary">@tag.ProductTags?.Count</span>
                         </td>
                         <td>
-
-                            @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Tag" }, { "Id", tag.Id.ToString() } })
-                            @await Html.PartialAsync("Components/_DeleteButton", new Dictionary<string, string> (){ { "Controller","Tag"},{ "Id", tag.Id.ToString()} })
-                </td>
-            </tr>
-                        }
+                            @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Tag", tag.Id))
+                            @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Tag", tag.Id))
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -46,5 +44,5 @@ else
     <div class="alert">
         <i class="material-icons">warning</i>
         <p>No tag defined yet!</p>
-    </div>   
+    </div>
 }

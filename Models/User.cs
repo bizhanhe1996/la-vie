@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
 using LaVie.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace LaVie.Models;
 
@@ -38,4 +38,6 @@ public class User : IdentityUser<int>, IModel
     [NotMapped]
     public string FullName => $"{FirstName} {LastName}";
 
+    [NotMapped]
+    public string Role => $"{FirstName} {LastName}";
 }

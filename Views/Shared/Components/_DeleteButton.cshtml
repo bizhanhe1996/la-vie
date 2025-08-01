@@ -1,5 +1,8 @@
-@model Dictionary<string, string>;
+@model DeleteButtonStruct
 
-<a class="btn del" asp-controller="@Model["Controller"]" asp-action="Delete" asp-route-id="@Model["Id"]">
-    <i class="material-icons">delete</i>
-</a>
+@if (User.HasClaim(c => c.Type == "Permission" && c.Value == $"{Model.Controller}.Delete"))
+{
+    <a class="btn del" asp-controller="@Model.Controller" asp-action="Delete" asp-route-id="@Model.Id">
+        <i class="material-icons">delete</i>
+    </a>
+}

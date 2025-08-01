@@ -4,7 +4,6 @@ namespace LaVie.ViewModels;
 
 public class UserViewModel
 {
-
     [Required]
     [Display(Name = "First Name")]
     public string FirstName { get; set; } = null!;
@@ -19,8 +18,10 @@ public class UserViewModel
     public string Email { get; set; } = null!;
 
     [Required]
-    [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$",
-        ErrorMessage = "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.")]
+    [RegularExpression(
+        @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$",
+        ErrorMessage = "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
+    )]
     [DataType(DataType.Password)]
     [Display(Name = "Password")]
     public string RawPassword { get; set; } = null!;
@@ -32,8 +33,10 @@ public class UserViewModel
     public string RawPasswordRepeat { get; set; } = null!;
 
     [Required]
-    [RegularExpression("Admin|Manager|Client", ErrorMessage = "Role must be Admin, Manager, or Client.")]
+    [RegularExpression(
+        "Admin|Manager|Client",
+        ErrorMessage = "Role must be Admin, Manager, or Client."
+    )]
     [Display(Name = "Role")]
     public string Role { get; set; } = null!;
-    
 }

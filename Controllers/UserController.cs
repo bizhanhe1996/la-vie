@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Authorization;
-using LaVie.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using LaVie.Data;
 using LaVie.Enums;
 using LaVie.Models;
+using LaVie.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaVie.Controllers;
 
@@ -43,9 +43,10 @@ public class UserController : BaseController
     {
         if (ModelState.IsValid)
         {
-
-            var user = new User(userViewModel.FirstName, userViewModel.LastName);
-            user.Email = userViewModel.Email;
+            var user = new User(userViewModel.FirstName, userViewModel.LastName)
+            {
+                Email = userViewModel.Email,
+            };
 
             var result = await _userManager.CreateAsync(user, userViewModel.RawPassword);
             if (result.Succeeded)

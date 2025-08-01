@@ -70,8 +70,8 @@
                         <td><span class="badge primary">@Model[i].ProductsCount</span></td>
                         <td>
                             <div class="flex gap-2">
-                                @await Html.PartialAsync("Components/_EditButton", new Dictionary<string, string> { { "Controller", "Category" }, { "Id", @Model[i].Id.ToString() } })
-                                @await Html.PartialAsync("Components/_DeleteButton", new Dictionary<string,string> (){ { "Controller","Category"},{ "Id", @Model[i].Id.ToString()} })
+                                @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Category", Model[i].Id))
+                                @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Category", Model[i].Id))
                             </div>
                         </td>
                     </tr>
