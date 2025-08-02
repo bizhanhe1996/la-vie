@@ -1,13 +1,13 @@
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using LaVie.Data;
 using LaVie.Enums;
+using LaVie.Filters;
 using LaVie.Models;
 using LaVie.Structs;
 using LaVie.Utils;
-using LaVie.Filters;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace LaVie.Controllers;
 
@@ -35,7 +35,7 @@ public class BaseController : Controller, IActionFilter
 
     protected Controller SetIndexBreadcrumbs()
     {
-        ViewBag.Path = new BreadcrumbItem[]
+        ViewBag.Path = new Breadcrumb[]
         {
             new()
             {
@@ -49,7 +49,7 @@ public class BaseController : Controller, IActionFilter
 
     protected Controller SetCreateBreadcrumbs()
     {
-        ViewBag.Path = new BreadcrumbItem[]
+        ViewBag.Path = new Breadcrumb[]
         {
             new()
             {
@@ -69,7 +69,7 @@ public class BaseController : Controller, IActionFilter
 
     protected Controller SetUpdateBreadcrumbs()
     {
-        ViewBag.Path = new BreadcrumbItem[]
+        ViewBag.Path = new Breadcrumb[]
         {
             new()
             {
@@ -132,10 +132,10 @@ public class BaseController : Controller, IActionFilter
 
     private void SetActiveUserRole(ActionExecutingContext context)
     {
-        var roles = context.HttpContext.User.Claims
-                    .Where(c => c.Type == ClaimTypes.Role)
-                    .Select(c => c.Value)
-                    .ToList();
+        var roles = context
+            .HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Role)
+            .Select(c => c.Value)
+            .ToList();
 
         ViewBag.ActiveUserRole = roles[0];
     }

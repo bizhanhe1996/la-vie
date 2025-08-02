@@ -35,6 +35,10 @@
   gap: 1rem;
 }
 
+.block {
+  display: block !important;
+}
+
 .opacity-100 {
   opacity: 1 !important;
 }

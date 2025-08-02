@@ -18,7 +18,44 @@
     @* Footer *@
     @await Html.PartialAsync("Panel/_Footer.cshtml")
     @* Modals *@
-    <div id="black-overlay" onclick="toggleAsideMobile()"></div>
+    <div id="black-overlay"></div>
+    <div id="module-help">
+        <h1 class="font-bold mb-2">Users</h1>
+        <table class="table table-auto border border-collapse">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Create</th>
+                    <th>Index</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Admin</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>Manager</td>
+                    <td></td>
+                    <td>✓</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Client</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     @* JS Here *@
     <script src="/js/app.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

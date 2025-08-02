@@ -5,6 +5,7 @@
   --theme-aside-background: var(--blue-600);
   --theme-section-background: var(--gray-100);
   --theme-footer-background: var(--gray-800);
+  --theme-module-help-background: var(--gray-200);
   /* text */
   --theme-text-light: var(--gray-100);
   --theme-text-dark: var(--gray-700);
@@ -36,6 +37,7 @@
   --theme-aside-background: var(--blue-900);
   --theme-section-background: var(--gray-900);
   --theme-footer-background: var(--gray-950);
+  --theme-module-help-background: var(--gray-800);
   /* text */
   --theme-text-light: var(--gray-300);
   --theme-text-dark: var(--gray-900);

@@ -6,7 +6,10 @@
 
 <div class="flex justify-between items-center mb-3">
     @await Html.PartialAsync("Components/_Breadcrumbs")    
-    @await Html.PartialAsync("Components/_CreateButton", "User")
+    <div class="flex gap-2">
+        @await Html.PartialAsync("Components/_InfoButton")
+        @await Html.PartialAsync("Components/_CreateButton", "User")
+    </div>
 </div>
 
 @if (Model.Count > 0)

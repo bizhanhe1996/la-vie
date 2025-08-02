@@ -13,6 +13,23 @@
   }
 };
 
+const toggleModuleHelp = (target) => {
+  const blackOverlay = document.querySelector("#black-overlay");
+  const moduleHelp = document.querySelector("#module-help");
+  
+  const action = moduleHelp.classList.contains("-translate-x-full")
+    ? "hide"
+    : "show";
+  if (action == "show") {
+    blackOverlay.addEventListener("click", toggleModuleHelp);
+    moduleHelp.classList.add("-translate-x-full");
+  } else if (action == "hide") {
+    blackOverlay.removeEventListener("click", toggleModuleHelp);
+    moduleHelp.classList.remove("-translate-x-full");
+  }
+  toggleBlackOverlay();
+};
+
 const toggleAside = (target) => {
   target.parentNode.parentNode.parentNode.parentNode.classList.toggle(
     "aside-toggle"
@@ -37,21 +54,32 @@ const toggleDirection = (element) => {
 const toggleAsideMobile = async () => {
   const aside = document.querySelector("aside");
   const leftValue = aside.style.marginInlineStart;
-  const mode = leftValue == "0px" ? "toHide" : "toShow";
-  const blackOverlayClassList =
-    document.querySelector("#black-overlay").classList;
+  const action = leftValue == "0px" ? "hide" : "show";
+  if (action == "show") {
+    document
+      .querySelector("#black-overlay")
+      .addEventListener("click", toggleAsideMobile);
+  } else if (action == "hide") {
+    document
+      .querySelector("#black-overlay")
+      .removeEventListener("click", toggleAsideMobile);
+  }
+  aside.style.marginInlineStart = action == "show" ? "0" : "-100%";
+  toggleBlackOverlay();
+};
 
-  if (mode == "toShow") {
-    aside.style.marginInlineStart = "0px";
-    blackOverlayClassList.toggle("block");
+const toggleBlackOverlay = () => {
+  const blackOverlay = document.querySelector("#black-overlay");
+  const action = blackOverlay.classList.contains("block") ? "hide" : "show";
+  if (action === "show") {
+    blackOverlay.classList.add("block");
     window.setTimeout(() => {
-      blackOverlayClassList.toggle("opacity-100");
+      blackOverlay.classList.add("opacity-100");
     }, 1);
-  } else {
-    aside.style.marginInlineStart = "-100%";
-    blackOverlayClassList.toggle("opacity-100");
+  } else if (action === "hide") {
+    blackOverlay.classList.remove("opacity-100");
     window.setTimeout(() => {
-      blackOverlayClassList.toggle("block");
+      blackOverlay.classList.remove("block");
     }, 300);
   }
 };

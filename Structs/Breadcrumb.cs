@@ -1,6 +1,6 @@
 namespace LaVie.Structs;
 
-public struct BreadcrumbItem
+public struct Breadcrumb
 {
     public string Controller { set; get; }
     public string Action { set; get; }

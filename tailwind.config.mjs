@@ -5,7 +5,8 @@ export default {
   },
   safelist: [
     'opacity-100',
-    'block'
+    'block',
+    '-translate-x-full'
   ],
   plugins: [],
 };
