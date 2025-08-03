@@ -32,6 +32,19 @@ html.panel {
       width: 100%;
       max-width: 420px;
       padding: 1rem;
+      button#module-help-close {
+        position: absolute;
+        color: var(--gray-100);
+        top: 0;
+        inset-inline-end: 0;
+        background-color: var(--theme-color-danger);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1 / 1;
+        padding: 0.5rem;
+        cursor: pointer;
+      }
     }
     div#black-overlay {
       height: 100vh;

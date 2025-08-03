@@ -20,8 +20,11 @@
     @* Modals *@
     <div id="black-overlay"></div>
     <div id="module-help">
-        <h1 class="font-bold mb-2">Users</h1>
-        <table class="table table-auto border border-collapse">
+        <h1 id="module-help-title" class="font-bold mb-4 text-2xl">Users</h1>
+        <button id="module-help-close" onclick="LaVie.funcs.toggleModuleHelp()">
+            <i class="material-icons">close</i>
+        </button>
+        <table class="table table-auto border border-collapse mb-4">
             <thead>
                 <tr>
                     <th></th>
@@ -31,33 +34,12 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Admin</td>
-                    <td>✓</td>
-                    <td>✓</td>
-                    <td>✓</td>
-                    <td>✓</td>
-                </tr>
-                <tr>
-                    <td>Manager</td>
-                    <td></td>
-                    <td>✓</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Client</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
+            <tbody></tbody>
         </table>
+        <p id="module-help-description"></p>
     </div>
     @* JS Here *@
-    <script src="/js/app.js" asp-append-version="true"></script>
+    <script src="/js/app.js" type="module" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

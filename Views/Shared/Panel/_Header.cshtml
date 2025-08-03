@@ -1,6 +1,6 @@
 <header class="box-shadow">
     @* left section *@
-    <i onclick="toggleAsideMobile()" id="aside-toggle-mobile" class="material-icons">dehaze</i>
+    <i onclick="LaVie.funcs.toggleAsideMobile()" id="aside-toggle-mobile" class="material-icons">dehaze</i>
     <div class="flex gap-2 items-center">
         <i class="material-icons text-teal-500">star</i>
         <a class="font-bold" asp-controller="Home" asp-action="Index">
@@ -9,10 +9,10 @@
     </div>
     @* right section *@
     <div class="ms-auto flex flex-row gap-2 items-center">
-        <span class="hidden md:flex cursor-pointer" onclick="toggleTheme(this)">
+        <span class="hidden md:flex cursor-pointer" onclick="LaVie.funcs.toggleTheme(this)">
             <i class="material-icons">dark_mode</i>
         </span>
-        <span class="hidden md:flex cursor-pointer" onclick="toggleDirection(this)">
+        <span class="hidden md:flex cursor-pointer" onclick="LaVie.funcs.toggleDirection(this)">
             <i class="material-icons">format_textdirection_r_to_l</i>
         </span>
         <div class="flex flex-col m-auto justify-center">
