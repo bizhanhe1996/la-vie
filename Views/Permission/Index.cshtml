@@ -1,0 +1,68 @@
+@model List<LaVie.Models.Permission>
+@{
+
+    ViewData["Title"] = "Permissions";
+}
+
+<div class="flex justify-between items-center mb-3">
+    @await Html.PartialAsync("Components/_Breadcrumbs")
+    <div class="flex gap-2">
+        @await Html.PartialAsync("Components/_HelpButton")
+    </div>
+</div>
+
+
+@if (Model.Count > 0)
+{
+    <div class="overflow-x-auto">
+        <table class="table striped">
+            <thead>
+                <th>#</th>
+                <th>Module</th>
+                <th>Action</th>
+                <th>Role</th>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i+1)</td>
+                        <td>@Model[i].Title.Split('.')[0]</td>
+                        <td>@Model[i].Title.Split('.')[1]</td>
+                        <td>@Model[i].Role</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert">
+        <i class="material-icons">warning</i>
+        <p>No permission defined yet!</p>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        window.setTimeout(() => {
+            window.LaVie.funcs.injectModuleHelpData({
+                title: "Permissions",
+                permissions: {
+                    "Admin": {
+                        "Create": false,
+                        "Index": true,
+                        "Update": false,
+                        "Delete": false,
+                    },
+                    "Manager": false,
+                    "Client": false
+                },
+                description: `Permissions are assigned to roles.
+                        You cannot define,delete, nor modify permissions themselves.
+                        You can only change to which roles they are assigned.`
+            });
+        }, 1000)
+    </script>
+}

@@ -1,11 +1,11 @@
 using Bogus;
+using LaVie.Data;
+using LaVie.Enums;
+using LaVie.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LaVie.Data;
-using LaVie.Enums;
-using LaVie.Models;
 
 namespace LaVie.Controllers;
 
