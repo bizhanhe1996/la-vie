@@ -18,6 +18,7 @@ public class IdentitySeeder : ISeeder
                 new("Permission", "User.Index"),
                 new("Permission", "User.Update"),
                 new("Permission", "User.Delete"),
+                new("Permission", "Role.Update"),
             ]
         },
         { "Manager", [new("Permission", "Home.Index"), new("Permission", "User.Index")] },

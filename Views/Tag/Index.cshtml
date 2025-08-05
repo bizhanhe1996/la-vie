@@ -30,8 +30,10 @@
                             <span class="badge primary">@tag.ProductTags?.Count</span>
                         </td>
                         <td>
+                            <div class="flex gap-2">
                             @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Tag", tag.Id))
                             @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Tag", tag.Id))
+                            </div>
                         </td>
                     </tr>
                 }

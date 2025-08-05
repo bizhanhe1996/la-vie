@@ -6,6 +6,9 @@ span.badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    max-height: 24px;
     color: var(--theme-text-light);
     user-select: none;
     &.primary {

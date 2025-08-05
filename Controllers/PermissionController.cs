@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using LaVie.Data;
 using LaVie.Models;
 using Microsoft.AspNetCore.Authorization;
