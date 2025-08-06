@@ -1,34 +1,40 @@
 namespace LaVie.Seeders;
 
 using System.Security.Claims;
+using LaVie.Enums;
 using LaVie.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
-public class IdentitySeeder : ISeeder
+public class IdentitySeeder(RoleManager<IdentityRole<int>> roleManager) : ISeeder
 {
-    private readonly RoleManager<IdentityRole<int>> _roleManager;
+    private readonly RoleManager<IdentityRole<int>> _roleManager = roleManager;
     private static readonly string[] roles = ["Admin", "Manager", "Client"];
     private static readonly Dictionary<string, List<Claim>> rolesAndClaims = new()
     {
         {
             "Admin",
             [
-                new("Permission", "Home.Index"),
-                new("Permission", "User.Create"),
-                new("Permission", "User.Index"),
-                new("Permission", "User.Update"),
-                new("Permission", "User.Delete"),
-                new("Permission", "Role.Update"),
+                new("Permission", PERMISSIONS.HOME_INDEX.ToString()),
+                new("Permission", PERMISSIONS.USER_CREATE.ToString()),
+                new("Permission", PERMISSIONS.USER_INDEX.ToString()),
+                new("Permission", PERMISSIONS.USER_UPDATE.ToString()),
+                new("Permission", PERMISSIONS.USER_DELETE.ToString()),
+                new("Permission", PERMISSIONS.ROLE_UPDATE.ToString()),
+                new("Permission", PERMISSIONS.CATEGORY_INDEX.ToString()),
+                new("Permission", PERMISSIONS.CATEGORY_CREATE.ToString()),
+                new("Permission", PERMISSIONS.CATEGORY_DELETE.ToString()),
+                new("Permission", PERMISSIONS.CATEGORY_UPDATE.ToString()),
             ]
         },
-        { "Manager", [new("Permission", "Home.Index"), new("Permission", "User.Index")] },
-        { "Client", [new("Permission", "Home.Index")] },
+        {
+            "Manager",
+            [
+                new("Permission", PERMISSIONS.HOME_INDEX.ToString()),
+                new("Permission", PERMISSIONS.USER_INDEX.ToString()),
+            ]
+        },
+        { "Client", [new("Permission", PERMISSIONS.HOME_INDEX.ToString())] },
     };
-
-    public IdentitySeeder(RoleManager<IdentityRole<int>> roleManager)
-    {
-        _roleManager = roleManager;
-    }
 
     public async Task Seed()
     {

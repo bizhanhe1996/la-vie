@@ -1,0 +1,15 @@
+namespace LaVie.Enums;
+
+public enum PERMISSIONS
+{
+    HOME_INDEX,
+    USER_CREATE,
+    USER_INDEX,
+    USER_UPDATE,
+    USER_DELETE,
+    ROLE_UPDATE,
+    CATEGORY_CREATE,
+    CATEGORY_INDEX,
+    CATEGORY_UPDATE,
+    CATEGORY_DELETE,
+}

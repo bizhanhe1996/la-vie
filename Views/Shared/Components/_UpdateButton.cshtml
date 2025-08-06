@@ -1,6 +1,7 @@
+@using LaVie.Structs
 @model UpdateButtonStruct
 
-@if (User.HasClaim(c => c.Type == "Permission" && c.Value == $"{Model.Controller}.Update"))
+@if (User.HasClaim(c => c.Value == Model.Permission))
 {
     <a class="btn upd" asp-controller="@Model.Controller" asp-action="Update" asp-route-id="@Model.Id">
         <i class="material-icons">edit_square</i>

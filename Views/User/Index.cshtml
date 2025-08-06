@@ -4,7 +4,7 @@
     ViewData["Title"] = "Users";
 }
 
-<div class="flex justify-between items-center mb-3">
+<div class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     <div class="flex gap-2">
         @await Html.PartialAsync("Components/_HelpButton")
@@ -37,10 +37,8 @@
                         @if (ViewBag.ActiveUserRole == "Admin")
                         {
                             <td>
-                                <div class="flex gap-2">
-                                    @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("User", user.Id))
-                                    @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("User", user.Id))
-                                </div>
+                                @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("User", user.Id))
+                                @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("User", user.Id))
                             </td>
                         }
                     </tr>

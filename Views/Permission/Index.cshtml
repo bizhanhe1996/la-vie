@@ -3,11 +3,9 @@
     ViewData["Title"] = "Permissions";
 }
 
-<div class="flex justify-between items-center mb-3">
+<div class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
-    <div class="flex gap-2">
-        @await Html.PartialAsync("Components/_HelpButton")
-    </div>
+    @await Html.PartialAsync("Components/_HelpButton")
 </div>
 
 
@@ -26,8 +24,8 @@
                 {
                     <tr>
                         <td>@(i+1)</td>
-                        <td>@Model[i].Title.Split('.')[0]</td>
-                        <td>@Model[i].Title.Split('.')[1]</td>
+                        <td>@Model[i].Title.Split('_')[0].ToLower()</td>
+                        <td>@Model[i].Title.Split('_')[1].ToLower()</td>
                         <td>@Model[i].Role</td>
                     </tr>
                 }

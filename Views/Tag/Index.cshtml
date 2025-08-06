@@ -3,7 +3,7 @@
     ViewData["Title"] = "Tags";
 }
 
-<div class="flex justify-between items-center mb-3">
+<div class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     @await Html.PartialAsync("Components/_CreateButton", "Tag")
 </div>
@@ -30,10 +30,8 @@
                             <span class="badge primary">@tag.ProductTags?.Count</span>
                         </td>
                         <td>
-                            <div class="flex gap-2">
                             @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Tag", tag.Id))
                             @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Tag", tag.Id))
-                            </div>
                         </td>
                     </tr>
                 }

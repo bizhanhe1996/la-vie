@@ -1,6 +1,7 @@
 @model DeleteButtonStruct
+@using LaVie.Structs
 
-@if (User.HasClaim(c => c.Type == "Permission" && c.Value == $"{Model.Controller}.Delete"))
+@if (User.HasClaim(c => c.Value == Model.Permission))
 {
     <a class="btn del" asp-controller="@Model.Controller" asp-action="Delete" asp-route-id="@Model.Id">
         <i class="material-icons">delete</i>

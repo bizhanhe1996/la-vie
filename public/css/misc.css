@@ -46,3 +46,15 @@
 .disabled {
   opacity: 0.5;
 }
+
+.page-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+
+.page-text {
+  color: var(--theme-table-td-text);
+}

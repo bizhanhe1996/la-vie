@@ -40,4 +40,18 @@ public class RoleController : BaseController
         ViewBag.Counts = counts;
         return View(roles);
     }
+
+    public async Task<IActionResult> Update(int id)
+    {
+        SetUpdateBreadcrumbs();
+        var role = await _roleManager.FindByIdAsync(id.ToString());
+        if (role == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.Permissions = await _roleManager.GetClaimsAsync(role);
+
+        return View(role);
+    }
 }
