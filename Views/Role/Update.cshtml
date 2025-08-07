@@ -8,39 +8,57 @@
     @await Html.PartialAsync("Components/_BackButton")
 </div>
 
+@* All permissions *@
 <h1 class="page-text font-bold text-xl mb-4">All Permissions</h1>
 <div class="flex gap-2 flex-wrap mb-8">
     @foreach (var permission in Enum.GetValues(typeof(PERMISSIONS)))
     {
-        <span class="badge primary cursor-grab" id="@permission" draggable="true" ondragstart="drag(event)">@permission</span>
+        <span class="badge primary cursor-grab permission" id="@permission" draggable="true"
+            ondragstart="drag(event)">@permission</span>
     }
 </div>
 
-@* dropzone *@
+@* Role permissions (dropzone) *@
 <h1 class="page-text font-bold text-xl mb-4">Role Permissions</h1>
-<div class="flex gap-2 flex-wrap" ondragover="allowDrop(event)" ondrop="drop(event)">
-
+<div class="dropzone" ondragover="allowDrop(event)" ondrop="drop(event)">
     @foreach (var permission in ViewBag.Permissions)
     {
-        <span class="badge primary cursor-grab">@(permission.Value)</span>
+        <span class="badge primary cursor-grab role-permission">@(permission.Value)</span>
     }
 </div>
 
-
 <script>
-    function allowDrop(ev) {
-        ev.preventDefault(); // Allows dropping
+    const allowDrop = (event) => {
+        event.preventDefault();
     }
 
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
+    const drag = (event) => {
+        event.dataTransfer.setData("text", event.target.id);
     }
 
-    function drop(ev) {
-        ev.preventDefault();
-        const data = ev.dataTransfer.getData("text");
-        const draggedElement = document.getElementById(data);
-        ev.target.appendChild(draggedElement);
-    }
+    const drop = (event) => {
 
+        const data = event.dataTransfer.getData("text");
+        const draggable = document.getElementById(data);
+        const addedPermissions = [...document.querySelectorAll(".role-permission")].map(permissionSpan => {
+            return permissionSpan.innerHTML.trim();
+        });
+
+        if (addedPermissions.includes(draggable.innerHTML.trim())) {
+            window.alert("Already added");
+            return;
+        }
+
+
+        event.preventDefault();
+
+
+        let dropzone = event.target;
+
+        if (dropzone.classList.contains("role-permission")) {
+            dropzone = dropzone.parentNode;
+
+        }
+        dropzone.appendChild(draggable);
+    }
 </script>

@@ -54,7 +54,15 @@
   margin-bottom: 1rem;
 }
 
-
 .page-text {
   color: var(--theme-table-td-text);
+}
+
+.dropzone {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px dashed var(--theme-table-td-text);
+  border-radius: 0.25rem;
 }
