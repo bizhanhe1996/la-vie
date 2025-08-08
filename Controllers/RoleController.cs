@@ -1,5 +1,8 @@
+using System.Security.Claims;
 using LaVie.Models;
+using LaVie.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,6 +44,7 @@ public class RoleController : BaseController
         return View(roles);
     }
 
+    [HttpGet]
     public async Task<IActionResult> Update(int id)
     {
         SetUpdateBreadcrumbs();
@@ -49,14 +53,65 @@ public class RoleController : BaseController
         {
             return NotFound();
         }
-
         ViewBag.Permissions = await _roleManager.GetClaimsAsync(role);
-
-        return View(role);
+        ViewBag.RoleName = role.Name;
+        return View();
     }
 
-    // public async Task<IActionResult> Update() { 
+    [HttpPost]
+    public async Task<IActionResult> Update(RoleUpdateViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            // Find role by name
+            var role = await _roleManager.FindByNameAsync(model.Role);
+            if (role == null)
+            {
+                return NotFound("Role not found");
+            }
 
-    //     return 2;
-    // }
+            var existingClaims = await _roleManager.GetClaimsAsync(role);
+            await RemoveClaimsOfRole(role, existingClaims);
+            if (ModelState.IsValid == false)
+            {
+                return BadRequest(ModelState);
+            }
+            await AddPermissionToRole(role, model.Permissions);
+            if (ModelState.IsValid == false)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View();
+        }
+    }
+
+    private async Task RemoveClaimsOfRole(IdentityRole<int> role, IList<Claim> claims)
+    {
+        foreach (var claim in claims)
+        {
+            var result = await _roleManager.RemoveClaimAsync(role, claim);
+            if (result.Succeeded == false)
+            {
+                ModelState.AddModelError("", $"Failed to remove permission {claim.Value}");
+            }
+        }
+    }
+
+    private async Task AddPermissionToRole(IdentityRole<int> role, string[] permissions)
+    {
+        foreach (var permission in permissions)
+        {
+            var permissionClaim = new Claim("Permission", permission);
+            var result = await _roleManager.AddClaimAsync(role, permissionClaim);
+            if (result.Succeeded == false)
+            {
+                ModelState.AddModelError("", $"Failed to add permission {permission}");
+            }
+        }
+    }
 }

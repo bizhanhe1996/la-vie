@@ -1,10 +1,8 @@
+@model LaVie.ViewModels.RoleUpdateViewModel;
 @using LaVie.Enums
 @{
     ViewData["Title"] = "Update a role";
 }
-
-
-
 <div class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     @await Html.PartialAsync("Components/_BackButton")
@@ -21,44 +19,48 @@
 </div>
 
 @* Role permissions (dropzone) *@
-<form id="role-update-form">
+<form id="role-update-form" asp-controller="Role" asp-action="Update">
+    <input type="hidden" asp-for="Role" value="@ViewBag.RoleName" />
     <h1 class="page-text font-bold text-xl mb-4">Role Permissions</h1>
-    <div class="dropzone mb-4" ondragover="allowDrop(event)" ondrop="drop(event)">
-
+    <div class="dropzone mb-4" ondragover="LaVie.funcs.allowDrop(event)" ondrop="drop(event)">
         @foreach (var permission in ViewBag.Permissions)
         {
             <span class="permission-base role-permission" onclick="this.remove()">@(permission.Value)</span>
         }
-
     </div>
-
     <div class="flex justify-end gap-2">
         @await Html.PartialAsync("Components/_SubmitButton")
     </div>
-
 </form>
-
-
-
-
 
 <script>
 
-    document.querySelector("#role-update-form").addEventListener("submit", (event) => {
+    const submit = (event) => {
+        
         event.preventDefault();
-        getRolePermissions();
-    });
+        const rolePermissions = getRolePermissions();
+        
+        const selectElement = document.createElement("select");
+        selectElement.multiple = true;
+        selectElement.classList.add("hidden");
+        selectElement.name = "Permissions";
 
-    const getRolePermissions = () => {
-        const rolePermissions = [...document.querySelectorAll(".role-permission")].map(permission => permission.innerHTML.trim());
+        for (let permission of rolePermissions) {
+            const option = document.createElement("option");
+            option.value = permission;
+            option.selected = true;
+            selectElement.appendChild(option)
+        }
 
+        const form = document.querySelector("#role-update-form");
+        form.appendChild(selectElement);
+        form.submit();
     }
 
+    document.querySelector("#role-update-form").addEventListener("submit", submit);
 
-
-
-    const allowDrop = (event) => {
-        event.preventDefault();
+    const getRolePermissions = () => {
+        return [...document.querySelectorAll(".role-permission")].map(permission => permission.innerHTML.trim());
     }
 
     const drag = (event) => {

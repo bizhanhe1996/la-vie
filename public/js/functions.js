@@ -133,3 +133,7 @@ export const changePageSize = (controller, selectElement) => {
   window.location.href =
     "/" + controller + "?page=1&size=" + selectElement.value;
 };
+
+export const allowDrop = (event) => {
+  event.preventDefault();
+}
