@@ -54,4 +54,9 @@ public class RoleController : BaseController
 
         return View(role);
     }
+
+    // public async Task<IActionResult> Update() { 
+
+    //     return 2;
+    // }
 }

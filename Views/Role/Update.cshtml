@@ -3,6 +3,8 @@
     ViewData["Title"] = "Update a role";
 }
 
+
+
 <div class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     @await Html.PartialAsync("Components/_BackButton")
@@ -13,21 +15,48 @@
 <div class="flex gap-2 flex-wrap mb-8">
     @foreach (var permission in Enum.GetValues(typeof(PERMISSIONS)))
     {
-        <span class="badge primary cursor-grab permission" id="@permission" draggable="true"
+        <span class="permission-base permission" id="@permission" draggable="true"
             ondragstart="drag(event)">@permission</span>
     }
 </div>
 
 @* Role permissions (dropzone) *@
-<h1 class="page-text font-bold text-xl mb-4">Role Permissions</h1>
-<div class="dropzone" ondragover="allowDrop(event)" ondrop="drop(event)">
-    @foreach (var permission in ViewBag.Permissions)
-    {
-        <span class="badge primary cursor-grab role-permission">@(permission.Value)</span>
-    }
-</div>
+<form id="role-update-form">
+    <h1 class="page-text font-bold text-xl mb-4">Role Permissions</h1>
+    <div class="dropzone mb-4" ondragover="allowDrop(event)" ondrop="drop(event)">
+
+        @foreach (var permission in ViewBag.Permissions)
+        {
+            <span class="permission-base role-permission" onclick="this.remove()">@(permission.Value)</span>
+        }
+
+    </div>
+
+    <div class="flex justify-end gap-2">
+        @await Html.PartialAsync("Components/_SubmitButton")
+    </div>
+
+</form>
+
+
+
+
 
 <script>
+
+    document.querySelector("#role-update-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        getRolePermissions();
+    });
+
+    const getRolePermissions = () => {
+        const rolePermissions = [...document.querySelectorAll(".role-permission")].map(permission => permission.innerHTML.trim());
+
+    }
+
+
+
+
     const allowDrop = (event) => {
         event.preventDefault();
     }
@@ -37,28 +66,26 @@
     }
 
     const drop = (event) => {
-
         const data = event.dataTransfer.getData("text");
         const draggable = document.getElementById(data);
+        const toBeAdded = draggable.cloneNode(true);
+        toBeAdded.classList.remove("permission");
         const addedPermissions = [...document.querySelectorAll(".role-permission")].map(permissionSpan => {
             return permissionSpan.innerHTML.trim();
         });
-
-        if (addedPermissions.includes(draggable.innerHTML.trim())) {
+        if (addedPermissions.includes(toBeAdded.innerHTML.trim())) {
             window.alert("Already added");
             return;
         }
-
-
         event.preventDefault();
-
-
         let dropzone = event.target;
-
         if (dropzone.classList.contains("role-permission")) {
             dropzone = dropzone.parentNode;
-
         }
-        dropzone.appendChild(draggable);
+        toBeAdded.classList.add("role-permission");
+        toBeAdded.addEventListener("click", function () {
+            this.remove();
+        });
+        dropzone.appendChild(toBeAdded);
     }
 </script>
