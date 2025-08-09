@@ -27,6 +27,12 @@ export const injectModuleHelpData = (moduleHelpData) => {
         const emptyTd = document.createElement("td");
         tr.appendChild(emptyTd);
       }
+    } else if (moduleHelpData["permissions"][role] === true) {
+      for (let i in [0, 1, 2, 3]) {
+        const emptyTd = document.createElement("td");
+        emptyTd.innerHTML = "✓";
+        tr.appendChild(emptyTd);
+      }
     } else {
       // for each permission
       for (const [permission, value] of Object.entries(

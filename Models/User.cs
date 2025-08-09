@@ -35,9 +35,8 @@ public class User : IdentityUser<int>, IModel
     [Required]
     public string LastName { set; get; } = null!;
 
-    [NotMapped]
-    public string FullName => $"{FirstName} {LastName}";
+    public string? AvatarPath { set; get; }
 
     [NotMapped]
-    public string Role => $"{FirstName} {LastName}";
+    public string FullName => $"{FirstName} {LastName}";
 }

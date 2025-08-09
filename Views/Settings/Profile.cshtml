@@ -1,0 +1,67 @@
+@model LaVie.ViewModels.ProfileViewModel
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="page-bar">
+    @await Html.PartialAsync("Components/_Breadcrumbs")
+    @await Html.PartialAsync("Components/_HelpButton")
+</div>
+
+
+<div class="page-content">
+    <form method="POST" class="form" asp-controller="Profile" asp-action="Update" enctype="multipart/form-data">
+        <div class="row mb-4">
+            <div class="col-span-12 md:col-span-6">
+                <fieldset>
+                    <label asp-for="FirstName">First name</label>
+                    <input asp-for="FirstName" readonly>
+                </fieldset>
+                <fieldset>
+                    <label asp-for="LastName">Last name</label>
+                    <input asp-for="LastName" readonly>
+                </fieldset>
+                <fieldset>
+                    <label asp-for="Email">Email</label>
+                    <input type="email" asp-for="Email">
+                </fieldset>
+                <fieldset>
+                    <label asp-for="AvatarFile">Avatar</label>
+                    <input type="file" asp-for="AvatarFile" accept="image/*">
+                </fieldset>
+            </div>
+            <div class="col-span-12 md:col-span-6">
+                <div id="avatar-demo" class="image-demo min-h-[256px]"></div>
+            </div>
+        </div>
+        <div class="flex justify-end gap-2">
+            @await Html.PartialAsync("Components/_SubmitButton")
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelector("#AvatarFile").addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.querySelector("#avatar-demo").style.backgroundImage = `url('${e.target.result}')`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        window.setTimeout(() => {
+            window.LaVie.funcs.injectModuleHelpData({
+                title: "Profile",
+                permissions: {
+                    "Admin": true,
+                    "Manager": true,
+                    "Client": true
+                },
+                description: `Profile`
+            });
+        }, 1000);
+    </script>
+}

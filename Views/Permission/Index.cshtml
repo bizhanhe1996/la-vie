@@ -23,7 +23,7 @@
                 @for (var i = 0; i < Model.Count; i++)
                 {
                     <tr>
-                        <td>@(i+1)</td>
+                        <td>@(i + 1)</td>
                         <td>@Model[i].Title.Split('_')[0].ToLower()</td>
                         <td>@Model[i].Title.Split('_')[1].ToLower()</td>
                         <td>@Model[i].Role</td>
@@ -57,8 +57,9 @@ else
                     "Client": false
                 },
                 description: `Permissions are assigned to roles.
-                        You cannot define,delete, nor modify permissions themselves.
-                        You can only change to which roles they are assigned.`
+                    The creation, deletion, or modification of permissions 
+                    is not permitted. You may only modify the role assignments 
+                    to which the permissions are associated.`
             });
         }, 1000)
     </script>

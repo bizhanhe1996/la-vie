@@ -98,3 +98,25 @@
     background: var(--theme-color-danger);
   }
 }
+
+.image-demo {
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--theme-table-td-text);
+  border-style: dashed;
+  border-radius: 0.25rem;
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &:after {
+    content: "Image Demo";
+    position: absolute;
+    color: var(--theme-table-td-text);
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+}

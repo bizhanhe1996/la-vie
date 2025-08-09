@@ -51,7 +51,7 @@ form.form {
       transition: box-shadow 0.25s ease, background 0.3s ease;
       resize: none;
       appearance: none;
-      &:focus {
+      &:focus:not([readonly]) {
         box-shadow: 0 0 0px 4px var(--theme-input-shadow-color);
         & + label {
           background: linear-gradient(

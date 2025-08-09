@@ -30,10 +30,10 @@
                         <td><span class="badge primary">@ViewBag.Counts[@Model[i].Name]["permissions"]</span></td>
                         <td><span class="badge primary">@ViewBag.Counts[@Model[i].Name]["users"]</span></td>
                         <td>
-                            
-                                @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Role",
-                                Model[i].Id))
-                    
+
+                            @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Role",
+                            Model[i].Id))
+
                 </td>
             </tr>
                         }
@@ -65,10 +65,10 @@ else
                     "Manager": false,
                     "Client": false
                 },
-                description: `Roels are assigned to users.
-                            You cannot define nor delete roles themselves.
-                            You can only change to which users they are
-                            assigned or which permissions they include.`
+                description: `Roles are assigned to users.
+                    The creation or deletion of roles is not permitted.
+                    You may only modify role assignments to users or 
+                    adjust the permissions associated with each role.`
             });
         }, 1000);
     </script>
