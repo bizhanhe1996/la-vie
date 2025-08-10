@@ -123,7 +123,7 @@ public class BaseController : Controller, IActionFilter
     {
         base.OnActionExecuting(context);
 
-        if (User.Identity.IsAuthenticated)
+        if (User.Identity != null && User.Identity.IsAuthenticated)
         {
             ViewBag.ActiveUser = _userManager.GetUserAsync(User).Result;
             SetActiveUserRole(context);

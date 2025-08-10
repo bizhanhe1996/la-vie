@@ -3,91 +3,95 @@
 @{
     ViewData["Title"] = "Update a role";
 }
-<div class="page-bar">
+<section class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     @await Html.PartialAsync("Components/_BackButton")
-</div>
+</section>
 
 @* All permissions *@
-<h1 class="page-text font-bold text-xl mb-4">All Permissions</h1>
-<div class="flex gap-2 flex-wrap mb-8">
-    @foreach (var permission in Enum.GetValues(typeof(PERMISSIONS)))
-    {
-        <span class="permission-base permission" id="@permission" draggable="true"
-            ondragstart="drag(event)">@permission</span>
-    }
-</div>
-
-@* Role permissions (dropzone) *@
-<form id="role-update-form" asp-controller="Role" asp-action="Update">
-    <input type="hidden" asp-for="Role" value="@ViewBag.RoleName" />
-    <h1 class="page-text font-bold text-xl mb-4">Role Permissions</h1>
-    <div class="dropzone mb-4" ondragover="LaVie.funcs.allowDrop(event)" ondrop="drop(event)">
-        @foreach (var permission in ViewBag.Permissions)
+<section class="page-content">
+    <h1 class="page-text font-bold text-xl mb-4">All Permissions</h1>
+    <div class="flex gap-2 flex-wrap mb-8">
+        @foreach (var permission in Enum.GetValues(typeof(PERMISSIONS)))
         {
-            <span class="permission-base role-permission" onclick="this.remove()">@(permission.Value)</span>
+            <span class="permission-base permission" id="@permission" draggable="true"
+                ondragstart="drag(event)">@permission</span>
         }
     </div>
-    <div class="flex justify-end gap-2">
-        @await Html.PartialAsync("Components/_SubmitButton")
-    </div>
-</form>
 
-<script>
+    @* Role permissions (dropzone) *@
+    <form id="role-update-form" asp-controller="Role" asp-action="Update">
+        <input type="hidden" asp-for="Role" value="@ViewBag.RoleName" />
+        <h1 class="page-text font-bold text-xl mb-4">Role Permissions</h1>
+        <div class="dropzone mb-4" ondragover="LaVie.funcs.allowDrop(event)" ondrop="drop(event)">
+            @foreach (var permission in ViewBag.Permissions)
+            {
+                <span class="permission-base role-permission" onclick="this.remove()">@(permission.Value)</span>
+            }
+        </div>
+        <div class="flex justify-end gap-2">
+            @await Html.PartialAsync("Components/_SubmitButton")
+        </div>
+    </form>
+</section>
 
-    const submit = (event) => {
-        
-        event.preventDefault();
-        const rolePermissions = getRolePermissions();
-        
-        const selectElement = document.createElement("select");
-        selectElement.multiple = true;
-        selectElement.classList.add("hidden");
-        selectElement.name = "Permissions";
+@section Scripts {
+    <script>
 
-        for (let permission of rolePermissions) {
-            const option = document.createElement("option");
-            option.value = permission;
-            option.selected = true;
-            selectElement.appendChild(option)
+        const submit = (event) => {
+
+            event.preventDefault();
+            const rolePermissions = getRolePermissions();
+
+            const selectElement = document.createElement("select");
+            selectElement.multiple = true;
+            selectElement.classList.add("hidden");
+            selectElement.name = "Permissions";
+
+            for (let permission of rolePermissions) {
+                const option = document.createElement("option");
+                option.value = permission;
+                option.selected = true;
+                selectElement.appendChild(option)
+            }
+
+            const form = document.querySelector("#role-update-form");
+            form.appendChild(selectElement);
+            form.submit();
         }
 
-        const form = document.querySelector("#role-update-form");
-        form.appendChild(selectElement);
-        form.submit();
-    }
+        document.querySelector("#role-update-form").addEventListener("submit", submit);
 
-    document.querySelector("#role-update-form").addEventListener("submit", submit);
-
-    const getRolePermissions = () => {
-        return [...document.querySelectorAll(".role-permission")].map(permission => permission.innerHTML.trim());
-    }
-
-    const drag = (event) => {
-        event.dataTransfer.setData("text", event.target.id);
-    }
-
-    const drop = (event) => {
-        const data = event.dataTransfer.getData("text");
-        const draggable = document.getElementById(data);
-        const toBeAdded = draggable.cloneNode(true);
-        toBeAdded.classList.remove("permission");
-        const addedPermissions = [...document.querySelectorAll(".role-permission")].map(permissionSpan => {
-            return permissionSpan.innerHTML.trim();
-        });
-        if (addedPermissions.includes(toBeAdded.innerHTML.trim())) {
-            window.alert("Already added");
-            return;
+        const getRolePermissions = () => {
+            return [...document.querySelectorAll(".role-permission")].map(permission => permission.innerHTML.trim());
         }
-        event.preventDefault();
-        let dropzone = event.target;
-        if (dropzone.classList.contains("role-permission")) {
-            dropzone = dropzone.parentNode;
+
+        const drag = (event) => {
+            event.dataTransfer.setData("text", event.target.id);
         }
-        toBeAdded.classList.add("role-permission");
-        toBeAdded.addEventListener("click", function () {
-            this.remove();
-        });
-        dropzone.appendChild(toBeAdded);
-    }
-</script>
+
+        const drop = (event) => {
+            const data = event.dataTransfer.getData("text");
+            const draggable = document.getElementById(data);
+            const toBeAdded = draggable.cloneNode(true);
+            toBeAdded.classList.remove("permission");
+            const addedPermissions = [...document.querySelectorAll(".role-permission")].map(permissionSpan => {
+                return permissionSpan.innerHTML.trim();
+            });
+            if (addedPermissions.includes(toBeAdded.innerHTML.trim())) {
+                window.alert("Already added");
+                return;
+            }
+            event.preventDefault();
+            let dropzone = event.target;
+            if (dropzone.classList.contains("role-permission")) {
+                dropzone = dropzone.parentNode;
+            }
+            toBeAdded.classList.add("role-permission");
+            toBeAdded.addEventListener("click", function () {
+                this.remove();
+            });
+            dropzone.appendChild(toBeAdded);
+        }
+    </script>
+}

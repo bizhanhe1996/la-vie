@@ -39,4 +39,7 @@ public class User : IdentityUser<int>, IModel
 
     [NotMapped]
     public string FullName => $"{FirstName} {LastName}";
+
+    [NotMapped]
+    public string Role { get; set; } = null!;
 }

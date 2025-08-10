@@ -24,7 +24,7 @@
         </div>
         <div class="relative" onclick="this.children[1].classList.toggle('scale-100')">
             <img id="profile-image" src="@ViewBag.ActiveUser.AvatarPath" draggable="false" />
-            <div class="scale-0 absolute bg-white shadow-xl shadow-gray-600 -start-[300%] z-2 rounded overflow-hidden transition-transform origin-top w-auto">
+            <div class="scale-0 absolute bg-popup shadow-xl shadow-gray-600 -start-[300%] z-2 rounded overflow-hidden transition-transform origin-top w-auto">
                 <div class="p-3 m-0!">
                     <form asp-controller="Account" asp-action="Logout" method="POST">
                         <button type="submit" class="btn del me-0">

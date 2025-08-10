@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Categories";
 }
-<div class="page-bar">
+<section class="page-bar">
     @* breadcrumbs *@
     @await Html.PartialAsync("Components/_Breadcrumbs")
     @* buttons *@
@@ -12,7 +12,8 @@
         <form class="form min-w-16">
             <fieldset class="mb-0!">
                 <select id="pagination-size" onchange="changePageSize('Category', this)">
-                    @foreach(var i in new int[]{10,20,30,40,50}) {
+                    @foreach (var i in new int[] { 10, 20, 30, 40, 50 })
+                    {
                         <option value="@i">@i</option>
                     }
                     <option value="-1">All</option>
@@ -20,23 +21,26 @@
             </fieldset>
         </form>
         @* admin options *@
-        @if (User.IsInRole("Admin")){
+        @if (User.IsInRole("Admin"))
+        {
             <div class="relative">
                 <button class="btn upd min-w-32" onclick="this.nextElementSibling.classList.toggle('scale-100')">
                     <span>Actions</span>
                     <i class="material-icons">keyboard_arrow_down</i>
                 </button>
-                <div class="absolute overflow-hidden bg-white shadow-lg shadow-gray-600 w-full scale-0 transition-transform origin-top rounded z-2 top-[125%]">
+                <div
+                    class="absolute overflow-hidden bg-white shadow-lg shadow-gray-600 w-full scale-0 transition-transform origin-top rounded z-2 top-[125%]">
                     <ul class="flex flex-col gap-3 p-3">
                         <li>
                             <button class="btn add w-full" onclick="toggleConfirm('Are you sure?', this)">
                                 <a class="hidden" asp-controller="Category" asp-action="Seed"></a>
                                 <i class="material-icons">keyboard_arrow_down</i>
                                 <span>Seed</span>
-                            </button>   
+                            </button>
                         </li>
                         <li>
-                            <button class="btn del w-full" onclick="toggleConfirm('Are you sure?', () => window.location.href = '/Category/Truncate'))">
+                            <button class="btn del w-full"
+                                onclick="toggleConfirm('Are you sure?', () => window.location.href = '/Category/Truncate'))">
                                 <i class="material-icons">keyboard_arrow_down</i>
                                 <span>Truncate</span>
                             </button>
@@ -47,33 +51,38 @@
         }
         @* create button *@
         @await Html.PartialAsync("Components/_CreateButton", "Category")
-    </div>    
-</div>
+    </div>
+</section>
 
-@if (Model != null && Model.Count > 0)
-{
-    <div class="overflow-x-auto">
-        <table class="table striped">
-            <thead>
-                <tr>
-                    @foreach(var th in new string[] {"#","Title","Slug","Products","Actions"}) {
-                        <th>@th</th>
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                @for(int i = 0; i < Model.Count; i++) {
+<section class="page-content">
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="overflow-x-auto">
+            <table class="table striped">
+                <thead>
                     <tr>
-                        <td>@((ViewBag.Page-1)*10 + i +1)</td>
-                        <td>@Model[i].Title</td>
-                        <td>@Model[i].Slug</td>
-                        <td><span class="badge primary">@Model[i].ProductsCount</span></td>
-                        <td>
-                            @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Category", Model[i].Id))
-                            @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Category", Model[i].Id))
-                        </td>
+                        @foreach (var th in new string[] { "#", "Title", "Slug", "Products", "Actions" })
+                        {
+                            <th>@th</th>
+                        }
                     </tr>
-                }
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@((ViewBag.Page - 1) * 10 + i + 1)</td>
+                            <td>@Model[i].Title</td>
+                            <td>@Model[i].Slug</td>
+                            <td><span class="badge primary">@Model[i].ProductsCount</span></td>
+                            <td>
+                                @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Category",
+                                Model[i].Id))
+                        @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Category",
+                                                Model[i].Id))
+                    </td>
+                </tr>
+                                }
             </tbody>
             <tfoot>
                 <tr>
@@ -84,11 +93,12 @@
             </tfoot>
         </table>
     </div>
-}
-else
-{
-    <div class="alert">
-        <i class="material-icons">warning</i>
-        <p>No category defined yet!</p>
-    </div>   
-}
+        }
+        else
+    {
+        <div class="alert">
+            <i class="material-icons">warning</i>
+            <p>No category defined yet!</p>
+        </div>
+    }
+</section>

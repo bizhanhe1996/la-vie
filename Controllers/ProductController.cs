@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using LaVie.Data;
 using LaVie.Enums;
 using LaVie.Models;
 using LaVie.Structs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaVie.Controllers;
 
@@ -51,7 +51,12 @@ public class ProductController : BaseController
 
         if (ModelState.IsValid)
         {
-            product.ProductTags = MapSelectedTagsIds(product?.SelectedTagsIds);
+            product.ProductTags = MapSelectedTagsIds(product?.SelectedTagsIds ?? []);
+            if (product == null)
+            {
+                SetCreateBreadcrumbs();
+                return SetCategories().SetTags().View(product);
+            }
             context.Products.Add(product);
             await context.SaveChangesAsync();
             return RedirectToAction("Index");

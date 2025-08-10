@@ -4,33 +4,36 @@
     ViewData["Title"] = mode + " a new Tag";
 }
 
-<div class="page-bar">
+<section class="page-bar">
     @await Html.PartialAsync("Components/_BreadCrumbs")
     @await Html.PartialAsync("Components/_BackButton")
-</div>
+</section>
 
-<form class="form" asp-action="@mode" method="POST">
-    @* fields *@
-    <div class="flex flex-col gap-2">
-        <fieldset>
-            <label asp-for="Name" required>Name</label>
-            <input asp-for="Name" required autofocus>
-            @if (ViewData.ModelState.ContainsKey("Name") && ViewData.ModelState["Name"]?.Errors?.Count > 0)
-            {
-                <span class="error" asp-validation-for="Name"></span>
-            }
-        </fieldset>
-        <fieldset>
-            <label asp-for="Description">Description</label>
-            <textarea asp-for="Description"></textarea>
-            @if (ViewData.ModelState.ContainsKey("Description") && ViewData.ModelState["Description"]?.Errors?.Count > 0)
-            {
-                <span class="error" asp-validation-for="Description"></span>
-            }
-        </fieldset>
-    </div>
-    @* buttons *@
-    <div class="flex justify-end">
-        @await Html.PartialAsync("Components/_SubmitButton")
-    </div>
-</form>
+<section class="page-content">
+    <form class="form" asp-action="@mode" method="POST">
+        @* fields *@
+        <div class="flex flex-col gap-2">
+            <fieldset>
+                <label asp-for="Name" required>Name</label>
+                <input asp-for="Name" required autofocus>
+                @if (ViewData.ModelState.ContainsKey("Name") && ViewData.ModelState["Name"]?.Errors?.Count > 0)
+                {
+                    <span class="error" asp-validation-for="Name"></span>
+                }
+            </fieldset>
+            <fieldset>
+                <label asp-for="Description">Description</label>
+                <textarea asp-for="Description"></textarea>
+                @if (ViewData.ModelState.ContainsKey("Description") && ViewData.ModelState["Description"]?.Errors?.Count
+                                > 0)
+                {
+                    <span class="error" asp-validation-for="Description"></span>
+                }
+            </fieldset>
+        </div>
+        @* buttons *@
+        <div class="flex justify-end">
+            @await Html.PartialAsync("Components/_SubmitButton")
+        </div>
+    </form>
+</section>

@@ -3,43 +3,44 @@
     ViewData["Title"] = "Permissions";
 }
 
-<div class="page-bar">
+<section class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     @await Html.PartialAsync("Components/_HelpButton")
-</div>
+</section>
 
-
-@if (Model.Count > 0)
-{
-    <div class="overflow-x-auto">
-        <table class="table striped">
-            <thead>
-                <th>#</th>
-                <th>Module</th>
-                <th>Action</th>
-                <th>Role</th>
-            </thead>
-            <tbody>
-                @for (var i = 0; i < Model.Count; i++)
-                {
-                    <tr>
-                        <td>@(i + 1)</td>
-                        <td>@Model[i].Title.Split('_')[0].ToLower()</td>
-                        <td>@Model[i].Title.Split('_')[1].ToLower()</td>
-                        <td>@Model[i].Role</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
-else
-{
-    <div class="alert">
-        <i class="material-icons">warning</i>
-        <p>No permission defined yet!</p>
-    </div>
-}
+<section class="page-content">
+    @if (Model.Count > 0)
+    {
+        <div class="overflow-x-auto">
+            <table class="table striped">
+                <thead>
+                    <th>#</th>
+                    <th>Module</th>
+                    <th>Action</th>
+                    <th>Role</th>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@Model[i].Title.Split('_')[0].ToLower()</td>
+                            <td>@Model[i].Title.Split('_')[1].ToLower()</td>
+                            <td>@Model[i].Role</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert">
+            <i class="material-icons">warning</i>
+            <p>No permission defined yet!</p>
+        </div>
+    }
+</section>
 
 @section Scripts {
     <script>
@@ -57,9 +58,9 @@ else
                     "Client": false
                 },
                 description: `Permissions are assigned to roles.
-                    The creation, deletion, or modification of permissions 
-                    is not permitted. You may only modify the role assignments 
-                    to which the permissions are associated.`
+                        The creation, deletion, or modification of permissions 
+                        is not permitted. You may only modify the role assignments 
+                        to which the permissions are associated.`
             });
         }, 1000)
     </script>

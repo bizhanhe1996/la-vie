@@ -1,0 +1,42 @@
+.image-demo-container {
+  position: relative;
+  &:after {
+    content: "Image Demo";
+    position: absolute;
+    color: var(--theme-table-td-text);
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+  .image-text {
+    position: absolute;
+    top: 50%;
+    inset-inline-start: 50%;
+    color: var(--theme-table-td-text);
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    display: none;
+    text-shadow: 0 0 0.25rem black;
+    user-select: none;
+  }
+  border: 4px dashed var(--theme-table-td-text);
+  border-radius: 0.25rem;
+  .image-demo {
+    width: 100%;
+    min-height: 256px;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    transition: background-image 0.3s ease, filter 0.3s ease;
+    &:hover {
+      filter: blur(4px);
+      & + .image-text {
+        display: block;
+      }
+    }
+  }
+}

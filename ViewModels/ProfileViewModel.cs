@@ -14,4 +14,6 @@ public class ProfileViewModel
     public string LastName { set; get; } = null!;
 
     public IFormFile AvatarFile { set; get; } = null!;
+
+    public string? AvatarPath { set; get; } = null!;
 }

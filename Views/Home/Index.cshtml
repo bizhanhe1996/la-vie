@@ -30,15 +30,17 @@
 });
 }
 
-<div class="grid sm-grid-cols-1 md-grid-cols-2 lg-grid-cols-4 gap-3">
-    @foreach (var pair in cards)
-    {
-        <div class="card card-@pair.Value["class"]">
-            <strong>@pair.Value["count"]</strong>
-            <b>@pair.Key</b>
-            <p>@pair.Value["message"]</p>
-            <i class="material-icons">@pair.Value["icon"]</i>
-            <div class="click-wave"></div>
-        </div>
-    }    
-</div>
+<section class="page-content">
+    <div class="grid sm-grid-cols-1 md-grid-cols-2 lg-grid-cols-4 gap-3">
+        @foreach (var pair in cards)
+        {
+            <div class="card card-@pair.Value["class"]">
+                <strong>@pair.Value["count"]</strong>
+                <b>@pair.Key</b>
+                <p>@pair.Value["message"]</p>
+                <i class="material-icons">@pair.Value["icon"]</i>
+                <div class="click-wave"></div>
+            </div>
+        }
+    </div>
+</section>

@@ -4,56 +4,60 @@
     ViewData["Title"] = "Users";
 }
 
-<div class="page-bar">
+<section class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     <div class="flex gap-2">
         @await Html.PartialAsync("Components/_HelpButton")
         @await Html.PartialAsync("Components/_CreateButton", "User")
     </div>
-</div>
+</section>
 
-@if (Model.Count > 0)
-{
-    <div class="overflow-x-auto">
-        <table class="table striped">
-            <thead>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                @if (ViewBag.ActiveUserRole == "Admin")
-                {
-                    <th>Actions</th>
-                }
-            </thead>
-            <tbody>
-                @foreach (User user in Model)
-                {
-                    <tr>
-                        <td>@user.Id</td>
-                        <td>@user.FirstName</td>
-                        <td>@user.LastName</td>
-                        <td>@user.Email</td>
-                        @if (ViewBag.ActiveUserRole == "Admin")
-                        {
-                            <td>
-                                @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("User", user.Id))
-                                @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("User", user.Id))
-                            </td>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
-else
-{
-    <div class="alert">
-        <i class="material-icons">warning</i>
-        <p>No user defined yet!</p>
-    </div>
-}
+<section class="page-content">
+    @if (Model.Count > 0)
+    {
+        <div class="overflow-x-auto">
+            <table class="table striped">
+                <thead>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    @if (ViewBag.ActiveUserRole == "Admin")
+                    {
+                        <th>Actions</th>
+                    }
+                </thead>
+                <tbody>
+                    @foreach (User user in Model)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Email</td>
+                            <td>@user.Role</td>
+                            @if (ViewBag.ActiveUserRole == "Admin")
+                            {
+                                <td>
+                                    @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("User", user.Id))
+                                    @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("User", user.Id))
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert">
+            <i class="material-icons">warning</i>
+            <p>No user defined yet!</p>
+        </div>
+    }
+</section>
 
 @section Scripts {
     <script>

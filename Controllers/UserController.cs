@@ -24,6 +24,13 @@ public class UserController : BaseController
     public async Task<IActionResult> Index()
     {
         var users = await context.Users.ToListAsync();
+
+        foreach (var user in users)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            user.Role = roles.FirstOrDefault("Default");
+        }
+
         SetIndexBreadcrumbs();
         return View(users);
     }

@@ -32,6 +32,7 @@ public class ProfileController : BaseController
             FirstName = user?.FirstName ?? "",
             LastName = user?.LastName ?? "",
             Email = user?.Email ?? "",
+            AvatarPath = user?.AvatarPath,
         };
 
         return View("~/Views/Settings/Profile.cshtml", profileViewModel);

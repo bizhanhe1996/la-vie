@@ -4,60 +4,64 @@
     ViewData["Title"] = mode + " a new user";
 }
 
-<div class="page-bar">
+<section class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     @await Html.PartialAsync("Components/_BackButton")
-</div>
+</section>
 
-<form class="form" asp-action="@mode" method="POST">
-    @* fields *@
-    <div class="flex flex-col">
-        <div class="grid grid-cols-12 gap-x-4">
-            <div class="col-span-12 md:col-span-4">
-                <fieldset>
-                    <label class="label required" asp-for="FirstName">First Name</label>
-                    <input class="input" asp-for="FirstName" autofocus required />
-                </fieldset>
-            </div>
-            <div class="col-span-12 md:col-span-4">
-                <fieldset>
-                    <label class="label required" asp-for="LastName">Last Name</label>
-                    <input class="input" asp-for="LastName" required />
-                </fieldset>
-            </div>
-            <div class="col-span-12 md:col-span-4">
+<section class="page-content">
+    <form class="form" asp-action="@mode" method="POST">
+        @* fields *@
+        <div class="flex flex-col">
+            <div class="grid grid-cols-12 gap-x-4">
+                <div class="col-span-12 md:col-span-4">
+                    <fieldset>
+                        <label class="label required" asp-for="FirstName">First Name</label>
+                        <input class="input" asp-for="FirstName" autofocus required />
+                    </fieldset>
+                </div>
+                <div class="col-span-12 md:col-span-4">
+                    <fieldset>
+                        <label class="label required" asp-for="LastName">Last Name</label>
+                        <input class="input" asp-for="LastName" required />
+                    </fieldset>
+                </div>
+                <div class="col-span-12 md:col-span-4">
 
-                <fieldset>
-                    <label class="label required" asp-for="Email">Email</label>
-                    <input type="email" class="input" asp-for="Email" autocomplete="nope" required />
-                </fieldset>
+                    <fieldset>
+                        <label class="label required" asp-for="Email">Email</label>
+                        <input type="email" class="input" asp-for="Email" autocomplete="nope" required />
+                    </fieldset>
+                </div>
             </div>
+            <div class="grid grid-cols-12 gap-x-4">
+                <div class="col-span-12 md:col-span-6">
+                    <fieldset>
+                        <label class="label required" asp-for="RawPassword">Password</label>
+                        <input type="password" class="input" asp-for="RawPassword" autocomplete="new-password"
+                            required />
+                    </fieldset>
+                </div>
+                <div class="col-span-12 md:col-span-6">
+                    <fieldset>
+                        <label class="label required" asp-for="RawPasswordRepeat">Password Repeat</label>
+                        <input type="password" class="input" asp-for="RawPasswordRepeat" required />
+                    </fieldset>
+                </div>
+            </div>
+            <fieldset>
+                <label class="label required" asp-for="Role">Role</label>
+                <select class="input" asp-for="Role">
+                    @foreach (var role in new string[] { "Admin", "Manager", "Client" })
+                    {
+                        <option value="@role">@role</option>
+                    }
+                </select>
+            </fieldset>
         </div>
-        <div class="grid grid-cols-12 gap-x-4">
-            <div class="col-span-12 md:col-span-6">
-                <fieldset>
-                    <label class="label required" asp-for="RawPassword">Password</label>
-                    <input type="password" class="input" asp-for="RawPassword" autocomplete="new-password" required />
-                </fieldset>
-            </div>
-            <div class="col-span-12 md:col-span-6">
-                <fieldset>
-                    <label class="label required" asp-for="RawPasswordRepeat">Password Repeat</label>
-                    <input type="password" class="input" asp-for="RawPasswordRepeat" required />
-                </fieldset>
-            </div>
+        @* Buttons *@
+        <div class="flex justify-end gap-2">
+            @await Html.PartialAsync("Components/_SubmitButton")
         </div>
-        <fieldset>
-            <label class="label required" asp-for="Role">Role</label>
-            <select class="input" asp-for="Role">
-                @foreach (var role in new string[]{"Admin","Manager","Client"}) {
-                    <option value="@role">@role</option>
-                }
-            </select>
-        </fieldset>
-    </div>
-    @* Buttons *@
-    <div class="flex justify-end gap-2">
-        @await Html.PartialAsync("Components/_SubmitButton")
-    </div>
-</form>
+    </form>
+</section>

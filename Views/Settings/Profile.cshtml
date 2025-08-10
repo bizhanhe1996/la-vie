@@ -3,21 +3,20 @@
     ViewData["Title"] = "User Profile";
 }
 
-<div class="page-bar">
+<section class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     @await Html.PartialAsync("Components/_HelpButton")
-</div>
+</section>
 
-
-<div class="page-content">
+<section class="page-content">
     <form method="POST" class="form" asp-controller="Profile" asp-action="Update" enctype="multipart/form-data">
         <div class="row mb-4">
             <div class="col-span-12 md:col-span-6">
-                <fieldset>
+                <fieldset readonly>
                     <label asp-for="FirstName">First name</label>
                     <input asp-for="FirstName" readonly>
                 </fieldset>
-                <fieldset>
+                <fieldset readonly>
                     <label asp-for="LastName">Last name</label>
                     <input asp-for="LastName" readonly>
                 </fieldset>
@@ -31,17 +30,25 @@
                 </fieldset>
             </div>
             <div class="col-span-12 md:col-span-6">
-                <div id="avatar-demo" class="image-demo min-h-[256px]"></div>
+                <div class="image-demo-container">
+                    <div id="avatar-demo" class="image-demo" onclick="handleClickOnAvatarDemo()"></div>
+                    <span class="image-text" class="page-text">Click to <br /> change</span>
+                </div>
             </div>
         </div>
         <div class="flex justify-end gap-2">
             @await Html.PartialAsync("Components/_SubmitButton")
         </div>
     </form>
-</div>
+</section>
 
 @section Scripts {
     <script>
+
+        const handleClickOnAvatarDemo = () => {
+            document.querySelector("#AvatarFile").click();
+        }
+
         document.querySelector("#AvatarFile").addEventListener("change", (event) => {
             const file = event.target.files[0];
             if (file) {
@@ -52,6 +59,14 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const avatarPath = "@Model.AvatarPath";
+            if (avatarPath.trim()) {
+                document.querySelector("#avatar-demo").style.backgroundImage = `url(${avatarPath})`;
+            }
+        });
+
         window.setTimeout(() => {
             window.LaVie.funcs.injectModuleHelpData({
                 title: "Profile",

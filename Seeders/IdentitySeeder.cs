@@ -1,5 +1,6 @@
 namespace LaVie.Seeders;
 
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using LaVie.Enums;
 using LaVie.Interfaces;
@@ -44,6 +45,10 @@ public class IdentitySeeder(RoleManager<IdentityRole<int>> roleManager) : ISeede
             await CreateRoleIfNotExists(role);
 
             var roleEntity = await _roleManager.FindByNameAsync(role);
+            if (roleEntity == null)
+            {
+                return;
+            }
             var currentClaims = await _roleManager.GetClaimsAsync(roleEntity);
 
             if (rolesAndClaims.TryGetValue(role, out var claims))
