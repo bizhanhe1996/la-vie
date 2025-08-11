@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using LaVie.Interfaces;
 
 namespace LaVie.Models;
 
-public class ProductTag
+public class ProductTag : BaseModel
 {
     [Required]
     public int ProductId { get; set; }

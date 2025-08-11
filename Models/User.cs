@@ -42,4 +42,7 @@ public class User : IdentityUser<int>, IModel
 
     [NotMapped]
     public string Role { get; set; } = null!;
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; }
 }

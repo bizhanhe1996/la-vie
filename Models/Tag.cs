@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 using LaVie.Interfaces;
 
 namespace LaVie.Models;
 
-public class Tag : IModel
+public class Tag : BaseModel
 {
     public Tag() { }
 

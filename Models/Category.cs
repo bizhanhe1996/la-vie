@@ -3,7 +3,7 @@ using LaVie.Interfaces;
 
 namespace LaVie.Models;
 
-public class Category : IModel
+public class Category : BaseModel
 {
     public int Id { set; get; }
 

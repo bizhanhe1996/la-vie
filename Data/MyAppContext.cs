@@ -1,7 +1,8 @@
+using LaVie.Interfaces;
+using LaVie.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using LaVie.Models;
 
 namespace LaVie.Data;
 
@@ -27,6 +28,32 @@ public class MyAppContext(DbContextOptions<MyAppContext> options)
         // relationships
         OneToManyRelationship(modelBuilder);
         ManyToManyRelationship(modelBuilder);
+    }
+
+    public override int SaveChanges()
+    {
+        UpdateTimestamps();
+        return base.SaveChanges();
+    }
+
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        UpdateTimestamps();
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void UpdateTimestamps()
+    {
+        var entries = ChangeTracker
+            .Entries()
+            .Where(e => e.Entity is IModel && (e.State == EntityState.Modified));
+
+        foreach (var entry in entries)
+        {
+            var entity = (IModel)entry.Entity;
+
+            entity.UpdatedAt = DateTime.UtcNow;
+        }
     }
 
     private static void OneToManyRelationship(ModelBuilder modelBuilder)

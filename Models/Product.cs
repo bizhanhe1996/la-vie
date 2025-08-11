@@ -4,7 +4,7 @@ using LaVie.Interfaces;
 
 namespace LaVie.Models;
 
-public class Product : IModel
+public class Product : BaseModel
 {
     public Product() { }
 
