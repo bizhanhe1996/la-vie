@@ -3,7 +3,9 @@
 
 @if (User.HasClaim(c => c.Value == Model.Permission))
 {
-    <a class="btn del" asp-controller="@Model.Controller" asp-action="Delete" asp-route-id="@Model.Id">
-        <i class="material-icons">delete</i>
+    <a class="table-button del" asp-controller="@Model.Controller" asp-action="Delete" asp-route-id="@Model.Id">
+        <i class="material-icons">delete_outline</i>
+        <small>Delete</small>
+        <div class="click-wave"></div>
     </a>
 }

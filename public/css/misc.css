@@ -55,7 +55,7 @@
 }
 
 .page-text {
-  color: var(--theme-table-td-text);
+  color: var(--theme-text-adaptable);
 }
 
 .dropzone {

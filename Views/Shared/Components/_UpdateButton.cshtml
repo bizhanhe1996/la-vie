@@ -3,7 +3,9 @@
 
 @if (User.HasClaim(c => c.Value == Model.Permission))
 {
-    <a class="btn upd" asp-controller="@Model.Controller" asp-action="Update" asp-route-id="@Model.Id">
-        <i class="material-icons">edit_square</i>
+    <a class="table-button upd" asp-controller="@Model.Controller" asp-action="Update" asp-route-id="@Model.Id">
+        <i class="material-icons">edit</i>
+        <small>Update</small>
+        <div class="click-wave"></div>
     </a>
 }

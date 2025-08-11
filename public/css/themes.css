@@ -9,6 +9,7 @@
   /* text */
   --theme-text-light: var(--gray-100);
   --theme-text-dark: var(--gray-700);
+  --theme-text-adaptable: var(--gray-600);
   /* inputs */
   --theme-input-background: var(--gray-200);
   --theme-input-color: var(--gray-500);
@@ -41,6 +42,7 @@
   /* text */
   --theme-text-light: var(--gray-300);
   --theme-text-dark: var(--gray-900);
+  --theme-text-adaptable: var(--gray-200);
   /* inputs */
   --theme-input-background: var(--gray-800);
   --theme-input-color: var(--gray-400);
