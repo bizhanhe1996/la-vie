@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using LaVie.Filters;
 using LaVie.Models;
 using LaVie.ViewModels;
-using LaVie.Filters;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LaVie.Controllers;
 
@@ -13,7 +14,11 @@ public class AccountController : Controller
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<IdentityRole<int>> _roleManager;
 
-    public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<IdentityRole<int>> roleManager)
+    public AccountController(
+        SignInManager<User> signInManager,
+        UserManager<User> userManager,
+        RoleManager<IdentityRole<int>> roleManager
+    )
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -64,6 +69,7 @@ public class AccountController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Policy = "AgeAndTimePolicy")]
     public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
     {
         returnUrl ??= Url.Content("/");

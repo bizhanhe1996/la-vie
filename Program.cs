@@ -1,11 +1,14 @@
 // uses
 using DotNetEnv;
+using LaVie.Authorization.Handlers;
+using LaVie.Authorization.Requirements;
+using LaVie.Data;
+using LaVie.Filters;
+using LaVie.Models;
+using LaVie.Seeders;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using LaVie.Data;
-using LaVie.Models;
-using LaVie.Filters;
-using LaVie.Seeders;
 
 WebApplicationOptions options = new() { WebRootPath = "public" };
 
@@ -24,6 +27,8 @@ builder.Services.AddControllersWithViews(options =>
 
 // DI Container
 builder.Services.AddSingleton<GlobalsInjectorFilter>();
+builder.Services.AddSingleton<IAuthorizationHandler, MaximumLoginHourHandler>();
+builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 
 // SQLite
 builder.Services.AddDbContext<MyAppContext>(options =>
@@ -41,6 +46,19 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Lockout.AllowedForNewUsers = false;
 });
 
+// Policies
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(
+        "AgeAndTimePolicy",
+        policy =>
+        {
+            // policy.Requirements.Add(new MinimumAgeRequirement(18));
+            policy.Requirements.Add(new MaximumLoginHourRequirement(24));
+        }
+    );
+});
+
 // building the application
 var app = builder.Build();
 
@@ -48,10 +66,9 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
-    
+
     var identitySeeder = new IdentitySeeder(roleManager);
     await identitySeeder.Seed();
-
 }
 
 // configure the HTTP request pipeline.
@@ -63,7 +80,8 @@ if (app.Environment.IsDevelopment() == false)
 }
 
 // middlewares are used here
-if (app.Environment.IsDevelopment()) {
+if (app.Environment.IsDevelopment())
+{
     app.UseHttpsRedirection();
 }
 app.UseStaticFiles();
@@ -76,7 +94,3 @@ app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Inde
 
 // running the application
 app.Run();
-
-
-  
-
