@@ -51,11 +51,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  
+  padding: 1rem;
+  padding-bottom: 0;
 }
 
 .page-text {
   color: var(--theme-text-adaptable);
+}
+
+.page-content {
+  padding: 1rem;
 }
 
 .dropzone {

@@ -29,6 +29,9 @@
   --theme-color-success: var(--green-500);
   --theme-color-warning: var(--orange-500);
   --theme-color-info: var(--cyan-500);
+  /* dropdown */
+  --theme-dropdown-background: var(--gray-100);
+  --theme-dropdown-shadow-color: var(--gray-900);
 }
 
 /* dark */
@@ -62,4 +65,7 @@
   --theme-color-success: var(--green-900);
   --theme-color-warning: var(--orange-900);
   --theme-color-info: var(--cyan-900);
+  /* dropdown */
+  --theme-dropdown-background: var(--gray-800);
+  --theme-dropdown-shadow-color: var(--gray-100);
 }

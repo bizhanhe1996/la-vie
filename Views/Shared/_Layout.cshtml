@@ -11,10 +11,18 @@
     <main role="main">
         @* Aside *@
         @await Html.PartialAsync("Panel/_Aside.cshtml")
-        <section class="p-3">
+        <section>
             @RenderBody()
         </section>
     </main>
+
+
+    <div class="absolute end-0 bottom-12 ">
+    <svg width="96" height="96" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="48" r="36" stroke="red" fill="transparent" stroke-width="4"></circle>
+    </svg>
+    </div>
+
     @* Footer *@
     @await Html.PartialAsync("Panel/_Footer.cshtml")
     @* Modals *@

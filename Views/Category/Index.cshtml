@@ -57,7 +57,7 @@
 <section class="page-content">
     @if (Model != null && Model.Count > 0)
     {
-        <div class="overflow-x-auto">
+        <div class="table-container">
             <table class="table striped">
                 <thead>
                     <tr>
@@ -76,13 +76,13 @@
                             <td>@Model[i].Slug</td>
                             <td><span class="badge primary">@Model[i].ProductsCount</span></td>
                             <td>
-                                @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Category",
-                                Model[i].Id))
-                        @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Category",
-                                                Model[i].Id))
-                    </td>
-                </tr>
-                                }
+                                <div class="actions">
+                                    @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Category", Model[i].Id))
+                                    @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Category", Model[i].Id))
+                                </div>
+                            </td>
+                        </tr>
+                    }
             </tbody>
             <tfoot>
                 <tr>

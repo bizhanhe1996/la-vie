@@ -1,5 +1,13 @@
+.table-container {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+}
+.table-container::-webkit-scrollbar {
+  display: none;
+}
 .table {
   overflow: hidden;
+
   width: 100%;
   border-collapse: collapse;
   border-radius: 0.5rem;
@@ -20,6 +28,10 @@
         border: 1px solid var(--theme-section-background);
         padding: 0.25rem;
         color: var(--theme-table-td-text);
+        & > div.actions {
+          display: flex;
+          gap: 0.5rem;
+        }
         .table-button {
           display: inline-flex;
           align-items: center;
@@ -30,9 +42,15 @@
           border-radius: 9999px;
           aspect-ratio: 1 / 1;
           user-select: none;
-          transition: color 0.3s ease, background-color 0.3s ease;
+          transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
           .material-icons {
             font-size: 20px !important;
+          }
+          &:focus {
+            & > small {
+              transform: scale(1);
+            }
+            outline: none;
           }
           &:active {
             div.click-wave {
@@ -65,7 +83,9 @@
             & > small {
               background-color: var(--theme-color-primary);
             }
-
+            &:focus {
+              box-shadow: 0 0 0 2px var(--theme-color-primary);
+            }
             color: var(--theme-color-primary);
             background-color: color-mix(
               in srgb,
@@ -83,6 +103,9 @@
           &.del {
             & > small {
               background-color: var(--theme-color-danger);
+            }
+            &:focus {
+              box-shadow: 0 0 0 2px var(--theme-color-danger);
             }
             color: var(--theme-color-danger);
             background-color: color-mix(

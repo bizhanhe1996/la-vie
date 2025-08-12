@@ -53,8 +53,7 @@ builder.Services.AddAuthorization(options =>
         "AgeAndTimePolicy",
         policy =>
         {
-            // policy.Requirements.Add(new MinimumAgeRequirement(18));
-            policy.Requirements.Add(new MaximumLoginHourRequirement(24));
+            policy.Requirements.Add(new MaximumLoginHourRequirement(22));
         }
     );
 });

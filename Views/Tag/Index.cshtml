@@ -12,7 +12,7 @@
 
     @if (Model.Count > 0)
     {
-        <div class="overflow-x-auto">
+        <div class="table-container">
             <table class="table striped">
                 <thead>
                     <th>ID</th>
@@ -32,8 +32,10 @@
                                 <span class="badge primary">@tag.ProductTags?.Count</span>
                             </td>
                             <td>
-                                @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Tag", tag.Id))
-                                @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Tag", tag.Id))
+                                <div class="actions">
+                                    @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Tag", tag.Id))
+                                    @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Tag", tag.Id))
+                                </div>
                             </td>
                         </tr>
                     }
