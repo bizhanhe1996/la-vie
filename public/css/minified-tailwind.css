@@ -231,6 +231,9 @@
   .bottom-48 {
     bottom: calc(var(--spacing) * 48);
   }
+  .bottom-\[36px\] {
+    bottom: 36px;
+  }
   .z-2 {
     z-index: 2;
   }
@@ -346,6 +349,9 @@
     --tw-scale-z: 100%;
     scale: var(--tw-scale-x) var(--tw-scale-y);
   }
+  .rotate-6 {
+    rotate: 6deg;
+  }
   .rotate-180 {
     rotate: 180deg;
   }
@@ -418,6 +424,12 @@
   }
   .bg-gray-200 {
     background-color: var(--color-gray-200);
+  }
+  .bg-gray-200\/10 {
+    background-color: color-mix(in srgb, oklch(92.8% 0.006 264.531) 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-gray-200) 10%, transparent);
+    }
   }
   .bg-white {
     background-color: var(--color-white);
