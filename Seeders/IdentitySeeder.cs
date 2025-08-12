@@ -1,6 +1,5 @@
 namespace LaVie.Seeders;
 
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using LaVie.Enums;
 using LaVie.Interfaces;
@@ -25,6 +24,14 @@ public class IdentitySeeder(RoleManager<IdentityRole<int>> roleManager) : ISeede
                 new("Permission", PERMISSIONS.CATEGORY_CREATE.ToString()),
                 new("Permission", PERMISSIONS.CATEGORY_DELETE.ToString()),
                 new("Permission", PERMISSIONS.CATEGORY_UPDATE.ToString()),
+                new("Permission", PERMISSIONS.TAG_INDEX.ToString()),
+                new("Permission", PERMISSIONS.TAG_CREATE.ToString()),
+                new("Permission", PERMISSIONS.TAG_DELETE.ToString()),
+                new("Permission", PERMISSIONS.TAG_UPDATE.ToString()),
+                new("Permission", PERMISSIONS.PRODUCT_INDEX.ToString()),
+                new("Permission", PERMISSIONS.PRODUCT_CREATE.ToString()),
+                new("Permission", PERMISSIONS.PRODUCT_DELETE.ToString()),
+                new("Permission", PERMISSIONS.PRODUCT_UPDATE.ToString()),
             ]
         },
         {
