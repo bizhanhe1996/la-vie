@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using LaVie.Interfaces;
 
 namespace LaVie.Models;
 

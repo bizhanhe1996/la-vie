@@ -1,4 +1,4 @@
-namespace LaVie.Structs;
+namespace LaVie.Extras.Structs;
 
 public struct Breadcrumb
 {

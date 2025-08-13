@@ -1,4 +1,4 @@
-namespace LaVie.Enums;
+namespace LaVie.Extras.Enums;
 
 public enum PERMISSIONS
 {
@@ -19,5 +19,5 @@ public enum PERMISSIONS
     PRODUCT_CREATE,
     PRODUCT_INDEX,
     PRODUCT_UPDATE,
-    PRODUCT_DELETE
+    PRODUCT_DELETE,
 }

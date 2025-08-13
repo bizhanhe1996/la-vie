@@ -1,4 +1,6 @@
-using LaVie.Filters;
+using LaVie.Extras.EventArgs;
+using LaVie.Extras.EventManagers;
+using LaVie.Extras.Filters;
 using LaVie.Models;
 using LaVie.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -13,16 +15,19 @@ public class AccountController : Controller
     private readonly SignInManager<User> _signInManager;
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<IdentityRole<int>> _roleManager;
+    private readonly AppEventManager _eventManager;
 
     public AccountController(
         SignInManager<User> signInManager,
         UserManager<User> userManager,
-        RoleManager<IdentityRole<int>> roleManager
+        RoleManager<IdentityRole<int>> roleManager,
+        AppEventManager eventManager
     )
     {
         _signInManager = signInManager;
         _userManager = userManager;
         _roleManager = roleManager;
+        _eventManager = eventManager;
     }
 
     [HttpGet]
@@ -51,6 +56,9 @@ public class AccountController : Controller
         {
             await _userManager.AddToRoleAsync(user, "Client");
             await _signInManager.SignInAsync(user, isPersistent: false);
+
+            _eventManager.RaiseUserRegistered(user);
+
             return RedirectToAction("Index", "Home");
         }
 

@@ -1,8 +1,8 @@
 using System.Diagnostics;
+using LaVie.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using LaVie.Models;
 
 namespace LaVie.Controllers;
 

@@ -2,7 +2,8 @@ html.panel {
   background: var(--theme-section-background);
   transition: background 0.3s ease;
   body {
-    height: 100vh;
+    height:100vh;
+    max-height: 100vh;
     margin: 0;
     display: grid;
     grid-template-rows: 48px 1fr 36px;
@@ -11,6 +12,11 @@ html.panel {
       display: grid;
       grid-template-columns: 196px 1fr;
       transition: grid-template-columns 0.5s ease;
+      max-height: 100vh;
+      overflow-y: hidden;
+      article {
+        overflow-y: auto;
+      }
     }
     footer {
       background-color: var(--theme-footer-background);

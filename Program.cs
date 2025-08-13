@@ -1,11 +1,13 @@
 // uses
 using DotNetEnv;
-using LaVie.Authorization.Handlers;
-using LaVie.Authorization.Requirements;
 using LaVie.Data;
-using LaVie.Filters;
+using LaVie.Extras.Authorization.Handlers;
+using LaVie.Extras.Authorization.Requirements;
+using LaVie.Extras.EventHandlers;
+using LaVie.Extras.EventManagers;
+using LaVie.Extras.Filters;
+using LaVie.Extras.Seeders;
 using LaVie.Models;
-using LaVie.Seeders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +31,7 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.AddSingleton<GlobalsInjectorFilter>();
 builder.Services.AddSingleton<IAuthorizationHandler, MaximumLoginHourHandler>();
 builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+builder.Services.AddSingleton<AppEventManager>();
 
 // SQLite
 builder.Services.AddDbContext<MyAppContext>(options =>
@@ -60,6 +63,11 @@ builder.Services.AddAuthorization(options =>
 
 // building the application
 var app = builder.Build();
+
+var eventManager = app.Services.GetRequiredService<AppEventManager>();
+var userHandler = new UserRegistryHandler();
+
+eventManager.UserRegistered += userHandler.OnUserRegistered;
 
 // seeding claims and roles
 using (var scope = app.Services.CreateScope())

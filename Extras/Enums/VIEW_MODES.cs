@@ -1,4 +1,4 @@
-namespace LaVie.Enums;
+namespace LaVie.Extras.Enums;
 
 public enum VIEW_MODES
 {

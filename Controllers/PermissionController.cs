@@ -24,9 +24,10 @@ public class PermissionController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
         SetIndexBreadcrumbs();
+
         var roles = _roleManager.Roles.ToList();
         var claimsOfRoles = new List<Permission>();
         foreach (var role in roles)
@@ -37,6 +38,10 @@ public class PermissionController : BaseController
             );
         }
 
-        return View(claimsOfRoles);
+        Paginator.SetTotalCount(claimsOfRoles.Count).SetPage(page).SetSize(size).Run();
+
+        var items = claimsOfRoles.Skip(Paginator.SkipCount).Take(Paginator.TakeCount).ToList();
+
+        return View(items);
     }
 }

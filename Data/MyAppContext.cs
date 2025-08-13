@@ -1,4 +1,4 @@
-using LaVie.Interfaces;
+using LaVie.Extras.Interfaces;
 using LaVie.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

@@ -1,5 +1,5 @@
 using LaVie.Data;
-using LaVie.Enums;
+using LaVie.Extras.Enums;
 using LaVie.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

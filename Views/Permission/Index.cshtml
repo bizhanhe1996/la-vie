@@ -23,13 +23,20 @@
                     @for (var i = 0; i < Model.Count; i++)
                     {
                         <tr>
-                            <td>@(i + 1)</td>
+                            <td>@((ViewBag.Page - 1) * 10 + i + 1)</td>
                             <td>@Model[i].Title.Split('_')[0].ToLower()</td>
                             <td>@Model[i].Title.Split('_')[1].ToLower()</td>
                             <td>@Model[i].Role</td>
                         </tr>
                     }
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="100%">
+                            @await Html.PartialAsync("Components/_Pagination", "Permission")
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     }

@@ -1,5 +1,3 @@
-using LaVie.Interfaces;
-
 namespace LaVie.Models;
 
 public class Permission(string title, string role) : BaseModel

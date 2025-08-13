@@ -1,8 +1,8 @@
-namespace LaVie.Seeders;
+namespace LaVie.Extras.Seeders;
 
 using System.Security.Claims;
-using LaVie.Enums;
-using LaVie.Interfaces;
+using LaVie.Extras.Enums;
+using LaVie.Extras.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 public class IdentitySeeder(RoleManager<IdentityRole<int>> roleManager) : ISeeder

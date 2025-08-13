@@ -1,4 +1,4 @@
-namespace LaVie.Interfaces;
+namespace LaVie.Extras.Interfaces;
 
 public interface IModel
 {

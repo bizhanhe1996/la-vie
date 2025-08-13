@@ -1,7 +1,7 @@
-using LaVie.Authorization.Requirements;
+using LaVie.Extras.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
 
-namespace LaVie.Authorization.Handlers;
+namespace LaVie.Extras.Authorization.Handlers;
 
 public class MaximumLoginHourHandler : AuthorizationHandler<MaximumLoginHourRequirement>
 {

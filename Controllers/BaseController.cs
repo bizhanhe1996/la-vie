@@ -1,10 +1,10 @@
 using System.Security.Claims;
 using LaVie.Data;
-using LaVie.Enums;
-using LaVie.Filters;
+using LaVie.Extras.Enums;
+using LaVie.Extras.Filters;
+using LaVie.Extras.Structs;
+using LaVie.Extras.Utils;
 using LaVie.Models;
-using LaVie.Structs;
-using LaVie.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

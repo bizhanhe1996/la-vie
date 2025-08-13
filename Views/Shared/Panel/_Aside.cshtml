@@ -1,64 +1,65 @@
 @{
 
     List<Dictionary<string, string>> items = [
-        new() {
-            {"title","Home"},
-            {"icon","home"},
-            {"controller","Home"},
-            {"action","Index"},
-            {"roles", "All"}
-        },
-        new() {
-            {"title", "Users"},
-            {"icon","person"},
-            {"controller","User"},
-            {"action","Index"},
-            {"roles", "Admin,Manager"}
-        },
-        new() {
-            {"title", "Permissions"},
-            {"icon","check_box"},
-            {"controller","Permission"},
-            {"action","Index"},
-            {"roles", "Admin"}
-        },
-        new() {
-            {"title", "Roles"},
-            {"icon","key"},
-            {"controller","Role"},
-            {"action","Index"},
-            {"roles", "Admin"}
-        },
-        new() {
-            {"title", "Categories"},
-            {"icon","category"},
-            {"controller","Category"},
-            {"action","Index"},
-            {"roles", "Admin,Manager"}
-        },
-        new() {
-            {"title", "Tags"},
-            {"icon","tag"},
-            {"controller","Tag"},
-            {"action","Index"},
-            {"roles", "Admin,Manager"}
-        },
-        new() {
-            {"title", "Products"},
-            {"icon","shopping_bag"},
-            {"controller","Product"},
-            {"action","Index"},
-            {"roles", "Admin,Manager"}
-        },
-    ];
+    new() {
+{"title","Home"},
+{"icon","home"},
+{"controller","Home"},
+{"action","Index"},
+{"roles", "All"}
+},
+new() {
+{"title", "Users"},
+{"icon","person"},
+{"controller","User"},
+{"action","Index"},
+{"roles", "Admin,Manager"}
+},
+new() {
+{"title", "Permissions"},
+{"icon","check_box"},
+{"controller","Permission"},
+{"action","Index"},
+{"roles", "Admin"}
+},
+new() {
+{"title", "Roles"},
+{"icon","key"},
+{"controller","Role"},
+{"action","Index"},
+{"roles", "Admin"}
+},
+new() {
+{"title", "Categories"},
+{"icon","category"},
+{"controller","Category"},
+{"action","Index"},
+{"roles", "Admin,Manager"}
+},
+new() {
+{"title", "Tags"},
+{"icon","tag"},
+{"controller","Tag"},
+{"action","Index"},
+{"roles", "Admin,Manager"}
+},
+new() {
+{"title", "Products"},
+{"icon","shopping_bag"},
+{"controller","Product"},
+{"action","Index"},
+{"roles", "Admin,Manager"}
+},
+];
 }
 
 <aside class="z-[7] md:z-[5]">
     <ul>
-        
+
         @foreach (var item in items)
         {
-            @if (item["roles"].Contains(ViewBag.ActiveUserRole) || item["roles"] == "All") {
+            @if (item["roles"].Contains(ViewBag.ActiveUserRole) || item["roles"] == "All")
+            {
                 <li>
                     <a asp-controller="@item["controller"]" asp-action="@item["action"]">
                         <i class="material-icons">@item["icon"]</i>
@@ -92,7 +93,7 @@
                 </li>
                 <li>
                     @* Theme *@
-                    <a onclick="LaVie.funcs.toggleTheme(this)">
+                    <a id="aside-theme-switch" onclick="LaVie.funcs.toggleTheme(this)">
                         <i class="material-icons">dark_mode</i>
                         <span>Dark</span>
                     </a>
@@ -106,4 +107,26 @@
             </a>
         </li>
         <ul>
+
+
+            <div class="absolute bottom-0">
+                <svg width="196" height="196" xmlns="http://www.w3.org/2000/svg" stroke-width="4" fill="none">
+                    <defs>
+                        @{
+                            var themes = new string[] { "success", "contrast", "danger", "secondary" };
+                        }
+                        @for (var i = 0; i < themes.Length; i++)
+                        {
+                            <linearGradient id="circles-grad-@i" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="var(--theme-color-@themes[i])" />
+                                <stop offset="100%" stop-color="transparent" />
+                            </linearGradient>
+                        }
+                    </defs>
+                    <circle cx="32" cy="64" r="16" stroke="url(#circles-grad-0)" />
+                    <circle cx="32" cy="168" r="72" stroke="url(#circles-grad-1)" />
+                    <circle cx="148" cy="206" r="32" stroke="url(#circles-grad-2)" />
+                    <circle cx="148" cy="96" r="42" stroke="url(#circles-grad-3)" />
+                </svg>
+            </div>
 </aside>

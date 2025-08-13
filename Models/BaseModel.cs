@@ -1,6 +1,6 @@
 namespace LaVie.Models;
 
-using LaVie.Interfaces;
+using LaVie.Extras.Interfaces;
 
 /*
     User class must be updated manually

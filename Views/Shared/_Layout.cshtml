@@ -11,50 +11,13 @@
     <main role="main">
         @* Aside *@
         @await Html.PartialAsync("Panel/_Aside.cshtml")
-        <section>
+        <article>
             @RenderBody()
-        </section>
+        </article>
     </main>
-
-
     <div class="absolute end-0 -bottom-0 z-[-1]">
-        <svg width="600" height="200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="4">
-            <defs>
-                <linearGradient id="grad1">
-                    <stop offset="0%" stop-color="transparent" />
-                    <stop offset="90%" stop-color="var(--theme-color-primary)" />
-                </linearGradient>
-                <linearGradient id="grad2">
-                    <stop offset="0%" stop-color="transparent" />
-                    <stop offset="80%" stop-color="var(--theme-color-danger)" />
-                </linearGradient>
-                <linearGradient id="grad3">
-                    <stop offset="0%" stop-color="transparent" />
-                    <stop offset="70%" stop-color="var(--theme-color-success)" />
-                </linearGradient>
-
-            </defs>
-
-            <path stroke="url(#grad1)" d="
-      M0 100 
-      C100 20, 200 180, 300 100
-      S500 20, 600 100
-    " />
-
-            <path stroke="url(#grad2)" d="
-      M0 130
-      C150 50, 250 150, 350 80
-      S550 120, 600 130
-    " />
-
-            <path stroke="url(#grad3)" d="
-      M0 70
-      C80 120, 180 30, 280 90
-      S480 60, 600 70
-    " />
-        </svg>
+        @await Html.PartialAsync("Graphics/SectionWaves.cshtml")
     </div>
-
     @* Footer *@
     @await Html.PartialAsync("Panel/_Footer.cshtml")
     @* Modals *@

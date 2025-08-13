@@ -1,4 +1,4 @@
-namespace LaVie.Utils;
+namespace LaVie.Extras.Utils;
 
 using LaVie.Controllers;
 

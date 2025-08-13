@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace LaVie.Authorization.Requirements;
+namespace LaVie.Extras.Authorization.Requirements;
 
 public class MinimumAgeRequirement : IAuthorizationRequirement
 {

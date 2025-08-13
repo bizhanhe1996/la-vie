@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using LaVie.Interfaces;
+using LaVie.Extras.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace LaVie.Models;

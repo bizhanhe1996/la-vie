@@ -1,7 +1,6 @@
 using LaVie.Data;
-using LaVie.Enums;
+using LaVie.Extras.Enums;
 using LaVie.Models;
-using LaVie.Structs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

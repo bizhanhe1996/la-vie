@@ -1,21 +1,25 @@
-export  const toggleTheme = (elm) => {
-  const theme = document.querySelector("html").classList.item(1);
+export const toggleTheme = (activator) => {
   const html = document.querySelector("html");
-  html.classList = ["panel"];
-  if (theme == "light") {
-    html.classList.add("dark");
-    elm.children[0].innerHTML = "light_mode";
-    elm.children[1].innerHTML = "Light";
-  } else {
-    html.classList.add("light");
-    elm.children[0].innerHTML = "dark_mode";
-    elm.children[1].innerHTML = "Dark";
+  const currentTheme = html.classList.item(0);
+  if (currentTheme == "light") {
+    html.classList.replace("light","dark");
+    activator.children[0].innerText = "light_mode";
+    if (activator.id == "aside-theme-switch") {
+      activator.children[1].innerHTML = "Light";
+    }
+  } else if (currentTheme == "dark") {    
+    html.classList.replace("dark","light");
+    activator.children[0].innerText = "dark_mode";
+    if (activator.id == "aside-theme-switch") {
+      activator.children[1].innerHTML = "Dark";
+    }
   }
 };
 
 export const injectModuleHelpData = (moduleHelpData) => {
   const moduleHelp = document.querySelector("#module-help");
-  moduleHelp.querySelector("#module-help-title").innerHTML = moduleHelpData.title;
+  moduleHelp.querySelector("#module-help-title").innerHTML =
+    moduleHelpData.title;
   // foreach role
   for (const role of ["Admin", "Manager", "Client"]) {
     const tr = document.createElement("tr");
@@ -142,4 +146,4 @@ export const changePageSize = (controller, selectElement) => {
 
 export const allowDrop = (event) => {
   event.preventDefault();
-}
+};
