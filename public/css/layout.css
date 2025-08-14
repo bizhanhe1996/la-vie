@@ -1,4 +1,5 @@
 html.panel {
+  visibility: hidden;
   background: var(--theme-section-background);
   transition: background 0.3s ease;
   body {
@@ -31,13 +32,14 @@ html.panel {
       z-index: 7;
       position: fixed;
       height: 100vh;
-      inset-inline-start: 100%;
-      transition: translate 0.5s ease;
+      inset-inline-end: -420px;
+      transition: inset-inline-end 0.5s ease;
       background: var(--theme-module-help-background);
       color: var(--theme-input-color);
       width: 100%;
       max-width: 420px;
       padding: 1rem;
+      
       button#module-help-close {
         position: absolute;
         color: var(--gray-100);

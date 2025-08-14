@@ -10,11 +10,16 @@
     @* right section *@
     <div class="ms-auto flex flex-row gap-2 items-center">
         @* theme *@
-        <span class="hidden md:flex cursor-pointer hover:rotate-45 transition-transform" id="header-theme-switch" onclick="LaVie.funcs.toggleTheme(this)">
-            <i class="material-icons">light_mode</i>
+        <span class="hidden md:flex cursor-pointer hover:rotate-45 transition-transform" id="header-theme-switch"
+            onclick="LaVie.funcs.toggleTheme(this)">
+            <i class="material-icons"></i>
+            <script>
+                document.querySelector('#header-theme-switch i').innerHTML = window.localStorage.getItem("la-vie-theme") + "_mode";
+            </script>
         </span>
         @* direction  *@
-        <span class="hidden md:flex cursor-pointer hover:-translate-x-1 transition-transform" onclick="LaVie.funcs.toggleDirection(this)">
+        <span class="hidden md:flex cursor-pointer hover:-translate-x-1 transition-transform"
+            onclick="LaVie.funcs.toggleDirection(this)">
             <i class="material-icons">format_textdirection_r_to_l</i>
         </span>
         <div class="flex flex-col m-auto justify-center">
@@ -24,7 +29,8 @@
             </span>
             <span class="text-right text-xs">@ViewBag.ActiveUser.Email</span>
         </div>
-        <div class="relative" onclick="['!scale-100','!opacity-100'].forEach(kls => this.children[1].classList.toggle(kls))">
+        <div class="relative"
+            onclick="['!scale-100','!opacity-100'].forEach(kls => this.children[1].classList.toggle(kls))">
             <img id="profile-image" src="@ViewBag.ActiveUser.AvatarPath" draggable="false" />
             <div class="la-vie-dropdown -start-[200%] origin-top-right">
                 <form asp-controller="Account" asp-action="Logout" method="POST">

@@ -1,4 +1,5 @@
 ﻿window.addEventListener("DOMContentLoaded", () => {
+  // tag selector
   document.querySelectorAll("div.tag-selector input").forEach((input) => {
     input.addEventListener("keydown", (event) => {
       const input = event.target;
@@ -37,7 +38,17 @@
     });
   });
 
+  // pagination size
   document.querySelectorAll("select#pagination-size").forEach((select) => {
     select.value = window.localStorage.getItem("pagination-size");
   });
+
+  // loading theme
+  const theme = window.localStorage.getItem("la-vie-theme");
+  if (theme === null) {
+    window.localStorage.setItem("la-vie-theme", "light");
+  } else {
+    document.querySelector('html').classList.replace("theme", theme);
+    document.querySelector('html').style.visibility = "visible";
+  }
 });

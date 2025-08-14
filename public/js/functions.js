@@ -2,12 +2,14 @@ export const toggleTheme = (activator) => {
   const html = document.querySelector("html");
   const currentTheme = html.classList.item(0);
   if (currentTheme == "light") {
+    window.localStorage.setItem("la-vie-theme", "dark") ;
     html.classList.replace("light","dark");
     activator.children[0].innerText = "light_mode";
     if (activator.id == "aside-theme-switch") {
       activator.children[1].innerHTML = "Light";
     }
-  } else if (currentTheme == "dark") {    
+  } else if (currentTheme == "dark") {
+    window.localStorage.setItem("la-vie-theme", "light");
     html.classList.replace("dark","light");
     activator.children[0].innerText = "dark_mode";
     if (activator.id == "aside-theme-switch") {
@@ -59,15 +61,15 @@ export const toggleModuleHelp = (target) => {
   // variables
   const blackOverlay = document.querySelector("#black-overlay");
   const moduleHelp = document.querySelector("#module-help");
-  const action = moduleHelp.classList.contains("-translate-x-full")
+  const action = moduleHelp.classList.contains("module-help-opened")
     ? "hide"
     : "show";
   if (action == "show") {
     blackOverlay.addEventListener("click", toggleModuleHelp);
-    moduleHelp.classList.add("-translate-x-full");
+    moduleHelp.classList.add("module-help-opened");
   } else if (action == "hide") {
     blackOverlay.removeEventListener("click", toggleModuleHelp);
-    moduleHelp.classList.remove("-translate-x-full");
+    moduleHelp.classList.remove("module-help-opened");
   }
   toggleBlackOverlay();
 };
@@ -84,10 +86,12 @@ export const toggleDirection = (element) => {
   const direction = html.getAttribute("dir");
   if (direction == "rtl") {
     html.setAttribute("dir", "ltr");
+    window.localStorage.setItem("la-vie-direction", "ltr");
     element.children[0].innerHTML = "format_textdirection_r_to_l";
     element.children[1].innerHTML = "RTL";
   } else {
     html.setAttribute("dir", "rtl");
+    window.localStorage.setItem("la-vie-direction", "rtl");
     element.children[0].innerHTML = "format_textdirection_l_to_r";
     element.children[1].innerHTML = "LTR";
   }

@@ -1,6 +1,25 @@
 ﻿<!DOCTYPE html>
-<html lang="en" dir="ltr" class="dark panel">
+<html lang="en" dir="ltr" class="theme panel">
+@* don't mive this script any where else *@
+<script>
+    const html = document.querySelector('html');
+    
+    // handle theme
+    const theme = window.localStorage.getItem("la-vie-theme");
+    if (theme === null) {
+        window.localStorage.setItem("la-vie-theme", "light");
+    }
+    html.classList.replace("theme", theme);
+    
+    // handle direction
+    const direction = window.localStorage.getItem("la-vie-direction");
+    if (direction === null) {
+        window.localStorage.setItem("la-vie-direction", "ltr");
+    }
+    html.setAttribute('dir',direction);
 
+    html.style.visibility = "visible";
+</script>
 @* Head *@
 @await Html.PartialAsync("Panel/_Head.cshtml")
 
@@ -15,32 +34,14 @@
             @RenderBody()
         </article>
     </main>
-    <div class="absolute end-0 -bottom-0 z-[-1]">
-        @await Html.PartialAsync("Graphics/SectionWaves.cshtml")
+    <div class="absolute end-0 -bottom-0 z-[-1] rtl:rotate-180 origin-center">
+        @await Html.PartialAsync("Graphics/SectionArt.cshtml")
     </div>
     @* Footer *@
     @await Html.PartialAsync("Panel/_Footer.cshtml")
     @* Modals *@
     <div id="black-overlay"></div>
-    <div id="module-help">
-        <h1 id="module-help-title" class="font-bold mb-4 text-2xl">Users</h1>
-        <button id="module-help-close" onclick="LaVie.funcs.toggleModuleHelp()">
-            <i class="material-icons">close</i>
-        </button>
-        <table class="table table-auto border border-collapse mb-4">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Create</th>
-                    <th>Index</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <p id="module-help-description"></p>
-    </div>
+    @await Html.PartialAsync("Panel/_Help.cshtml")
     @* JS Here *@
     <script src="/js/app.js" type="module" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
