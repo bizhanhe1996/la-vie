@@ -18,9 +18,13 @@
             </script>
         </span>
         @* direction  *@
-        <span class="hidden md:flex cursor-pointer hover:-translate-x-1 transition-transform"
+        <span class="hidden md:flex cursor-pointer hover:-translate-x-1 transition-transform" id="header-direction-switch"
             onclick="LaVie.funcs.toggleDirection(this)">
-            <i class="material-icons">format_textdirection_r_to_l</i>
+            <i class="material-icons">star</i>
+            <script>
+                const currentDirection = window.localStorage.getItem("la-vie-direction");
+                document.querySelector('#header-direction-switch i').innerHTML = "format_textdirection_" + (currentDirection === "ltr" ? "r_to_l":"l_to_r");
+            </script>
         </span>
         <div class="flex flex-col m-auto justify-center">
             <span>

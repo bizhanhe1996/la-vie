@@ -131,8 +131,8 @@ export const toggleBlackOverlay = () => {
 };
 
 export const toggleSubmenu = (elm) => {
-  const height = elm.nextElementSibling.style.height;
-  elm.nextElementSibling.style.height = height == "auto" ? "0" : "auto";
+  const maxHeight = elm.nextElementSibling.style.maxHeight;
+  elm.nextElementSibling.style.maxHeight = maxHeight == "256px" ? "0" : "256px";
   [...elm.children].at(-1).classList.toggle("rotate-180");
 };
 

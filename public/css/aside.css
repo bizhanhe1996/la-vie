@@ -5,6 +5,7 @@ aside {
   overflow: hidden;
   color: var(--theme-text-light);
   user-select: none;
+  box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
   ul {
     display: flex;
     flex-direction: column;
@@ -32,10 +33,16 @@ aside {
             animation: click-effect 0.3s ease;
           }
         }
+        i.arrow-down {
+          margin-inline-start: auto;
+          margin-inline-end: 0.5rem;
+          transition: rotate 0.5s ease;
+        }
+
       }
       ul.submenu-items {
-        height: 0;
-        transition: height 0.3s ease;
+        max-height: 0;
+        transition: max-height 1s ease-in-out;
         overflow: hidden;
         margin-inline-start: 28px !important;
       }
@@ -54,8 +61,3 @@ i#aside-toggle-mobile {
   cursor: pointer;
 }
 
-.arrow-down {
-  margin-inline-start: auto;
-  margin-inline-end: 0.5rem;
-  transition: transform 0.5s ease;
-}

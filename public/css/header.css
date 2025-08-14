@@ -6,6 +6,7 @@ header {
   align-items: center;
   padding-inline-start: 1rem;
   user-select: none;
+  box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
   div {
     margin-inline-end: 0.5rem;
     img#profile-image {

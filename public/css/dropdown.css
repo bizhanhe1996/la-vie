@@ -2,7 +2,7 @@ div.la-vie-dropdown {
   scale: 0;
   position: absolute;
   background: var(--theme-dropdown-background);
-  box-shadow: 0 4px 12px 0px color-mix(in srgb, var(--theme-dropdown-shadow-color) 24%, transparent 75%);
+  box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
   z-index: 2;
   border-radius: 0.25rem;
   overflow: hidden;

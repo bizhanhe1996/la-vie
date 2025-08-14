@@ -9,7 +9,7 @@
   justify-content: center;
   cursor: pointer;
   transition: transform 0.3s ease;
-  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
   overflow: hidden;
   &:hover {
     transform: translateY(-4px);
@@ -39,7 +39,7 @@
   }
   i {
     position: absolute;
-    right: 0;
+    inset-inline-end: 0;
     font-size: 5rem;
     padding: 1rem;
     transform: rotate(15deg);

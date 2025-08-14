@@ -1,3 +1,9 @@
+/* global */
+:root {
+  --global-shadow-color: color-mix(in srgb, var(--color-gray-500) 50%, transparent 50%);
+  --global-shadow-blur: 8px;
+}
+
 /* light */
 :root.light {
   /* layout */
@@ -71,3 +77,4 @@
   --theme-dropdown-background: var(--gray-800);
   --theme-dropdown-shadow-color: var(--gray-100);
 }
+
