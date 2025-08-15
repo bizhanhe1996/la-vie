@@ -2,6 +2,7 @@ html.panel {
   visibility: hidden;
   background: var(--theme-section-background);
   transition: background 0.3s ease;
+  overflow: hidden;
   body {
     height:100vh;
     max-height: 100vh;

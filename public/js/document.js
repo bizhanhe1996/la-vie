@@ -1,4 +1,18 @@
 ﻿window.addEventListener("DOMContentLoaded", () => {
+  // loading theme
+  const theme = window.localStorage.getItem("la-vie-theme");
+  if (theme === null) {
+    window.localStorage.setItem("la-vie-theme", "light");
+  } else {
+    document.querySelector("html").classList.replace("theme", theme);
+    document.querySelector("html").style.visibility = "visible";
+  }
+
+  // pagination size
+  document.querySelectorAll("select#pagination-size").forEach((select) => {
+    select.value = window.localStorage.getItem("pagination-size");
+  });
+
   // tag selector
   document.querySelectorAll("div.tag-selector input").forEach((input) => {
     input.addEventListener("keydown", (event) => {
@@ -38,17 +52,23 @@
     });
   });
 
-  // pagination size
-  document.querySelectorAll("select#pagination-size").forEach((select) => {
-    select.value = window.localStorage.getItem("pagination-size");
+  // table checkboxes
+  document.querySelectorAll("th div.checkbox input").forEach((checkbox) => {
+    checkbox.addEventListener("change", (event) => {
+      event.target
+        .closest("table")
+        .querySelectorAll("tbody div.checkbox input")
+        .forEach((input) => {
+          input.checked = event.target.checked;
+        });
+    });
   });
 
-  // loading theme
-  const theme = window.localStorage.getItem("la-vie-theme");
-  if (theme === null) {
-    window.localStorage.setItem("la-vie-theme", "light");
-  } else {
-    document.querySelector('html').classList.replace("theme", theme);
-    document.querySelector('html').style.visibility = "visible";
-  }
+  document.querySelectorAll("td div.checkbox input").forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      checkbox
+        .closest("table")
+        .querySelector("thead th div.checkbox input").checked = false;
+    });
+  });
 });

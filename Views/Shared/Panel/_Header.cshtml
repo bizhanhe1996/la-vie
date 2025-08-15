@@ -10,21 +10,27 @@
     @* right section *@
     <div class="ms-auto flex flex-row gap-2 items-center">
         @* theme *@
-        <span class="hidden md:flex cursor-pointer hover:rotate-45 transition-transform" id="header-theme-switch"
+        <span class="hidden md:flex cursor-pointer tooltip-activator fc" id="header-theme-switch"
             onclick="LaVie.funcs.toggleTheme(this)">
-            <i class="material-icons"></i>
+            <i class="material-icons hover:rotate-45 transition-transform"></i>
             <script>
                 document.querySelector('#header-theme-switch i').innerHTML = window.localStorage.getItem("la-vie-theme") + "_mode";
             </script>
+            <small class="tooltip top-[120%] margin-auto  ">
+                Change theme
+            </small>
         </span>
         @* direction  *@
-        <span class="hidden md:flex cursor-pointer hover:-translate-x-1 transition-transform" id="header-direction-switch"
+        <span class="hidden md:flex cursor-pointer tooltip-activator fc" id="header-direction-switch"
             onclick="LaVie.funcs.toggleDirection(this)">
-            <i class="material-icons">star</i>
+            <i class="material-icons hover:-translate-x-1 transition-transform">star</i>
             <script>
                 const currentDirection = window.localStorage.getItem("la-vie-direction");
                 document.querySelector('#header-direction-switch i').innerHTML = "format_textdirection_" + (currentDirection === "ltr" ? "r_to_l":"l_to_r");
             </script>
+            <small class="tooltip top-[120%] margin-auto ">
+                Change direction
+            </small>
         </span>
         <div class="flex flex-col m-auto justify-center">
             <span>

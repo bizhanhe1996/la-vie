@@ -47,7 +47,11 @@ public class Paginator
     private void _limitedRecords()
     {
         _pagesCount = _totalCount / _size;
-        if (_page <= 0)
+        if (_pagesCount == 0)
+        {
+            _pagesCount = 1;
+        }
+        if (_page <= 1)
         {
             _page = 1;
         }

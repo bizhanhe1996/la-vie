@@ -21,9 +21,16 @@ public class UserController : BaseController
     }
 
     [Authorize(Roles = "Admin,Manager")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
-        var users = await context.Users.ToListAsync();
+        SetIndexBreadcrumbs();
+
+        Paginator.SetTotalCount(await context.Users.CountAsync()).SetPage(page).SetSize(size).Run();
+        var users = await context
+            .Users.OrderBy(u => u.CreatedAt)
+            .Skip(Paginator.SkipCount)
+            .Take(Paginator.TakeCount)
+            .ToListAsync();
 
         foreach (var user in users)
         {
@@ -31,7 +38,6 @@ public class UserController : BaseController
             user.Role = roles.FirstOrDefault("Default");
         }
 
-        SetIndexBreadcrumbs();
         return View(users);
     }
 

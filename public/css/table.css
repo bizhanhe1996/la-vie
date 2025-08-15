@@ -12,16 +12,23 @@ div.table-container {
       background-color: var(--theme-table-thead);
       color: var(--theme-table-row-even);
       th {
+        white-space: nowrap;
         font-weight: 600;
         text-align: start;
-        padding: 0.25rem;
+        padding: 0.5rem;
+      }
+      th:first-of-type {
+        width: 0px;
+      }
+      th:last-of-type {
+        width: 0px;
       }
     }
     tbody {
       tr {
         transition: background-color 0.15s;
         td {
-          padding: 0.25rem;
+          padding: 0.5rem;
           color: var(--theme-table-td-text);
           & > div.actions {
             display: flex;

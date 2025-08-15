@@ -10,6 +10,9 @@ ul.breadcrumbs {
     color: var(--theme-table-td-text);
     display: flex;
     align-items: center;
+    a:focus {
+      outline: none;
+    }
   }
   li:not(:last-child)::after {
     content: "chevron_right";

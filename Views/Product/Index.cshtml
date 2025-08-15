@@ -15,7 +15,13 @@
             <table class="table striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>
+                            <div class="checkbox">
+                                <input type="checkbox" />
+                                <i class="material-icons">check</i>
+                            </div>
+                        </th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Category</th>
@@ -27,6 +33,12 @@
                     @foreach (var product in Model)
                     {
                         <tr>
+                            <td>
+                                <div class="checkbox">
+                                <input type="checkbox" />
+                                <i class="material-icons">check</i>
+                            </div>
+                            </td>
                             <td>@product.Id</td>
                             <td>@product.Name</td>
                             <td>@product.Price</td>

@@ -1,5 +1,8 @@
 aside {
-  background: var(--theme-aside-background);
+  background: linear-gradient(120deg, 
+  var(--theme-aside-background) 25%, 
+  var(--theme-header-background) 75%
+  );
   transition: margin-inline-start 0.5s ease, color 0.5s ease;
   position: relative;
   overflow: hidden;
@@ -10,6 +13,7 @@ aside {
     display: flex;
     flex-direction: column;
     list-style-type: none;
+    gap:8px;
     padding: 0 !important;
     margin: 0 !important;
     margin-inline-start: 36px;
@@ -26,6 +30,10 @@ aside {
         overflow: hidden;
         position: relative;
         &:hover {
+          padding-inline-start: 1rem;
+        }
+        &:focus {
+          outline: none !important;
           padding-inline-start: 1rem;
         }
         &:active {
