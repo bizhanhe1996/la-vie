@@ -51,9 +51,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   padding: 1rem;
   padding-bottom: 0;
+  
+  max-width: 100vw;
+  min-height: 52px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .page-text {
@@ -109,7 +114,6 @@
   inset-inline-end: 0 !important;
 }
 
-
 small.tooltip {
   transition: transform 0.2s;
   color: var(--gray-200);
@@ -128,9 +132,25 @@ small.tooltip {
 }
 
 .tooltip-activator:hover {
-
   position: relative;
   small.tooltip {
     transform: scale(1);
   }
+}
+
+.la-vie-help-module-button {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--theme-color-secondary);
+}
+
+.scale-100 {
+  scale: 1 !important;
+}
+
+.opacity-100 {
+  opacity: 1 !important;
 }

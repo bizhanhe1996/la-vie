@@ -14,8 +14,7 @@
         @if (User.IsInRole("Admin"))
         {
             <div class="relative flex flex-col items-center">
-                <button class="btn del"
-                    onclick="['!scale-100','!opacity-100'].forEach((kls) => {this.nextElementSibling.classList.toggle(kls)})">
+                <button class="btn del" onclick="LaVie.funcs.toggleDropdown(this.parentNode.children[1])">
                     <span>Admin</span>
                     <i class="material-icons">keyboard_arrow_down</i>
                 </button>
@@ -40,8 +39,7 @@
         }
         @* multi actions *@
         <div class="relative flex flex-col items-center">
-            <button class="btn upd"
-                onclick="['!opacity-100','!scale-100'].forEach(kls=>this.nextElementSibling.classList.toggle(kls))">
+            <button class="btn upd" onclick="LaVie.funcs.toggleDropdown(this.parentNode.children[1])">
                 <span>Actions</span>
                 <i class="material-icons">keyboard_arrow_down</i>
             </button>

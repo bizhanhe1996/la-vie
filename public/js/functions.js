@@ -74,10 +74,16 @@ export const toggleModuleHelp = (target) => {
   toggleBlackOverlay();
 };
 
-export const toggleAside = (target) => {
-  target.parentNode.parentNode.parentNode.parentNode.classList.toggle(
-    "aside-toggle"
-  );
+export const toggleSmallAside = (target) => {
+  const main = document.querySelector("body > main");
+  const action = main.classList.contains("aside-small") ? "open" : "collpase";
+  if (action == "open") {
+    main.classList.remove("aside-small");
+    window.localStorage.setItem("la-vie-aside-small", false);
+  } else if (action == "collpase") {
+    main.classList.add("aside-small");
+    window.localStorage.setItem("la-vie-aside-small", true);
+  }
   target.children[0].classList.toggle("rotate-180");
 };
 
@@ -150,6 +156,10 @@ export const changePageSize = (controller, selectElement) => {
 
 export const allowDrop = (event) => {
   event.preventDefault();
+};
+
+export const toggleDropdown = (dropdown) => {
+  ["scale-100", "opacity-100"].forEach((kls) => dropdown.classList.toggle(kls));
 };
 
 export const multiDelete = async (module, tableId) => {

@@ -18,6 +18,7 @@ html.panel {
       overflow-y: hidden;
       article {
         overflow-y: auto;
+        overflow-x: hidden;
       }
     }
     footer {

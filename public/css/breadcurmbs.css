@@ -2,12 +2,13 @@ ul.breadcrumbs {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-inline-end: 0.5rem;
   display: flex;
   align-items: center;
   user-select: none;
   gap: 0.25rem;
   li {
-    color: var(--theme-table-td-text);
+    color: var(--theme-text-adaptable);
     display: flex;
     align-items: center;
     a:focus {

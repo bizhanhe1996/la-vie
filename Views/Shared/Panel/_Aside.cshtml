@@ -1,4 +1,9 @@
 @{
+
+    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+
+
     List<Dictionary<string, string>> items = [
     new() {
 {"title","Home"},
@@ -53,62 +58,61 @@ new() {
 }
 
 <aside class="z-[7] md:z-[5]">
-    <ul>
-
-        @foreach (var item in items)
-        {
-            @if (item["roles"].Contains(ViewBag.ActiveUserRole) || item["roles"] == "All")
+    <div class="m-2">
+        <ul>
+            @foreach (var item in items)
             {
-                <li>
-                    <a asp-controller="@item["controller"]" asp-action="@item["action"]">
-                        <i class="material-icons">@item["icon"]</i>
-                        <span>@item["title"]</span>
-                        <div class="click-wave"></div>
-                    </a>
-                </li>
+                @if (item["roles"].Contains(ViewBag.ActiveUserRole) || item["roles"] == "All")
+                {
+                    <li class='@(currentController ==  item["controller"] && currentAction == item["action"] ? "active" : "")'>
+                        <a asp-controller="@item["controller"]" asp-action="@item["action"]">
+                            <i class="material-icons">@item["icon"]</i>
+                            <span>@item["title"]</span>
+                            <div class="click-wave"></div>
+                        </a>
+                    </li>
+                }
             }
-        }
-        @* settings *@
-        <li>
-            <div class="submenu-title" onclick="LaVie.funcs.toggleSubmenu(this)">
-                <i class="material-icons">settings</i>
-                <span>Settings</span>
-                <i class="material-icons arrow-down">keyboard_arrow_down</i>
-            </div>
-            <ul class="submenu-items">
-                <li>
-                    <a asp-controller="Profile" asp-action="Index" draggable="false">
-                        <i class="material-icons">person</i>
-                        <span>Profile</span>
-                        <div class="click-wave"></div>
-                    </a>
-                </li>
-                <li>
-                    @* Direction *@
-                    <a onclick="LaVie.funcs.toggleDirection(this)">
-                        <i class="material-icons">format_textdirection_r_to_l</i>
-                        <span>RTL</span>
-                    </a>
-                </li>
-                <li>
-                    @* Theme *@
-                    <a id="aside-theme-switch" onclick="LaVie.funcs.toggleTheme(this)">
-                        <i class="material-icons">dark_mode</i>
-                        <span>Dark</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a onclick="LaVie.funcs.toggleAside(this)">
-                <i class="material-icons transition-transform">chevron_left</i>
-                <span>Collapse</span>
-            </a>
-        </li>
-
-
-    </ul>
+            @* settings *@
+            <li>
+                <div class="submenu-title" onclick="LaVie.funcs.toggleSubmenu(this)">
+                    <i class="material-icons">settings</i>
+                    <span>Settings</span>
+                    <i class="material-icons arrow-down">keyboard_arrow_down</i>
+                </div>
+                <ul class="submenu-items">
+                    <li>
+                        <a asp-controller="Profile" asp-action="Index" draggable="false">
+                            <i class="material-icons">person</i>
+                            <span>Profile</span>
+                            <div class="click-wave"></div>
+                        </a>
+                    </li>
+                    <li>
+                        @* Direction *@
+                        <a onclick="LaVie.funcs.toggleDirection(this)">
+                            <i class="material-icons">format_textdirection_r_to_l</i>
+                            <span>RTL</span>
+                        </a>
+                    </li>
+                    <li>
+                        @* Theme *@
+                        <a id="aside-theme-switch" onclick="LaVie.funcs.toggleTheme(this)">
+                            <i class="material-icons">dark_mode</i>
+                            <span>Dark</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a onclick="LaVie.funcs.toggleSmallAside(this)">
+                    <i class="material-icons transition-transform">chevron_left</i>
+                    <span>Collapse</span>
+                </a>
+            </li>
+        </ul>
+    </div>
     <div class="absolute bottom-0 z-[-1]">
-    @await Html.PartialAsync("../Graphics/AsideArt.cshtml")
+        @await Html.PartialAsync("../Graphics/AsideArt.cshtml")
     </div>
 </aside>

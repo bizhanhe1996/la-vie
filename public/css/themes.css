@@ -69,7 +69,7 @@
   --theme-alert-background: var(--gray-800);
   /* semantic colors */
   --theme-color-primary: var(--blue-900);
-  --theme-color-secondary: var(--gray-900);
+  --theme-color-secondary: var(--gray-700);
   --theme-color-danger: var(--red-900);
   --theme-color-success: var(--green-900);
   --theme-color-warning: var(--orange-900);

@@ -1,5 +1,6 @@
 .btn {
   padding: 6px 8px;
+  min-height: 36px;
   font-size: 14px;
   display: inline-flex;
   align-items: center;

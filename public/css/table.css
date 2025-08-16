@@ -190,3 +190,13 @@ div.table-container {
 .table-container::-webkit-scrollbar {
   display: none;
 }
+
+
+table.help-module-table {
+  tr {
+    td, th {
+      padding: 0.5rem;
+      border: 1px solid var(--theme-text-adaptable);
+    }
+  }
+}

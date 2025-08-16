@@ -3,14 +3,14 @@
     <i onclick="LaVie.funcs.toggleAsideMobile()" id="aside-toggle-mobile" class="material-icons">dehaze</i>
     <div class="flex gap-2 items-center">
         <i class="material-icons text-teal-500">star</i>
-        <a class="font-bold" asp-controller="Home" asp-action="Index">
+        <a class="font-bold whitespace-nowrap" asp-controller="Home" asp-action="Index">
             @ViewBag.ENV_PROJECT_NAME
         </a>
     </div>
     @* right section *@
     <div class="ms-auto flex flex-row gap-2 items-center">
-        @* theme *@
-        <span class="hidden md:flex cursor-pointer tooltip-activator fc" id="header-theme-switch"
+        @* switch theme *@
+        <span class="hidden md:flex cursor-pointer tooltip-activator md:fc" id="header-theme-switch"
             onclick="LaVie.funcs.toggleTheme(this)">
             <i class="material-icons hover:rotate-45 transition-transform"></i>
             <script>
@@ -21,26 +21,25 @@
             </small>
         </span>
         @* direction  *@
-        <span class="hidden md:flex cursor-pointer tooltip-activator fc" id="header-direction-switch"
+        <span class="hidden md:flex cursor-pointer tooltip-activator md:fc" id="header-direction-switch"
             onclick="LaVie.funcs.toggleDirection(this)">
             <i class="material-icons hover:-translate-x-1 transition-transform">star</i>
             <script>
                 const currentDirection = window.localStorage.getItem("la-vie-direction");
-                document.querySelector('#header-direction-switch i').innerHTML = "format_textdirection_" + (currentDirection === "ltr" ? "r_to_l":"l_to_r");
+                document.querySelector('#header-direction-switch i').innerHTML = "format_textdirection_" + (currentDirection === "ltr" ? "r_to_l" : "l_to_r");
             </script>
             <small class="tooltip top-[120%] margin-auto ">
                 Change direction
             </small>
         </span>
         <div class="flex flex-col m-auto justify-center">
-            <span>
+            <span class="flex flex-nowrap gap-2">
                 <span class="font-bold">@ViewBag.ActiveUser.FullName</span>
-                <span class="text-xs text-yellow-300 ms-2">@ViewBag.ActiveUserRole</span>
+                <span class="text-xs text-yellow-300">@ViewBag.ActiveUserRole</span>
             </span>
             <span class="text-right text-xs">@ViewBag.ActiveUser.Email</span>
         </div>
-        <div class="relative"
-            onclick="['!scale-100','!opacity-100'].forEach(kls => this.children[1].classList.toggle(kls))">
+        <div class="relative" onclick="LaVie.funcs.toggleDropdown(this.children[1])">
             <img id="profile-image" src="@ViewBag.ActiveUser.AvatarPath" draggable="false" />
             <div class="la-vie-dropdown -start-[200%] origin-top-right">
                 <form asp-controller="Account" asp-action="Logout" method="POST">
