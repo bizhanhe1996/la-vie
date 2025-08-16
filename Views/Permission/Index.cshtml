@@ -42,10 +42,7 @@
     }
     else
     {
-        <div class="alert">
-            <i class="material-icons">warning</i>
-            <p>No permission defined yet!</p>
-        </div>
+        @await Html.PartialAsync("Components/_Alert", "No permission defined yet!")
     }
 </section>
 

@@ -35,9 +35,9 @@
                         <tr>
                             <td>
                                 <div class="checkbox">
-                                <input type="checkbox" />
-                                <i class="material-icons">check</i>
-                            </div>
+                                    <input type="checkbox" />
+                                    <i class="material-icons">check</i>
+                                </div>
                             </td>
                             <td>@product.Id</td>
                             <td>@product.Name</td>
@@ -58,21 +58,20 @@
                             </td>
                             <td>
                                 <div class="actions">
-                                    @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Product", product.Id))
-                                    @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("ProductUser", product.Id))
-                                </div>
-                            </td>
-                        </tr>
-                    }
+                                    @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Product",
+                                    product.Id))
+                            @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("ProductUser",
+                                                        product.Id))
+                        </div>
+                    </td>
+                </tr>
+                                }
                 </tbody>
             </table>
         </div>
     }
     else
     {
-        <div class="alert">
-            <i class="material-icons">warning</i>
-            <p>No product defined yet!</p>
-        </div>
+        @await Html.PartialAsync("Components/_Alert", "No product defined yet!")
     }
 </section>

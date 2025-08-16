@@ -8,7 +8,6 @@ aside {
   overflow: hidden;
   color: var(--theme-text-light);
   user-select: none;
-  box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
   ul {
     display: flex;
     flex-direction: column;

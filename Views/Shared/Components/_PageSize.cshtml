@@ -1,0 +1,12 @@
+@model string
+<form class="form min-w-16">
+    <fieldset class="mb-0!">
+        <select id="pagination-size" onchange="LaVie.funcs.changePageSize('@Model', this)">
+            @foreach (var i in new int[] { 10, 20, 30, 40, 50 })
+            {
+                <option value="@i">@i</option>
+            }
+            <option value="-1">All</option>
+        </select>
+    </fieldset>
+</form>

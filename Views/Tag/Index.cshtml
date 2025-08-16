@@ -17,9 +17,9 @@
                 <thead>
                     <th>
                         <div class="checkbox">
-                                <input type="checkbox" />
-                                <i class="material-icons">check</i>
-                            </div>
+                            <input type="checkbox" />
+                            <i class="material-icons">check</i>
+                        </div>
                     </th>
                     <th>#</th>
                     <th>Name</th>
@@ -33,9 +33,9 @@
                         <tr>
                             <td>
                                 <div class="checkbox">
-                                <input type="checkbox" />
-                                <i class="material-icons">check</i>
-                            </div>
+                                    <input type="checkbox" />
+                                    <i class="material-icons">check</i>
+                                </div>
                             </td>
                             <td>@tag.Id</td>
                             <td>@tag.Name</td>
@@ -57,9 +57,6 @@
     }
     else
     {
-        <div class="alert">
-            <i class="material-icons">warning</i>
-            <p>No tag defined yet!</p>
-        </div>
+        @await Html.PartialAsync("Components/_Alert", "No tag defined yet!")
     }
 </section>
