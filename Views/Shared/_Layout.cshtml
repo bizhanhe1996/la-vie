@@ -28,7 +28,6 @@
     @await Html.PartialAsync("Panel/_Header.cshtml")
     @* Main *@
     <main role="main">
-
         <script>
             const main = document.querySelector("body > main");
             const asideSmall = window.localStorage.getItem("la-vie-aside-small");
@@ -36,7 +35,6 @@
                 main.classList.add("aside-small");
             }
         </script>
-
         @* Aside *@
         @await Html.PartialAsync("Panel/_Aside.cshtml")
         <article>

@@ -8,11 +8,6 @@
     document.querySelector("html").style.visibility = "visible";
   }
 
-  // pagination size
-  document.querySelectorAll("select#pagination-size").forEach((select) => {
-    select.value = window.localStorage.getItem("pagination-size");
-  });
-
   // tag selector
   document.querySelectorAll("div.tag-selector input").forEach((input) => {
     input.addEventListener("keydown", (event) => {

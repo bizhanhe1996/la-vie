@@ -1,12 +1,30 @@
 @model string
-<form class="form min-w-16">
-    <fieldset class="mb-0!">
-        <select id="pagination-size" onchange="LaVie.funcs.changePageSize('@Model', this)">
+
+<div class="relative fc">
+    <button class="btn back" onclick="LaVie.funcs.toggleDropdown(this.parentNode.children[1])">
+        <span>
+            <script>
+                const pageSize = window.localStorage.getItem("pagination-size");
+                if (pageSize > 0) {
+                    document.write(pageSize)
+                } else if (pageSize == -1) {
+                    document.write('All')
+                } else {
+                    document.write(10)
+                }
+            </script>
+        </span>
+        <i class="material-icons">keyboard_arrow_down</i>
+    </button>
+    <div class="la-vie-dropdown origin-top !w-full">
+        <ul class="page-text flex flex-col gap-2 text-center">
             @foreach (var i in new int[] { 10, 20, 30, 40, 50 })
             {
-                <option value="@i">@i</option>
+                <li class="cursor-pointer select-none" onclick="LaVie.funcs.changePageSize('@Model', @i)">
+                    @i
+                </li>
             }
-            <option value="-1">All</option>
-        </select>
-    </fieldset>
-</form>
+            <li onclick="LaVie.funcs.changePageSize('@Model', -1)">All</li>
+        </ul>
+    </div>
+</div>

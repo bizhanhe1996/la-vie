@@ -154,3 +154,9 @@ small.tooltip {
 .opacity-100 {
   opacity: 1 !important;
 }
+
+.bg-contrast {
+  background: var(--theme-color-contrast) !important;
+}
+
+

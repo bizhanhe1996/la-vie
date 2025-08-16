@@ -148,10 +148,10 @@ export const toggleConfirm = (message, elm) => {
   }
 };
 
-export const changePageSize = (controller, selectElement) => {
-  window.localStorage.setItem("pagination-size", selectElement.value);
+export const changePageSize = (controller, pageSize) => {
+  window.localStorage.setItem("pagination-size", pageSize);
   window.location.href =
-    "/" + controller + "?page=1&size=" + selectElement.value;
+    "/" + controller + "?page=1&size=" + pageSize;
 };
 
 export const allowDrop = (event) => {
