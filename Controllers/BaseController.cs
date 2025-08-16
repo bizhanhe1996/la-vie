@@ -2,12 +2,14 @@ using System.Security.Claims;
 using LaVie.Data;
 using LaVie.Extras.Enums;
 using LaVie.Extras.Filters;
+using LaVie.Extras.Interfaces;
 using LaVie.Extras.Structs;
 using LaVie.Extras.Utils;
 using LaVie.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaVie.Controllers;
 
@@ -117,6 +119,18 @@ public class BaseController : Controller, IActionFilter
             await context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+    }
+
+    public async Task<IActionResult> MultiDelete<Entity>(
+        MyAppContext context,
+        int[] ids,
+        string redirectUrl
+    )
+        where Entity : class, IModel
+    {
+        var dbSet = context.Set<Entity>();
+        int deletedCount = await dbSet.Where(e => ids.Contains(e.Id)).ExecuteDeleteAsync();
+        return Ok(new { deletedCount, redirectUrl });
     }
 
     public override void OnActionExecuting(ActionExecutingContext context)

@@ -2,6 +2,7 @@ namespace LaVie.Extras.Interfaces;
 
 public interface IModel
 {
+    public int Id { set; get; }
     public DateTime CreatedAt { set; get; }
     public DateTime UpdatedAt { set; get; }
 }

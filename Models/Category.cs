@@ -4,8 +4,6 @@ namespace LaVie.Models;
 
 public class Category : BaseModel
 {
-    public int Id { set; get; }
-
     [Required]
     public string Title { set; get; } = null!;
 

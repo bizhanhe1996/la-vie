@@ -99,9 +99,17 @@ public class CategoryController : BaseController
         }
     }
 
+    [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
         return await Delete<Category>(context, id);
+    }
+
+    [ValidateAntiForgeryToken]
+    [HttpPost]
+    public async Task<IActionResult> MultiDelete([FromBody] int[] ids)
+    {
+        return await MultiDelete<Category>(context, ids, "/Category");
     }
 
     [HttpGet]

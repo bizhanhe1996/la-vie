@@ -71,4 +71,11 @@
         .querySelector("thead th div.checkbox input").checked = false;
     });
   });
+
+  // adding CSRF token to session storage
+  const tokenInput = document.querySelector('input[name="__RequestVerificationToken"]');
+  const token = tokenInput.value;
+  window.sessionStorage.setItem("CSRF-token",token);
+  tokenInput.remove();
+
 });

@@ -14,8 +14,6 @@ public class Product : BaseModel
         CategoryId = categoryId;
     }
 
-    public int Id { set; get; }
-
     [Required]
     public string Name { set; get; } = null!;
 

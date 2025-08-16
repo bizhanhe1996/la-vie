@@ -13,26 +13,25 @@
         @* admin options *@
         @if (User.IsInRole("Admin"))
         {
-            <div class="relative">
-                <button class="btn del min-w-32" onclick="this.nextElementSibling.classList.toggle('scale-100')">
+            <div class="relative flex flex-col items-center">
+                <button class="btn del"
+                    onclick="['!scale-100','!opacity-100'].forEach((kls) => {this.nextElementSibling.classList.toggle(kls)})">
                     <span>Admin</span>
                     <i class="material-icons">keyboard_arrow_down</i>
                 </button>
-                <div
-                    class="absolute overflow-hidden bg-white shadow-lg shadow-gray-600 w-full scale-0 transition-transform origin-top rounded z-2 top-[125%]">
-                    <ul class="flex flex-col gap-3 p-3">
+                <div class="la-vie-dropdown origin-top">
+                    <ul class="flex flex-col gap-2">
                         <li>
-                            <button class="btn add w-full" onclick="toggleConfirm('Are you sure?', this)">
-                                <a class="hidden" asp-controller="Category" asp-action="Seed"></a>
-                                <i class="material-icons">keyboard_arrow_down</i>
-                                <span>Seed</span>
+                            <button class="btn add w-full" onclick="LaVie.funcs.toggleConfirm('Are you sure?', this)">
+                                <a asp-controller="Category" asp-action="Seed">
+                                    Seed
+                                </a>
                             </button>
                         </li>
                         <li>
                             <button class="btn del w-full"
-                                onclick="toggleConfirm('Are you sure?', () => window.location.href = '/Category/Truncate'))">
-                                <i class="material-icons">keyboard_arrow_down</i>
-                                <span>Truncate</span>
+                                onclick="LaVie.funcs.toggleConfirm('Are you sure?', () => window.location.href = '/Category/Truncate')">
+                                Truncate
                             </button>
                         </li>
                     </ul>
@@ -40,11 +39,23 @@
             </div>
         }
         @* multi actions *@
-        <button class="btn upd">
-            <span>Actions</span>
-            <i class="material-icons">home</i>
-        </button>
-
+        <div class="relative flex flex-col items-center">
+            <button class="btn upd"
+                onclick="['!opacity-100','!scale-100'].forEach(kls=>this.nextElementSibling.classList.toggle(kls))">
+                <span>Actions</span>
+                <i class="material-icons">keyboard_arrow_down</i>
+            </button>
+            <div class="la-vie-dropdown origin-top">
+                <ul>
+                    <li>
+                        <button class="btn del" onclick="LaVie.funcs.multiDelete('Category','categories-table')">
+                            <span>Delete</span>
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
         @* create button *@
         @await Html.PartialAsync("Components/_CreateButton", "Category")
     </div>
@@ -54,7 +65,7 @@
     @if (Model != null && Model.Count > 0)
     {
         <div class="table-container">
-            <table class="table striped">
+            <table class="table striped" id="categories-table">
                 <thead>
                     <tr>
                         <th>
@@ -78,7 +89,7 @@
                         <tr>
                             <td>
                                 <div class="checkbox">
-                                    <input type="checkbox" />
+                                    <input type="checkbox" data-id="@Model[i].Id" />
                                     <i class="material-icons">check</i>
                                 </div>
                             </td>
@@ -106,9 +117,9 @@
             </tfoot>
         </table>
     </div>
-}
-else
-{
-    @await Html.PartialAsync("Components/_Alert", "No category defined yet!")
-}
+        }
+        else
+    {
+        @await Html.PartialAsync("Components/_Alert", "No category defined yet!")
+    }
 </section>

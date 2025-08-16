@@ -2,15 +2,15 @@ export const toggleTheme = (activator) => {
   const html = document.querySelector("html");
   const currentTheme = html.classList.item(0);
   if (currentTheme == "light") {
-    window.localStorage.setItem("la-vie-theme", "dark") ;
-    html.classList.replace("light","dark");
+    window.localStorage.setItem("la-vie-theme", "dark");
+    html.classList.replace("light", "dark");
     activator.children[0].innerText = "light_mode";
     if (activator.id == "aside-theme-switch") {
       activator.children[1].innerHTML = "Light";
     }
   } else if (currentTheme == "dark") {
     window.localStorage.setItem("la-vie-theme", "light");
-    html.classList.replace("dark","light");
+    html.classList.replace("dark", "light");
     activator.children[0].innerText = "dark_mode";
     if (activator.id == "aside-theme-switch") {
       activator.children[1].innerHTML = "Dark";
@@ -150,4 +150,36 @@ export const changePageSize = (controller, selectElement) => {
 
 export const allowDrop = (event) => {
   event.preventDefault();
+};
+
+export const multiDelete = async (module, tableId) => {
+  if (
+    window.confirm("Are you sure that you want to delete all selected rows?")
+  ) {
+    const deletableIds = [
+      ...document.querySelectorAll(
+        `table#${tableId} tbody tr td div.checkbox input:checked`
+      ),
+    ].map((checkbox) => {
+      return +checkbox.getAttribute("data-id");
+    });
+
+    debugger;
+    const response = await fetch("/Category/MultiDelete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        RequestVerificationToken: window.sessionStorage.getItem("CSRF-token"),
+      },
+      body: JSON.stringify(deletableIds),
+    });
+
+    const result = await response.json();
+
+    if (result.deletedCount > 0) {
+      window.location.href = result.redirectUrl;
+    } else {
+      window.alert("Nothing deleted!");
+    }
+  }
 };
