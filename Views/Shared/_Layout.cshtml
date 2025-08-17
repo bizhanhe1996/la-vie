@@ -6,7 +6,7 @@
 
     // handle theme
     const theme = window.localStorage.getItem("la-vie-theme");
-    
+
     if (theme === null) {
         window.localStorage.setItem("la-vie-theme", "light");
     }
@@ -49,6 +49,19 @@
     @await Html.PartialAsync("Panel/_Footer.cshtml")
     @* Modals *@
     <div id="black-overlay"></div>
+
+
+
+    <div id="la-vie-confirm-modal">
+        <i class="material-icons">question_mark</i>
+        <p class="message"></p>
+        <div class="buttons">
+            <button class="btn back no" onclick="LaVie.funcs.toggleConfirm(null)">No</button>
+            <button class="btn del yes">Yes</button>
+        </div>
+    </div>
+
+
     @await Html.PartialAsync("Panel/_Help.cshtml")
     @* JS Here *@
     <script src="/js/app.js" type="module" asp-append-version="true"></script>

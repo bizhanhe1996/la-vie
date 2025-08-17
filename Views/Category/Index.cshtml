@@ -21,16 +21,11 @@
                 <div class="la-vie-dropdown origin-top">
                     <ul class="flex flex-col gap-2">
                         <li>
-                            <button class="btn add w-full" onclick="LaVie.funcs.toggleConfirm('Are you sure?', this)">
+                            <button class="btn add w-full"
+                                onclick="LaVie.funcs.toggleConfirm('Are you sure?', () => this.click())">
                                 <a asp-controller="Category" asp-action="Seed">
                                     Seed
                                 </a>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="btn del w-full"
-                                onclick="LaVie.funcs.toggleConfirm('Are you sure?', () => window.location.href = '/Category/Truncate')">
-                                Truncate
                             </button>
                         </li>
                     </ul>
@@ -46,7 +41,8 @@
             <div class="la-vie-dropdown origin-top">
                 <ul>
                     <li>
-                        <button class="btn del" onclick="LaVie.funcs.multiDelete('Category','categories-table')">
+                        <button class="btn del"
+                            onclick="LaVie.funcs.toggleConfirm('Are you sure?',()=>LaVie.funcs.multiDelete('Category','categories-table'))">
                             <span>Delete</span>
                             <i class="material-icons">delete</i>
                         </button>

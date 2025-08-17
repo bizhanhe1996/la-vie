@@ -142,16 +142,34 @@ export const toggleSubmenu = (elm) => {
   [...elm.children].at(-1).classList.toggle("rotate-180");
 };
 
-export const toggleConfirm = (message, elm) => {
-  if (window.confirm(message)) {
-    elm.querySelector("a").click();
+export const toggleConfirm = (message, callback = null) => {
+  const confirmModal = document.querySelector("div#la-vie-confirm-modal");
+  const action = message ? "open" : "close";
+  if (action == "open") {
+    confirmModal.querySelector("p").innerHTML = message;
+    ["opacity-100", "scale-100"].forEach((kls) =>
+      confirmModal.classList.add(kls)
+    );
+    confirmModal.querySelector("button.yes").addEventListener("click", () => {
+      callback();
+      toggleConfirm(null);
+    });
+  } else if (action == "close") {
+    confirmModal.querySelector("p").innerHTML = null;
+    ["opacity-100", "scale-100"].forEach((kls) =>
+      confirmModal.classList.remove(kls)
+    );
+    const yesButtonClone = confirmModal.querySelector("button.yes").cloneNode();
+    yesButtonClone.innerHTML = "Yes";
+    confirmModal.querySelector("button.yes").remove();
+    confirmModal.querySelector("div.buttons").append(yesButtonClone);
   }
+  toggleBlackOverlay();
 };
 
 export const changePageSize = (controller, pageSize) => {
   window.localStorage.setItem("pagination-size", pageSize);
-  window.location.href =
-    "/" + controller + "?page=1&size=" + pageSize;
+  window.location.href = "/" + controller + "?page=1&size=" + pageSize;
 };
 
 export const allowDrop = (event) => {
@@ -163,33 +181,28 @@ export const toggleDropdown = (dropdown) => {
 };
 
 export const multiDelete = async (module, tableId) => {
-  if (
-    window.confirm("Are you sure that you want to delete all selected rows?")
-  ) {
-    const deletableIds = [
-      ...document.querySelectorAll(
-        `table#${tableId} tbody tr td div.checkbox input:checked`
-      ),
-    ].map((checkbox) => {
-      return +checkbox.getAttribute("data-id");
-    });
+  const deletableIds = [
+    ...document.querySelectorAll(
+      `table#${tableId} tbody tr td div.checkbox input:checked`
+    ),
+  ].map((checkbox) => {
+    return +checkbox.getAttribute("data-id");
+  });
 
-    debugger;
-    const response = await fetch("/Category/MultiDelete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        RequestVerificationToken: window.sessionStorage.getItem("CSRF-token"),
-      },
-      body: JSON.stringify(deletableIds),
-    });
+  const response = await fetch("/Category/MultiDelete", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      RequestVerificationToken: window.sessionStorage.getItem("CSRF-token"),
+    },
+    body: JSON.stringify(deletableIds),
+  });
 
-    const result = await response.json();
+  const result = await response.json();
 
-    if (result.deletedCount > 0) {
-      window.location.href = result.redirectUrl;
-    } else {
-      window.alert("Nothing deleted!");
-    }
+  if (result.deletedCount > 0) {
+    window.location.href = result.redirectUrl;
+  } else {
+    window.alert("Nothing deleted!");
   }
 };
