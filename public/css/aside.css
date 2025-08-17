@@ -17,10 +17,22 @@ aside {
     margin: 0 !important;
     margin-inline-start: 36px;
     li {
+      position: relative;
       &.active {
-        background-color: var(--theme-section-background);
-        color: var(--theme-text-adaptable);
-        border-radius: 0.5rem;
+        & span.triangle {
+          display: block;
+        }
+      }
+      span.triangle {
+        rotate: 180deg;
+        position: absolute;
+        top: 50%;
+        transform: translateY(50%) scaleX(0.75);
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+        color: var(--theme-section-background);
+        inset-inline-end: -16px;
+        display: none;
       }
       a,
       .submenu-title {
@@ -67,9 +79,7 @@ aside {
 }
 
 i#aside-toggle-mobile {
-  display: none;
   color: #f3f4f6;
   margin-inline-end: 0.5rem;
   cursor: pointer;
 }
-

@@ -1,6 +1,6 @@
 <header class="box-shadow">
     @* left section *@
-    <i onclick="LaVie.funcs.toggleAsideMobile()" id="aside-toggle-mobile" class="material-icons">dehaze</i>
+    <i onclick="LaVie.funcs.toggleAsideMobile()" id="aside-toggle-mobile" class="material-icons block sm:!hidden ">dehaze</i>
     <div class="flex gap-2 items-center">
         <i class="material-icons text-teal-500">star</i>
         <a class="font-bold whitespace-nowrap" asp-controller="Home" asp-action="Index">
@@ -10,18 +10,18 @@
     @* right section *@
     <div class="ms-auto flex flex-row gap-2 items-center">
         @* switch theme *@
-        <span class="hidden sm:flex cursor-pointer tooltip-activator" id="header-theme-switch"
+        <span class="hidden sm:flex sm:items-center sm:justify-center cursor-pointer tooltip-activator" id="header-theme-switch"
             onclick="LaVie.funcs.toggleTheme(this)">
             <i class="material-icons hover:rotate-45 transition-transform"></i>
             <script>
-                document.querySelector('#header-theme-switch i').innerHTML = window.localStorage.getItem("la-vie-theme") + "_mode";
+                document.querySelector('#header-theme-switch i').innerHTML = (window.localStorage.getItem("la-vie-theme") == "dark" ? "light":"dark") + "_mode";
             </script>
             <small class="tooltip top-[120%] margin-auto  ">
                 Change theme
             </small>
         </span>
         @* direction  *@
-        <span class="hidden sm:flex cursor-pointer tooltip-activator" id="header-direction-switch"
+        <span class="hidden sm:flex sm:items-center sm:justify-center cursor-pointer tooltip-activator" id="header-direction-switch"
             onclick="LaVie.funcs.toggleDirection(this)">
             <i class="material-icons hover:-translate-x-1 transition-transform">star</i>
             <script>

@@ -1,60 +1,67 @@
+@using LaVie.Extras.Structs
 @{
-
     var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
     var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+    List<AsideItemStruct> items = new()
+{
+new()
+{
+Title = "Home",
+Icon = "home",
+Controller = "Home",
+Action = "Index",
+Roles = "All"
+},
+new()
+{
+Title = "Users",
+Icon = "person",
+Controller = "User",
+Action = "Index",
+Roles = "Admin,Manager"
+},
+new()
+{
+Title = "Permissions",
+Icon = "check_box",
+Controller = "Permission",
+Action = "Index",
+Roles = "Admin"
+},
+new()
+{
+Title = "Roles",
+Icon = "key",
+Controller = "Role",
+Action = "Index",
+Roles = "Admin"
+},
+new()
+{
+Title = "Categories",
+Icon = "category",
+Controller = "Category",
+Action = "Index",
+Roles = "Admin,Manager"
+},
+new()
+{
+Title = "Tags",
+Icon = "tag",
+Controller = "Tag",
+Action = "Index",
+Roles = "Admin,Manager"
+},
+new()
+{
+Title = "Products",
+Icon = "shopping_bag",
+Controller = "Product",
+Action = "Index",
+Roles = "Admin,Manager"
+}
+};
 
-
-    List<Dictionary<string, string>> items = [
-    new() {
-{"title","Home"},
-{"icon","home"},
-{"controller","Home"},
-{"action","Index"},
-{"roles", "All"}
-},
-new() {
-{"title", "Users"},
-{"icon","person"},
-{"controller","User"},
-{"action","Index"},
-{"roles", "Admin,Manager"}
-},
-new() {
-{"title", "Permissions"},
-{"icon","check_box"},
-{"controller","Permission"},
-{"action","Index"},
-{"roles", "Admin"}
-},
-new() {
-{"title", "Roles"},
-{"icon","key"},
-{"controller","Role"},
-{"action","Index"},
-{"roles", "Admin"}
-},
-new() {
-{"title", "Categories"},
-{"icon","category"},
-{"controller","Category"},
-{"action","Index"},
-{"roles", "Admin,Manager"}
-},
-new() {
-{"title", "Tags"},
-{"icon","tag"},
-{"controller","Tag"},
-{"action","Index"},
-{"roles", "Admin,Manager"}
-},
-new() {
-{"title", "Products"},
-{"icon","shopping_bag"},
-{"controller","Product"},
-{"action","Index"},
-{"roles", "Admin,Manager"}
-},
-];
 }
 
 <aside class="z-[7] md:z-[5]">
@@ -62,14 +69,15 @@ new() {
         <ul>
             @foreach (var item in items)
             {
-                @if (item["roles"].Contains(ViewBag.ActiveUserRole) || item["roles"] == "All")
+                @if (item.Roles.Contains(ViewBag.ActiveUserRole) || item.Roles == "All")
                 {
-                    <li class='@(currentController ==  item["controller"] && currentAction == item["action"] ? "active" : "")'>
-                        <a asp-controller="@item["controller"]" asp-action="@item["action"]">
-                            <i class="material-icons">@item["icon"]</i>
-                            <span>@item["title"]</span>
+                    <li class='@(currentController == item.Controller && currentAction == item.Action ? "active" : "")'>
+                        <a asp-controller="@item.Controller" asp-action="@item.Action">
+                            <i class="material-icons">@item.Icon</i>
+                            <span>@item.Title</span>
                             <div class="click-wave"></div>
                         </a>
+                        <span class="triangle">►</span>
                     </li>
                 }
             }
