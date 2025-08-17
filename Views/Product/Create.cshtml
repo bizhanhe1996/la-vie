@@ -1,4 +1,5 @@
-@model LaVie.Models.Product;
+@model LaVie.Models.Product
+@using LaVie.Extras.Structs
 @{
   string mode = ViewBag.ViewMode.ToString() == "UPDATE" ? "Update" : "Create";
   ViewData["Title"] = mode + " a new product";
@@ -11,7 +12,6 @@
 
 <section class="page-content">
   <form class="form" asp-action="@mode" method="POST">
-
     <fieldset>
       <label asp-for="Name" required>Name</label>
       <input asp-for="Name" required />
@@ -33,7 +33,7 @@
       </select>
       <span class="error" asp-validation-for="Category"></span>
     </fieldset>
-    @await Html.PartialAsync("Components/_TagSelector", (Dictionary<string, string>)ViewBag.Tags)
+    @await Html.PartialAsync("Components/_TagSelector", new TagSelectorStruct(ViewBag.Tags, "SelectedTagsIds"))
     <div class="flex justify-end mt-4">
       @await Html.PartialAsync("Components/_SubmitButton")
     </div>

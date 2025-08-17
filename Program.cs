@@ -17,30 +17,29 @@ public class Program
     {
         WebApplicationOptions options = new() { WebRootPath = "public" };
         var builder = WebApplication.CreateBuilder(options);
-
         var startup = new Startup(builder.Configuration);
-        startup.ConfigureServices(builder.Services);
-
+        startup.AddServices(builder.Services);
         var app = builder.Build();
+        startup.UseMiddlewares(app, app.Environment);
+        OnUserRegistered(app);
+        await IdentitySeeder(app);
+        return app;
+    }
 
-        startup.ConfigureHttpRequestPipeline(app, app.Environment);
+    private static async Task IdentitySeeder(WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        var roleManager = scope.ServiceProvider.GetRequiredService<
+            RoleManager<IdentityRole<int>>
+        >();
+        var identitySeeder = new IdentitySeeder(roleManager);
+        await identitySeeder.Seed();
+    }
 
+    private static void OnUserRegistered(WebApplication app)
+    {
         var eventManager = app.Services.GetRequiredService<AppEventManager>();
         var userHandler = new UserRegistryHandler();
-
         eventManager.UserRegistered += userHandler.OnUserRegistered;
-
-        // seeding claims and roles
-        using (var scope = app.Services.CreateScope())
-        {
-            var roleManager = scope.ServiceProvider.GetRequiredService<
-                RoleManager<IdentityRole<int>>
-            >();
-
-            var identitySeeder = new IdentitySeeder(roleManager);
-            await identitySeeder.Seed();
-        }
-
-        return app;
     }
 }

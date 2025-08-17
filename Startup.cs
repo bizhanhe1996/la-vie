@@ -20,38 +20,49 @@ public class Startup
         _configuration = configuration;
     }
 
-    // Register services here
-    public void ConfigureServices(IServiceCollection services)
+    public void AddServices(IServiceCollection services)
+    {
+        LoadEnvironmentVariables();
+        AddControllersWithViews(services);
+        AddSingletonServices(services);
+        AddSQLiteService(services);
+        AddIdentityService(services);
+        ConfigureIdentity(services);
+        AddPolicies(services);
+    }
+
+    private static void LoadEnvironmentVariables()
     {
         Env.Load();
+    }
 
+    private static void AddControllersWithViews(IServiceCollection services)
+    {
         services.AddControllersWithViews(options =>
         {
             options.Filters.Add<GlobalsInjectorFilter>();
         });
+    }
 
+    private static void AddSingletonServices(IServiceCollection services)
+    {
         services.AddSingleton<GlobalsInjectorFilter>();
         services.AddSingleton<IAuthorizationHandler, MaximumLoginHourHandler>();
         services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
         services.AddSingleton<AppEventManager>();
+    }
 
-        // SQLite
-        services.AddDbContext<MyAppContext>(options =>
-            options.UseSqlite(_configuration.GetConnectionString("DefaultConnection"))
-        );
-
-        // Identity
-        services
-            .AddIdentity<User, IdentityRole<int>>()
-            .AddEntityFrameworkStores<MyAppContext>()
-            .AddDefaultTokenProviders();
-
+    private static void ConfigureIdentity(IServiceCollection services)
+    {
         services.Configure<IdentityOptions>(options =>
         {
             options.User.RequireUniqueEmail = true;
             options.Lockout.AllowedForNewUsers = false;
         });
+    }
 
+    private static void AddPolicies(IServiceCollection services)
+    {
         services.AddAuthorization(options =>
         {
             options.AddPolicy(
@@ -64,7 +75,15 @@ public class Startup
         });
     }
 
-    public void ConfigureHttpRequestPipeline(WebApplication app, IHostEnvironment env)
+    private static void AddIdentityService(IServiceCollection services)
+    {
+        services
+            .AddIdentity<User, IdentityRole<int>>()
+            .AddEntityFrameworkStores<MyAppContext>()
+            .AddDefaultTokenProviders();
+    }
+
+    public void UseMiddlewares(WebApplication app, IHostEnvironment env)
     {
         if (env.IsDevelopment())
         {
@@ -85,5 +104,12 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+    }
+
+    private void AddSQLiteService(IServiceCollection services)
+    {
+        services.AddDbContext<MyAppContext>(options =>
+            options.UseSqlite(_configuration.GetConnectionString("DefaultConnection"))
+        );
     }
 }

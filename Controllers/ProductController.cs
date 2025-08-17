@@ -45,17 +45,19 @@ public class ProductController : BaseController
         if (CheckUniqueConstraint(product))
         {
             SetCreateBreadcrumbs();
-            return this.SetCategories().SetTags().View(product);
+            return SetCategories().SetTags().View(product);
         }
 
         if (ModelState.IsValid)
         {
-            product.ProductTags = MapSelectedTagsIds(product?.SelectedTagsIds ?? []);
             if (product == null)
             {
                 SetCreateBreadcrumbs();
                 return SetCategories().SetTags().View(product);
             }
+
+            product.ProductTags = MapSelectedTagsIds(product?.SelectedTagsIds ?? []);
+
             context.Products.Add(product);
             await context.SaveChangesAsync();
             return RedirectToAction("Index");

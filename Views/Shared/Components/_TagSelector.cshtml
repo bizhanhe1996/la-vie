@@ -1,15 +1,17 @@
-@model Dictionary<string, string>
-<div class="tag-selector">  
+@model LaVie.Extras.Structs.TagSelectorStruct
+<div class="tag-selector">
   <label>Tags</label>
   <div class="selected-tags"></div>
-  <input list="available-tags" placeholder="Type ..." autofocus/>  
-  <select name="" multiple>
-    @foreach(var pair in Model) {
+  <input list="available-tags" placeholder="Type ..." />
+  <select name="@Model.AspFor" multiple>
+    @foreach (var pair in Model.Pairs)
+    {
       <option value="@pair.Value" label="@pair.Key" />
     }
   </select>
   <datalist id="available-tags">
-    @foreach(var pair in Model) {
+    @foreach (var pair in Model.Pairs)
+    {
       <option value="@pair.Value" label="@pair.Key" />
     }
   </datalist>

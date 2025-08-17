@@ -24,7 +24,7 @@ public class Product : BaseModel
     public Category? Category { set; get; }
 
     [NotMapped]
-    public int[]? SelectedTagsIds { set; get; }
+    public int[]? SelectedTagsIds { set; get; } = [];
 
     public ICollection<ProductTag>? ProductTags { set; get; }
 }
