@@ -1,0 +1,59 @@
+.bg-gradient-blue-transparent {
+  background: linear-gradient(90deg, var(--blue-500), transparent 50%);
+}
+
+.fc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+.opacity-100 {
+  opacity: 1 !important;
+}
+
+.block {
+  display: block !important;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.dropzone {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px dashed var(--theme-table-td-text);
+  border-radius: 0.25rem;
+  min-height: 64px;
+}
+
+.module-help-opened {
+  inset-inline-end: 0 !important;
+}
+
+.la-vie-help-module-button {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--theme-color-secondary);
+}
+
+.scale-100 {
+  scale: 1 !important;
+}
+
+.bg-contrast {
+  background: var(--theme-color-contrast) !important;
+}
