@@ -1,50 +1,55 @@
-﻿@{
-    // page title
+﻿@using LaVie.Extras.Structs
+@{
     ViewData["Title"] = "Home Page";
-
-    // cards
-    Dictionary<string, Dictionary<string, string>> cards = new();
-    cards.Add("Messages", new() {
-{"message", "Sina, Saeed, Sepehr, ..."},
-{"icon","message"},
-{"class","info"},
-{"count","79"},
-});
-    cards.Add("Tasks", new() {
-{"message", "Article, Book, ..."},
-{"icon","check_circle"},
-{"class","primary"},
-{"count","9"},
-});
-    cards.Add("Events", new() {
-{"message", "Sina, Saeed, Sepehr, ..."},
-{"icon","event"},
-{"class","gray"},
-{"count","43"},
-});
-    cards.Add("Notes", new() {
-{"message", "Sina, Saeed, Sepehr, ..."},
-{"icon","notes"},
-{"class","danger"},
-{"count","12"},
-});
+    var cards = new List<HomeCardStruct>
+{
+new HomeCardStruct(
+"Messages",
+"Sina, Saeed, Sepehr, ...",
+"message",
+"info",
+79
+),
+new HomeCardStruct(
+"Tasks",
+"Article, Book, ...",
+"check_circle",
+"primary",
+9
+),
+new HomeCardStruct(
+"Events",
+"Sina, Saeed, Sepehr, ...",
+"event",
+"gray",
+43
+),
+new HomeCardStruct(
+"Notes",
+"Sina, Saeed, Sepehr, ...",
+"notes",
+"danger",
+12
+)
+};
 }
 
 <section class="page-content">
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        @foreach (var pair in cards)
+        @foreach (var card in cards)
         {
-            <div class="card card-@pair.Value["class"]">
-                <strong>@pair.Value["count"]</strong>
-                <b>@pair.Key</b>
-                <p>@pair.Value["message"]</p>
-                <i class="material-icons">@pair.Value["icon"]</i>
+            <div class="card card-@card.Class">
+                <strong>@card.Count</strong>
+                <b>@card.Title</b>
+                <p>@card.Message</p>
+                <i class="material-icons">@card.Icon</i>
                 <div class="click-wave"></div>
             </div>
         }
     </div>
     <div class="mt-4">
-        <button class="btn upd" onclick="LaVie.funcs.toggleConfirm('Are you sure?',() => console.log('Bonjour'))">Open confirm</button>
+        <button class="btn upd" onclick="LaVie.funcs.toggleConfirm('Are you sure?',() => console.log('Bonjour'))">Open
+            confirm</button>
     </div>
 
 </section>
