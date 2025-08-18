@@ -114,30 +114,6 @@
   inset-inline-end: 0 !important;
 }
 
-small.tooltip {
-  transition: transform 0.2s;
-  color: var(--gray-200);
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  border-radius: 1rem;
-  font-size: 0.75rem;
-  display: inline-flex;
-  align-items: center;
-  position: absolute;
-  transform: scale(0);
-  background: var(--gray-700);
-  white-space: nowrap;
-}
-
-.tooltip-activator:hover {
-  position: relative;
-  small.tooltip {
-    transform: scale(1);
-  }
-}
-
 .la-vie-help-module-button {
   cursor: pointer;
   user-select: none;

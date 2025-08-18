@@ -17,6 +17,7 @@ html[dir=ltr] .card i {
   transition: transform 0.3s ease;
   box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
   overflow: hidden;
+  z-index: 0;
   &:hover {
     transform: translateY(-4px);
     i {
