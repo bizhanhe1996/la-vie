@@ -1,7 +1,3 @@
-.bg-gradient-blue-transparent {
-  background: linear-gradient(90deg, var(--blue-500), transparent 50%);
-}
-
 .fc {
   display: flex;
   align-items: center;
@@ -52,8 +48,4 @@
 
 .scale-100 {
   scale: 1 !important;
-}
-
-.bg-contrast {
-  background: var(--theme-color-contrast) !important;
 }

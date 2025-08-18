@@ -206,3 +206,69 @@ export const multiDelete = async (module, tableId) => {
     window.alert("Nothing deleted!");
   }
 };
+
+export const addNotification = (type, title, message) => {
+  const notificationTemplate = `
+      <span></span>
+      <div>
+        <i class="material-icons"></i>
+        <h3></h3>
+      </div>
+      <p></p>
+  `;
+  const notificationElement = document.createElement("div");
+  notificationElement.classList.add("la-vie-notification");
+  notificationElement.innerHTML = notificationTemplate;
+  notificationElement.querySelector("h3").innerHTML = title;
+  notificationElement.querySelector("p").innerHTML = message;
+  const iconElement = notificationElement.querySelector("i");
+  switch (type) {
+    case "success":
+      iconElement.innerHTML = "done_outline";
+      notificationElement.classList.add("bg-success");
+      break;
+    case "error":
+      iconElement.innerHTML = "error";
+      notificationElement.classList.add("bg-danger");
+      break;
+    case "warning":
+      iconElement.innerHTML = "warning";
+      notificationElement.classList.add("bg-warning");
+      break;
+    case "info":
+    default:
+      iconElement.innerHTML = "notifications";
+      notificationElement.classList.add("bg-primary");
+      break;
+  }
+
+  notificationElement.addEventListener("click", function () {
+    this.classList.add("!opacity-0");
+    window.setTimeout(() => {
+      this.remove();
+    }, 500);
+  });
+
+  const underlayInterval = window.setInterval(() => {
+    let currentWidth = notificationElement.querySelector("span").style.width;
+    if (currentWidth == "") {
+      currentWidth = "100";
+    }
+    currentWidth = +currentWidth.replace("%", "");
+    notificationElement.querySelector("span").style.width =
+      currentWidth - 1 + "%";
+  }, 20);
+
+  window.setTimeout(() => {
+    window.clearInterval(underlayInterval);
+    notificationElement.click();
+  }, 2000);
+
+  document
+    .querySelector("#la-vie-notifications")
+    .appendChild(notificationElement);
+
+  window.setTimeout(() => {
+    notificationElement.classList.add("!translate-x-0");
+  }, 1);
+};

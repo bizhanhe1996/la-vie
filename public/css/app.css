@@ -1,6 +1,7 @@
 @import url(_colors.css);
 @import url(_themes.css);
 @import url(_keyframes.css);
+@import url(_backgrounds.css);
 @import url(_icons.css);
 @import url(_buttons.css);
 @import url(_layout.css);
@@ -20,4 +21,5 @@
 @import url(_tooltip.css);
 @import url(_page.css);
 @import url(_permissions.css);
+@import url(_notifications.css);
 @import url(_misc.css);

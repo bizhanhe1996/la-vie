@@ -1,0 +1,15 @@
+.bg-primary {
+    background-color: var(--theme-color-primary);
+}
+.bg-success {
+    background-color: var(--theme-color-success);
+}
+.bg-danger {
+    background-color: var(--theme-color-danger);
+}
+.bg-warning {
+    background-color: var(--theme-color-warning);
+}
+.bg-contrast {
+  background: var(--theme-color-contrast) !important;
+}

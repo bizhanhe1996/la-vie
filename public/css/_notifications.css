@@ -1,0 +1,42 @@
+div#la-vie-notifications {
+  position: fixed;
+  z-index: 1;
+  inset-inline-end: 0;
+  bottom: 4rem;
+  width: 24rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  user-select: none;
+  div.la-vie-notification {
+    box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
+    transition: translate 0.5s ease, opacity 0.5s ease;
+    translate: 100%;
+    position: relative;
+    color: var(--theme-text-light);
+    padding: 1rem;
+    cursor: pointer;
+    border-start-start-radius: 0.375rem;
+    border-end-start-radius: 0.375rem;
+    overflow: hidden;
+    & > div {
+      display: flex;
+      gap: 0.5rem;
+      h3 {
+        font-weight: bold;
+        font-size: large;
+      }
+      margin-bottom: 0.5rem;
+    }
+    span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  top: 0;
+  inset-inline-start: 0;
+}
+  }
+}
+
+

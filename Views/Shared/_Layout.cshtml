@@ -46,23 +46,11 @@
         @await Html.PartialAsync("Graphics/SectionArt.cshtml")
     </div>
     @* Footer *@
-    @await Html.PartialAsync("Panel/_Footer.cshtml")
-    @* Modals *@
     <div id="black-overlay"></div>
-
-
-
-    <div id="la-vie-confirm-modal"></div>
-        <i class="material-icons">question_mark</i>
-        <p class="message"></p>
-        <div class="buttons">
-            <button class="btn back no" onclick="LaVie.funcs.toggleConfirm(null)">No</button>
-            <button class="btn del yes">Yes</button>
-        </div>
-    </div>
-
-
+    @await Html.PartialAsync("Panel/_Footer.cshtml")
     @await Html.PartialAsync("Panel/_Help.cshtml")
+    @await Html.PartialAsync("Panel/_Confirm.cshtml")
+    <div id="la-vie-notifications"></div>
     @* JS Here *@
     <script src="/js/app.js" type="module" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

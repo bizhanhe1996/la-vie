@@ -47,9 +47,26 @@ new HomeCardStruct(
             </div>
         }
     </div>
-    <div class="mt-4">
+    <div class="mt-4 flex gap-2 flex-wrap">
         <button class="btn upd" onclick="LaVie.funcs.toggleConfirm('Are you sure?',() => console.log('Bonjour'))">Open
             confirm</button>
+
+
+        <button class="btn add"
+            onclick="LaVie.funcs.addNotification('success', 'Done!', 'Task Successfully done.')">Success
+            Notification</button>
+        <button class="btn del" onclick="LaVie.funcs.addNotification('error', 'Error!', 'Something went wrong!')">Error
+            Notification</button>
+
+        <button class="btn back"
+            onclick="LaVie.funcs.addNotification('warning', 'Warning!', 'Keep watching the clock.')">Warning
+            Notification</button>
+
+        <button class="btn upd"
+            onclick="LaVie.funcs.addNotification('info', 'Info!', 'La vie mean the life in french.')">Info
+            Notification</button>
+
+
     </div>
 
 </section>

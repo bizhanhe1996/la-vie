@@ -4,9 +4,11 @@ export default {
     extend: {},
   },
   safelist: [
-    'opacity-100',
-    'block',
-    '-translate-x-full'
+    "opacity-100",
+    "block",
+    "-translate-x-full",
+    "translate-x-0",
+    "opacity-0",
   ],
   plugins: [],
 };
