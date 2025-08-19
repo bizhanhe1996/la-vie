@@ -11,7 +11,6 @@ div#la-vie-notifications {
   div.la-vie-notification {
     box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
     transition: translate 0.5s ease, opacity 0.5s ease;
-    translate: 100%;
     position: relative;
     color: var(--theme-text-light);
     padding: 1rem;
@@ -29,14 +28,24 @@ div#la-vie-notifications {
       margin-bottom: 0.5rem;
     }
     span {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.05);
-  top: 0;
-  inset-inline-start: 0;
-}
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.05);
+      top: 0;
+      inset-inline-start: 0;
+    }
   }
 }
 
+html[dir="rtl"] {
+  div.la-vie-notification {
+    translate: -100%;
+  }
+}
 
+html[dir="ltr"] {
+  div.la-vie-notification {
+    translate: 100%;
+  }
+}
