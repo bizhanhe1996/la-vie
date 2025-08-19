@@ -8,3 +8,25 @@
     opacity: 0;
   }
 }
+
+@keyframes progress-bar {
+  0% {
+    width: 0%;
+    inset-inline-start: 0;
+    background-color: var(--theme-color-info);
+  }
+  25% {
+    background-color: var(--theme-color-primary);
+  }
+  50% {
+    background-color: var(--theme-color-success);
+  }
+  75% {
+    background-color: var(--theme-color-warning);
+  }
+  100% {
+    width: 100%;
+    inset-inline-start: 100%;
+    background-color: var(--theme-color-danger);
+  }
+}

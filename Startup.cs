@@ -101,12 +101,7 @@ public class Startup
             app.UseHttpsRedirection();
         }
 
-        var provider = new FileExtensionContentTypeProvider();
-        // add only what’s missing
-        provider.Mappings[".svg"] = "image/svg+xml";
-
-        app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = provider });
-
+        app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();

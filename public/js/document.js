@@ -1,4 +1,5 @@
 ﻿window.addEventListener("DOMContentLoaded", () => {
+  
   // loading theme
   const theme = window.localStorage.getItem("la-vie-theme");
   if (theme === null) {
@@ -73,4 +74,8 @@
   window.sessionStorage.setItem("CSRF-token",token);
   document.querySelector('#CSRF-token-container').remove();
   
+});
+
+window.addEventListener("beforeunload",() => {
+  document.querySelector("div#la-vie-loader").style.display = "flex";
 });

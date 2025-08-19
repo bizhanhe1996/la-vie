@@ -4,6 +4,7 @@ header {
   transition: background 0.3s ease;
   display: flex;
   align-items: center;
+  position: relative;
   padding-inline-start: 1rem;
   user-select: none;
   box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
@@ -21,5 +22,4 @@ header {
       }
     }
   }
-
 }

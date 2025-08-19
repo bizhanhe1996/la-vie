@@ -27,6 +27,10 @@
 <body>
     @* Header *@
     @await Html.PartialAsync("Panel/_Header.cshtml")
+
+    @* progress bar *@
+    <div id="la-vie-progress"></div>
+
     @* Main *@
     <main role="main">
         <script>
@@ -53,7 +57,7 @@
     @await Html.PartialAsync("Panel/_Confirm.cshtml")
     <div id="la-vie-notifications"></div>
     <div id="CSRF-token-container" class="hidden">
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
     </div>
     @* JS Here *@
     <script src="/js/app.js" type="module" asp-append-version="true"></script>
