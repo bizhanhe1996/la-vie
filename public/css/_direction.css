@@ -1,0 +1,7 @@
+html[dir="ltr"] {
+  --aside-triangle-scale: 0.75;
+}
+
+html[dir="rtl"] {
+  --aside-triangle-scale: -0.75;
+}
