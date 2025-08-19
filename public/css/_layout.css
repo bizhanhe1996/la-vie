@@ -4,12 +4,22 @@ html.panel {
   transition: background 0.3s ease;
   overflow: hidden;
   body {
-    height:100vh;
+    height: 100vh;
     max-height: 100vh;
     margin: 0;
     display: grid;
     grid-template-rows: 48px 1fr 36px;
     position: relative;
+    div#la-vie-progress {
+      animation: progress-bar 3s infinite;
+      display: none;
+      animation-timing-function: ease-in-out;
+      position: absolute;
+      top: 48px;
+      background: var(--theme-color-success);
+      height: 4px;
+      z-index: 6;
+    }
     main {
       display: grid;
       grid-template-columns: 196px 1fr;
@@ -41,7 +51,7 @@ html.panel {
       width: 100%;
       max-width: 420px;
       padding: 1rem;
-      
+
       button#module-help-close {
         position: absolute;
         color: var(--gray-100);

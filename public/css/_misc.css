@@ -49,13 +49,3 @@
 .scale-100 {
   scale: 1 !important;
 }
-
-div#la-vie-progress {
-  animation: progress-bar 3s infinite;
-  animation-timing-function: ease-in-out;
-  position: absolute;
-  top: 48px;
-  background: var(--theme-color-success);
-  height: 4px;
-  z-index: 6;
-}

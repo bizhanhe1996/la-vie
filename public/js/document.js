@@ -77,5 +77,5 @@
 });
 
 window.addEventListener("beforeunload",() => {
-  document.querySelector("div#la-vie-loader").style.display = "flex";
+  document.querySelector("div#la-vie-progress").style.display = "block";
 });
