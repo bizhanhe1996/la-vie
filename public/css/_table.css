@@ -1,12 +1,12 @@
 div.table-container {
   overflow-x: auto;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   box-shadow: 0 0 var(--global-shadow-blur) var(--global-shadow-color);
   table.table {
     overflow: hidden;
     width: 100%;
     border-collapse: collapse;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     border: none;
     thead {
       background-color: var(--theme-table-thead);

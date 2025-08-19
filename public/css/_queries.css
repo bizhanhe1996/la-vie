@@ -6,6 +6,9 @@
       width: 100vw;
     }
   }
+  header {
+    background-image: none;
+  }
   aside {
     position: absolute;
     margin-inline-start: -100%;

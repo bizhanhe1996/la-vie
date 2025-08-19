@@ -1,7 +1,11 @@
 html[dir="ltr"] {
   --aside-triangle-scale: 0.75;
+  --header-effect-position: 196px;
+  --header-gradient-to: right;
 }
 
 html[dir="rtl"] {
   --aside-triangle-scale: -0.75;
+  --header-effect-position: calc(100% - 196px);
+  --header-gradient-to: left;
 }

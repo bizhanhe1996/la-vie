@@ -3,7 +3,7 @@
 
 @if (User.HasClaim(c => c.Value == Model.Permission))
 {
-    <a class="table-button del" asp-controller="@Model.Controller" asp-action="Delete" asp-route-id="@Model.Id">
+    <a class="table-button del" asp-controller="@Model.Controller" asp-action="Delete" asp-route-id="@Model.Id" onclick="LaVie.funcs.toggleConfirm('Are your sure of deleting this item?', () => window.location.href = this.href );return false;">
         <i class="material-icons">delete_outline</i>
         <small>Delete</small>
         <div class="click-wave"></div>

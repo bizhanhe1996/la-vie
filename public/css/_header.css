@@ -1,6 +1,15 @@
 header {
   color: var(--theme-text-light);
-  background: var(--theme-header-background);
+
+  background-image: linear-gradient(
+    to var(--header-gradient-to),
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-color: var(--theme-header-background);
+  background-position: var(--header-effect-position);
   transition: background 0.3s ease;
   display: flex;
   align-items: center;
