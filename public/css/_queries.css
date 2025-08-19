@@ -16,6 +16,9 @@
       display: none !important;
     }
   }
+  div#la-vie-notifications {
+    width: 18rem !important;
+  }
   i#aside-toggle-mobile {
     display: flex;
   }

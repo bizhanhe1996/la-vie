@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "twc": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/minified-tailwind.css --watch"
+    "twc": "npx tailwindcss -i ./public/css/_tailwind.css -o ./public/css/minified-tailwind.css --watch"
   },
   "repository": {
     "type": "git",

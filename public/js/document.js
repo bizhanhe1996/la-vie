@@ -71,6 +71,6 @@
   const tokenInput = document.querySelector('input[name="__RequestVerificationToken"]');
   const token = tokenInput.value;
   window.sessionStorage.setItem("CSRF-token",token);
-  tokenInput.remove();
-
+  document.querySelector('#CSRF-token-container').remove();
+  
 });

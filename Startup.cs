@@ -7,6 +7,7 @@ using LaVie.Extras.Filters;
 using LaVie.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 
 namespace LaVie;
@@ -95,11 +96,17 @@ public class Startup
             app.UseHsts();
         }
 
-        if (app.Environment.IsDevelopment())
+        if (app.Environment.IsDevelopment() == false)
         {
             app.UseHttpsRedirection();
         }
-        app.UseStaticFiles();
+
+        var provider = new FileExtensionContentTypeProvider();
+        // add only what’s missing
+        provider.Mappings[".svg"] = "image/svg+xml";
+
+        app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = provider });
+
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();

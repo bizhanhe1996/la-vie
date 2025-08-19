@@ -46,11 +46,15 @@
         @await Html.PartialAsync("Graphics/SectionArt.cshtml")
     </div>
     @* Footer *@
-    <div id="black-overlay"></div>
     @await Html.PartialAsync("Panel/_Footer.cshtml")
+    @* modals, etc *@
+    <div id="black-overlay"></div>
     @await Html.PartialAsync("Panel/_Help.cshtml")
     @await Html.PartialAsync("Panel/_Confirm.cshtml")
     <div id="la-vie-notifications"></div>
+    <div id="CSRF-token-container" class="hidden">
+    @Html.AntiForgeryToken()
+    </div>
     @* JS Here *@
     <script src="/js/app.js" type="module" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
