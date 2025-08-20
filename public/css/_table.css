@@ -27,6 +27,9 @@ div.table-container {
     tbody {
       tr {
         transition: background-color 0.15s;
+        &.nothing-found {
+          display: none;
+        }
         td {
           padding: 0.5rem;
           color: var(--theme-table-td-text);
@@ -190,7 +193,6 @@ div.table-container {
 .table-container::-webkit-scrollbar {
   display: none;
 }
-
 
 table.help-module-table {
   tr {

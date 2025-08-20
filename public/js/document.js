@@ -1,5 +1,4 @@
 ﻿window.addEventListener("DOMContentLoaded", () => {
-  
   // loading theme
   const theme = window.localStorage.getItem("la-vie-theme");
   if (theme === null) {
@@ -69,13 +68,14 @@
   });
 
   // adding CSRF token to session storage
-  const tokenInput = document.querySelector('input[name="__RequestVerificationToken"]');
+  const tokenInput = document.querySelector(
+    'input[name="__RequestVerificationToken"]'
+  );
   const token = tokenInput.value;
-  window.sessionStorage.setItem("CSRF-token",token);
-  document.querySelector('#CSRF-token-container').remove();
-  
+  window.sessionStorage.setItem("CSRF-token", token);
+  document.querySelector("#CSRF-token-container").remove();
 });
 
-window.addEventListener("beforeunload",() => {
+window.addEventListener("beforeunload", () => {
   document.querySelector("div#la-vie-progress").style.display = "block";
 });

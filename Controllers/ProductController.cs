@@ -20,15 +20,45 @@ public class ProductController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
         SetIndexBreadcrumbs();
+
+        // pagination
+        Paginator
+            .SetTotalCount(await context.Products.CountAsync())
+            .SetPage(page)
+            .SetSize(size)
+            .Run();
+
         var products = await context
-            .Products.Include(p => p.Category)
-            .Include(p => p.ProductTags)
+            .Products.OrderBy(p => p.Id)
+            .Skip(Paginator.SkipCount)
+            .Take(Paginator.TakeCount)
+            .Include(p => p.Category)
+            .Include(p => p.ProductTags!)
             .ThenInclude(pt => pt.Tag)
             .ToListAsync();
         return View(products);
+    }
+
+    public async Task<IActionResult> Search(string query)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            return RedirectToAction("Index");
+        }
+        query = query.ToUpper();
+
+        var products = await context
+            .Products.Where(p => p.Name.ToUpper().Contains(query))
+            .Include(p => p.Category)
+            .Include(p => p.ProductTags!)
+            .ThenInclude(pt => pt.Tag)
+            .ToListAsync();
+
+        SetIndexBreadcrumbs();
+        return View("~/Views/Product/Index.cshtml", products);
     }
 
     [HttpGet]
@@ -58,7 +88,7 @@ public class ProductController : BaseController
 
             product.ProductTags = MapSelectedTagsIds(product?.SelectedTagsIds ?? []);
 
-            context.Products.Add(product);
+            context.Products.Add(product!);
             await context.SaveChangesAsync();
             return RedirectToAction("Index");
         }

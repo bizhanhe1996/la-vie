@@ -5,14 +5,19 @@
 
 <section class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
-    @await Html.PartialAsync("Components/_CreateButton", "Product")
+    <div class="flex gap-2 items-center">
+        @await Html.PartialAsync("Components/_PageSize", "Product")
+        @await Html.PartialAsync("Components/_MultiAction", "products-table")
+        @await Html.PartialAsync("Components/_CreateButton", "Product")
+    </div>
 </section>
 
 <section class="page-content">
     @if (Model.Count > 0)
     {
+        @await Html.PartialAsync("Components/_TableSearch", new TableSearchStruct("Product","products-table"))
         <div class="table-container">
-            <table class="table striped">
+            <table class="table striped" id="products-table">
                 <thead>
                     <tr>
                         <th>
@@ -30,8 +35,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var product in Model)
+                    @for (int i = 0; i < Model.Count; i++ )
                     {
+                        var product = Model[i];
                         <tr>
                             <td>
                                 <div class="checkbox">
@@ -39,7 +45,7 @@
                                     <i class="material-icons">check</i>
                                 </div>
                             </td>
-                            <td>@product.Id</td>
+                            <td>@((ViewBag.Page - 1) * 10 + i + 1)</td>
                             <td>@product.Name</td>
                             <td>@product.Price</td>
                             <td>
@@ -60,13 +66,26 @@
                                 <div class="actions">
                                     @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Product",
                                     product.Id))
-                            @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("ProductUser",
+                            @await Html.PartialAsync("Components/_DeleteButton", new DeleteButtonStruct("Product",
                                                         product.Id))
                         </div>
                     </td>
                 </tr>
                                 }
+                                <tr class="nothing-found">
+                                    <td colspan="100%">
+                                        No result found!
+                                    </td>
+                                </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="100%">
+                            @await Html.PartialAsync("Components/_Pagination", "Product")
+                        </td>
+                    </tr>
+                </tfoot>
+
             </table>
         </div>
     }

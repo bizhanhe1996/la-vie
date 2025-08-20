@@ -1,0 +1,18 @@
+@model string
+<div class="relative flex flex-col items-center">
+    <button class="btn upd" onclick="LaVie.funcs.toggleDropdown(this.parentNode.children[1])">
+        <span>Actions</span>
+        <i class="material-icons">keyboard_arrow_down</i>
+    </button>
+    <div class="la-vie-dropdown origin-top">
+        <ul>
+            <li>
+                <button class="btn del"
+                    onclick="LaVie.funcs.toggleConfirm('Are you sure?',()=>LaVie.funcs.multiDelete('Category','@Model'))">
+                    <span>Delete</span>
+                    <i class="material-icons">delete</i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+@model LaVie.Extras.Structs.TableSearchStruct
+
+<form asp-controller="@Model.Controller" asp-action="Search" class="form" method="POST">
+    <fieldset>
+        <label for="products-search-input">Search</label>
+        <input id="products-search-input" oninput="LaVie.funcs.findInTable('@Model.TableId', this)"
+            name="query"
+            placeholder="After type, you can press enter to search in the database"
+            required
+            autocomplete="off"
+            autofocus
+            >
+    </fieldset>
+</form>

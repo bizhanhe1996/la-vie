@@ -4,53 +4,10 @@
     ViewData["Title"] = "Categories";
 }
 <section class="page-bar">
-    @* breadcrumbs *@
     @await Html.PartialAsync("Components/_Breadcrumbs")
-    @* buttons *@
     <div class="flex gap-2 items-center">
-        @* page size *@
         @await Html.PartialAsync("Components/_PageSize", "Category")
-        @* admin options *@
-        @if (User.IsInRole("Admin"))
-        {
-            <div class="relative flex flex-col items-center">
-                <button class="btn del" onclick="LaVie.funcs.toggleDropdown(this.parentNode.children[1])">
-                    <span>Admin</span>
-                    <i class="material-icons">keyboard_arrow_down</i>
-                </button>
-                <div class="la-vie-dropdown origin-top">
-                    <ul class="flex flex-col gap-2">
-                        <li>
-                            <button class="btn add w-full"
-                                onclick="LaVie.funcs.toggleConfirm('Are you sure?', () => this.click())">
-                                <a asp-controller="Category" asp-action="Seed">
-                                    Seed
-                                </a>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        }
-        @* multi actions *@
-        <div class="relative flex flex-col items-center">
-            <button class="btn upd" onclick="LaVie.funcs.toggleDropdown(this.parentNode.children[1])">
-                <span>Actions</span>
-                <i class="material-icons">keyboard_arrow_down</i>
-            </button>
-            <div class="la-vie-dropdown origin-top">
-                <ul>
-                    <li>
-                        <button class="btn del"
-                            onclick="LaVie.funcs.toggleConfirm('Are you sure?',()=>LaVie.funcs.multiDelete('Category','categories-table'))">
-                            <span>Delete</span>
-                            <i class="material-icons">delete</i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        @* create button *@
+        @await Html.PartialAsync("Components/_MultiAction", "categories-table")
         @await Html.PartialAsync("Components/_CreateButton", "Category")
     </div>
 </section>

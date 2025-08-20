@@ -272,3 +272,21 @@ export const addNotification = (type, title, message) => {
     notificationElement.classList.add("!translate-x-0");
   }, 1);
 };
+
+export const findInTable = (tableId, searchInput) => {
+  const tbody = document.querySelector(`table#${tableId} tbody`);
+  const rows = tbody.querySelectorAll("tr");
+  const normalizedQuery = searchInput.value.trim().toLowerCase();
+  rows.forEach((row) => {
+    row.style.display = "none";
+  });
+  let resultsCount = 0;
+  rows.forEach((row) => {
+    if (row.innerHTML.toLowerCase().includes(normalizedQuery)) {
+      row.style.display = "table-row";
+      resultsCount++;
+    }
+  });
+  tbody.querySelector("tr.nothing-found").style.display =
+    resultsCount == 0 ? "table-row" : "none";
+};
