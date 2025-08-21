@@ -15,16 +15,13 @@
 <section class="page-content">
     @if (Model.Count > 0)
     {
-        @await Html.PartialAsync("Components/_TableSearch", new TableSearchStruct("Product","products-table"))
+        @await Html.PartialAsync("Components/_TableSearch", new TableSearchStruct("Product", "products-table"))
         <div class="table-container">
             <table class="table striped" id="products-table">
                 <thead>
                     <tr>
                         <th>
-                            <div class="checkbox">
-                                <input type="checkbox" />
-                                <i class="material-icons">check</i>
-                            </div>
+                            @await Html.PartialAsync("Components/_Checkbox", 0)
                         </th>
                         <th>#</th>
                         <th>Name</th>
@@ -35,15 +32,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (int i = 0; i < Model.Count; i++ )
+                    @for (int i = 0; i < Model.Count; i++)
                     {
                         var product = Model[i];
                         <tr>
                             <td>
-                                <div class="checkbox">
-                                    <input type="checkbox" />
-                                    <i class="material-icons">check</i>
-                                </div>
+                                @await Html.PartialAsync("Components/_Checkbox", 0)
                             </td>
                             <td>@((ViewBag.Page - 1) * 10 + i + 1)</td>
                             <td>@product.Name</td>
@@ -72,24 +66,24 @@
                     </td>
                 </tr>
                                 }
-                                <tr class="nothing-found">
-                                    <td colspan="100%">
-                                        No result found!
-                                    </td>
-                                </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="100%">
-                            @await Html.PartialAsync("Components/_Pagination", "Product")
-                        </td>
-                    </tr>
-                </tfoot>
+                <tr class="nothing-found">
+                    <td colspan="100%">
+                        No result found!
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="100%">
+                        @await Html.PartialAsync("Components/_Pagination", "Product")
+                    </td>
+                </tr>
+            </tfoot>
 
-            </table>
-        </div>
-    }
-    else
+        </table>
+    </div>
+        }
+        else
     {
         @await Html.PartialAsync("Components/_Alert", "No product defined yet!")
     }

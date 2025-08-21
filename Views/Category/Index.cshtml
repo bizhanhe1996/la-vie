@@ -20,10 +20,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <div class="checkbox">
-                                <input type="checkbox" />
-                                <i class="material-icons">check</i>
-                            </div>
+                            @await Html.PartialAsync("Components/_Checkbox", 0)
                         </th>
                         <th class="!w-0">
                             #
@@ -39,10 +36,7 @@
                     {
                         <tr>
                             <td>
-                                <div class="checkbox">
-                                    <input type="checkbox" data-id="@Model[i].Id" />
-                                    <i class="material-icons">check</i>
-                                </div>
+                                @await Html.PartialAsync("Components/_Checkbox", Model[i].Id)
                             </td>
                             <td>@((ViewBag.Page - 1) * 10 + i + 1)</td>
                             <td>@Model[i].Title</td>

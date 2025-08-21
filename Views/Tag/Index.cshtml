@@ -16,10 +16,7 @@
             <table class="table striped">
                 <thead>
                     <th>
-                        <div class="checkbox">
-                            <input type="checkbox" />
-                            <i class="material-icons">check</i>
-                        </div>
+                        @await Html.PartialAsync("Components/_Checkbox", 0)
                     </th>
                     <th>#</th>
                     <th>Name</th>
@@ -32,10 +29,7 @@
                     {
                         <tr>
                             <td>
-                                <div class="checkbox">
-                                    <input type="checkbox" />
-                                    <i class="material-icons">check</i>
-                                </div>
+                                @await Html.PartialAsync("Components/_Checkbox", 0)
                             </td>
                             <td>@tag.Id</td>
                             <td>@tag.Name</td>

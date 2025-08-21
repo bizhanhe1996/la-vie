@@ -19,10 +19,7 @@
             <table class="table striped">
                 <thead>
                     <th>
-                        <div class="checkbox">
-                            <input type="checkbox" class="table-master-checkbox" />
-                            <i class="material-icons">check</i>
-                        </div>
+                        @await Html.PartialAsync("Components/_Checkbox", 0)
                     </th>
                     <th>#</th>
                     <th>First Name</th>
@@ -40,10 +37,7 @@
                     {
                         <tr>
                             <td>
-                                <div class="checkbox">
-                                    <input type="checkbox" />
-                                    <i class="material-icons">check</i>
-                                </div>
+                                @await Html.PartialAsync("Components/_Checkbox", 0)
                             </td>
                             <td>@((ViewBag.Page - 1) * 10 + i + 1)</td>
                             <td>@Model[i].FirstName</td>
