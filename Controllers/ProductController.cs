@@ -23,14 +23,11 @@ public class ProductController : BaseController
     public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
         SetIndexBreadcrumbs();
-
-        // pagination
         Paginator
             .SetTotalCount(await context.Products.CountAsync())
             .SetPage(page)
             .SetSize(size)
             .Run();
-
         var products = await context
             .Products.OrderBy(p => p.Id)
             .Skip(Paginator.SkipCount)

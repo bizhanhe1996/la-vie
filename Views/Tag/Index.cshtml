@@ -18,11 +18,10 @@
                     <th>
                         @await Html.PartialAsync("Components/_Checkbox", 0)
                     </th>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Products</th>
-                    <th>Actions</th>
+                    @foreach (var header in new[] { "#", "Name", "Description", "Products", "Actions" })
+                    {
+                        <th>@header</th>
+                    }
                 </thead>
                 <tbody>
                     @foreach (var tag in Model)
@@ -51,6 +50,6 @@
     }
     else
     {
-        @await Html.PartialAsync("Components/_Alert", "No tag defined yet!")
+        @await Html.PartialAsync("Components/_Alert", "Nothing found!")
     }
 </section>

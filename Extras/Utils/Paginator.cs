@@ -46,7 +46,21 @@ public class Paginator
 
     private void _limitedRecords()
     {
-        _pagesCount = _totalCount / _size;
+        float pagesCountFloat = (float)_totalCount / _size;
+
+        if (pagesCountFloat < 1)
+        {
+            _pagesCount = 1;
+        }
+        else if (Math.Abs(pagesCountFloat - 1) < 0.00001f)
+        {
+            _pagesCount = 1;
+        }
+        else if (pagesCountFloat > 1)
+        {
+            _pagesCount = (int)Math.Ceiling(pagesCountFloat);
+        }
+
         if (_pagesCount == 0)
         {
             _pagesCount = 1;

@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Products";
 }
-
 <section class="page-bar">
     @await Html.PartialAsync("Components/_Breadcrumbs")
     <div class="flex gap-2 items-center">
@@ -13,9 +12,10 @@
 </section>
 
 <section class="page-content">
+    @await Html.PartialAsync("Components/_TableSearch", new TableSearchStruct("Product", "products-table"))
     @if (Model.Count > 0)
     {
-        @await Html.PartialAsync("Components/_TableSearch", new TableSearchStruct("Product", "products-table"))
+
         <div class="table-container">
             <table class="table striped" id="products-table">
                 <thead>
@@ -23,12 +23,10 @@
                         <th>
                             @await Html.PartialAsync("Components/_Checkbox", 0)
                         </th>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Category</th>
-                        <th>Tags</th>
-                        <th>Actions</th>
+                        @foreach (var header in new[] { "#", "Name", "Price", "Category", "Tags", "Actions" })
+                        {
+                            <th>@header</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -85,6 +83,6 @@
         }
         else
     {
-        @await Html.PartialAsync("Components/_Alert", "No product defined yet!")
+        @await Html.PartialAsync("Components/_Alert", "Nothing found!")
     }
 </section>
