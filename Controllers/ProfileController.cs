@@ -9,16 +9,14 @@ namespace LaVie.Controllers;
 public class ProfileController : BaseController
 {
     private readonly IWebHostEnvironment _env;
-    private readonly MyAppContext _context;
 
     public ProfileController(
         UserManager<User> userManager,
         IWebHostEnvironment env,
         MyAppContext context
     )
-        : base("Profile", "Profile", userManager)
+        : base("Profile", "Profile", context, userManager)
     {
-        _context = context;
         _env = env;
     }
 

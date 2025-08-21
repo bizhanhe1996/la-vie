@@ -11,24 +11,20 @@ namespace LaVie.Controllers;
 [Authorize]
 public class ProductController : BaseController
 {
-    private readonly MyAppContext context;
-
     public ProductController(MyAppContext context, UserManager<User> userManager)
-        : base("Product", "Products", userManager)
-    {
-        this.context = context;
-    }
+        : base("Product", "Products", context, userManager) { }
 
     [HttpGet]
     public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
         SetIndexBreadcrumbs();
         Paginator
-            .SetTotalCount(await context.Products.CountAsync())
+            .SetTotalCount(await _context.Products.CountAsync())
             .SetPage(page)
             .SetSize(size)
             .Run();
-        var products = await context
+
+        var products = await _context
             .Products.OrderBy(p => p.Id)
             .Skip(Paginator.SkipCount)
             .Take(Paginator.TakeCount)
@@ -47,7 +43,7 @@ public class ProductController : BaseController
         }
         query = query.ToUpper();
 
-        var products = await context
+        var products = await _context
             .Products.Where(p => p.Name.ToUpper().Contains(query))
             .Include(p => p.Category)
             .Include(p => p.ProductTags!)
@@ -85,8 +81,8 @@ public class ProductController : BaseController
 
             product.ProductTags = MapSelectedTagsIds(product?.SelectedTagsIds ?? []);
 
-            context.Products.Add(product!);
-            await context.SaveChangesAsync();
+            _context.Products.Add(product!);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         else
@@ -99,7 +95,7 @@ public class ProductController : BaseController
     [HttpGet]
     public async Task<IActionResult> Update(int id)
     {
-        Product? updatable = await context.Products.FindAsync(id);
+        Product? updatable = await _context.Products.FindAsync(id);
         if (updatable == null)
         {
             return NotFound();
@@ -117,8 +113,8 @@ public class ProductController : BaseController
     {
         if (ModelState.IsValid)
         {
-            context.Products.Update(product);
-            await context.SaveChangesAsync();
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         else
@@ -131,26 +127,26 @@ public class ProductController : BaseController
 
     public async Task<IActionResult> Delete(int id)
     {
-        return await Delete<Product>(context, id);
+        return await Delete<Product>(_context, id);
     }
 
     private ProductController SetCategories()
     {
-        ViewBag.Categories = context.Categories.ToList();
+        ViewBag.Categories = _context.Categories.ToList();
         return this;
     }
 
     private ProductController SetTags()
     {
         var Tags = new Dictionary<string, string>();
-        context.Tags.ToList().ForEach(t => Tags.Add(t.Name, t.Id.ToString()));
+        _context.Tags.ToList().ForEach(t => Tags.Add(t.Name, t.Id.ToString()));
         ViewBag.Tags = Tags;
         return this;
     }
 
     private bool CheckUniqueConstraint(Product product)
     {
-        bool isTaken = context.Products.Any(p => p.Name == product.Name);
+        bool isTaken = _context.Products.Any(p => p.Name == product.Name);
         if (isTaken)
         {
             ModelState.AddModelError("Name", "This name is already taken.");

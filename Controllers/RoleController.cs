@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using LaVie.Data;
 using LaVie.Models;
 using LaVie.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -12,8 +13,12 @@ public class RoleController : BaseController
 {
     private readonly RoleManager<IdentityRole<int>> _roleManager;
 
-    public RoleController(RoleManager<IdentityRole<int>> roleManager, UserManager<User> userManager)
-        : base("Role", "Roles", userManager)
+    public RoleController(
+        RoleManager<IdentityRole<int>> roleManager,
+        UserManager<User> userManager,
+        MyAppContext context
+    )
+        : base("Role", "Roles", context, userManager)
     {
         _roleManager = roleManager;
     }

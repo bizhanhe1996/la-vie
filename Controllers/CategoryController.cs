@@ -12,13 +12,8 @@ namespace LaVie.Controllers;
 [Authorize]
 public class CategoryController : BaseController
 {
-    private readonly MyAppContext context;
-
     public CategoryController(MyAppContext context, UserManager<User> userManager)
-        : base("Category", "Categories", userManager)
-    {
-        this.context = context;
-    }
+        : base("Category", "Categories", context, userManager) { }
 
     public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
@@ -26,12 +21,12 @@ public class CategoryController : BaseController
         SetIndexBreadcrumbs();
         // pagination
         Paginator
-            .SetTotalCount(await context.Categories.CountAsync())
+            .SetTotalCount(await _context.Categories.CountAsync())
             .SetPage(page)
             .SetSize(size)
             .Run();
         // database
-        List<Category> categories = await context
+        List<Category> categories = await _context
             .Categories.OrderBy(c => c.Id)
             .Skip(Paginator.SkipCount)
             .Take(Paginator.TakeCount)
@@ -52,7 +47,7 @@ public class CategoryController : BaseController
     [HttpGet]
     public async Task<IActionResult> Update(int Id)
     {
-        var category = await context.Categories.FindAsync(Id);
+        var category = await _context.Categories.FindAsync(Id);
         if (category == null)
         {
             return NotFound();
@@ -70,8 +65,8 @@ public class CategoryController : BaseController
     {
         if (ModelState.IsValid)
         {
-            context.Categories.Update(category);
-            await context.SaveChangesAsync();
+            _context.Categories.Update(category);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         else
@@ -88,8 +83,8 @@ public class CategoryController : BaseController
     {
         if (ModelState.IsValid)
         {
-            context.Categories.Add(category);
-            await context.SaveChangesAsync();
+            _context.Categories.Add(category);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         else
@@ -102,14 +97,14 @@ public class CategoryController : BaseController
     [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
-        return await Delete<Category>(context, id);
+        return await Delete<Category>(_context, id);
     }
 
     [ValidateAntiForgeryToken]
     [HttpPost]
     public async Task<IActionResult> MultiDelete([FromBody] int[] ids)
     {
-        return await MultiDelete<Category>(context, ids, "/Category");
+        return await MultiDelete<Category>(_context, ids, "/Category");
     }
 
     [HttpGet]
@@ -124,14 +119,14 @@ public class CategoryController : BaseController
             .RuleFor(c => c.Description, f => f.Lorem.Sentence(12));
         var fakeCategories = faker.Generate(100);
 
-        context.Categories.AddRange(fakeCategories);
-        await context.SaveChangesAsync();
+        _context.Categories.AddRange(fakeCategories);
+        await _context.SaveChangesAsync();
         return RedirectToAction("Index");
     }
 
     private bool CheckUniqueConstraint(Category category)
     {
-        bool isTaken = context.Categories.Any(c => c.Title == category.Title);
+        bool isTaken = _context.Categories.Any(c => c.Title == category.Title);
         if (isTaken)
         {
             ModelState.AddModelError("Name", "This title is already taken.");

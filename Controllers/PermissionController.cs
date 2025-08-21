@@ -9,7 +9,6 @@ namespace LaVie.Controllers;
 [Authorize(Roles = "Admin")]
 public class PermissionController : BaseController
 {
-    private readonly MyAppContext _context;
     private readonly RoleManager<IdentityRole<int>> _roleManager;
 
     public PermissionController(
@@ -17,10 +16,9 @@ public class PermissionController : BaseController
         UserManager<User> userManager,
         RoleManager<IdentityRole<int>> roleManager
     )
-        : base("Permission", "Permissions", userManager)
+        : base("Permission", "Permissions", context, userManager)
     {
         _roleManager = roleManager;
-        _context = context;
     }
 
     [HttpGet]

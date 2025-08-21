@@ -16,16 +16,23 @@ namespace LaVie.Controllers;
 [ServiceFilter(typeof(GlobalsInjectorFilter))]
 public class BaseController : Controller, IActionFilter
 {
-    public BaseController(string controller, string indexTitle, UserManager<User> userManager)
+    public BaseController(
+        string controller,
+        string indexTitle,
+        MyAppContext context,
+        UserManager<User> userManager
+    )
     {
         Controller = controller;
         IndexTitle = indexTitle;
+        _context = context;
         _userManager = userManager;
         Paginator = new(this);
     }
 
     private string Controller { set; get; }
     private string IndexTitle { set; get; }
+    protected readonly MyAppContext _context;
     protected readonly UserManager<User> _userManager;
     protected readonly Paginator Paginator;
 

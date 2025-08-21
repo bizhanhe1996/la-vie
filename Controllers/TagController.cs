@@ -11,19 +11,14 @@ namespace LaVie.Controllers;
 [Authorize]
 public class TagController : BaseController
 {
-    private readonly MyAppContext context;
-
     public TagController(MyAppContext context, UserManager<User> userManager)
-        : base("Tag", "Tags", userManager)
-    {
-        this.context = context;
-    }
+        : base("Tag", "Tags", context, userManager) { }
 
     [HttpGet]
     public IActionResult Index()
     {
         SetIndexBreadcrumbs();
-        List<Tag> tags = context.Tags.Include(tag => tag.ProductTags).ToList();
+        List<Tag> tags = _context.Tags.Include(tag => tag.ProductTags).ToList();
         return View(tags);
     }
 
@@ -38,7 +33,7 @@ public class TagController : BaseController
     [HttpGet]
     public async Task<IActionResult> Update(int id)
     {
-        var tag = await context.Tags.FindAsync(id);
+        var tag = await _context.Tags.FindAsync(id);
         if (tag == null)
         {
             return NotFound();
@@ -56,8 +51,8 @@ public class TagController : BaseController
     {
         if (ModelState.IsValid)
         {
-            context.Tags.Update(tag);
-            await context.SaveChangesAsync();
+            _context.Tags.Update(tag);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         else
@@ -73,8 +68,8 @@ public class TagController : BaseController
     {
         if (ModelState.IsValid)
         {
-            context.Tags.Add(tag);
-            await context.SaveChangesAsync();
+            _context.Tags.Add(tag);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         else
@@ -86,6 +81,6 @@ public class TagController : BaseController
     [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
-        return await Delete<Tag>(context, id);
+        return await Delete<Tag>(_context, id);
     }
 }

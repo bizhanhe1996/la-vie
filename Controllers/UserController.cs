@@ -12,21 +12,20 @@ namespace LaVie.Controllers;
 [Authorize(Roles = "Admin,Manager")]
 public class UserController : BaseController
 {
-    protected readonly MyAppContext context;
-
     public UserController(MyAppContext context, UserManager<User> userManager)
-        : base("User", "Users", userManager)
-    {
-        this.context = context;
-    }
+        : base("User", "Users", context, userManager) { }
 
     [Authorize(Roles = "Admin,Manager")]
     public async Task<IActionResult> Index(int page = 1, int size = 10)
     {
         SetIndexBreadcrumbs();
 
-        Paginator.SetTotalCount(await context.Users.CountAsync()).SetPage(page).SetSize(size).Run();
-        var users = await context
+        Paginator
+            .SetTotalCount(await _context.Users.CountAsync())
+            .SetPage(page)
+            .SetSize(size)
+            .Run();
+        var users = await _context
             .Users.OrderBy(u => u.CreatedAt)
             .Skip(Paginator.SkipCount)
             .Take(Paginator.TakeCount)
@@ -79,7 +78,7 @@ public class UserController : BaseController
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(int Id)
     {
-        var user = await context.Users.FindAsync(Id);
+        var user = await _context.Users.FindAsync(Id);
         if (user == null)
         {
             return NotFound();
@@ -98,8 +97,8 @@ public class UserController : BaseController
     {
         if (ModelState.IsValid)
         {
-            context.Users.Update(user);
-            await context.SaveChangesAsync();
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         else
@@ -113,6 +112,6 @@ public class UserController : BaseController
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
-        return await Delete<User>(this.context, id);
+        return await Delete<User>(_context, id);
     }
 }

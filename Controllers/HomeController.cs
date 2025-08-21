@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using LaVie.Data;
 using LaVie.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,8 +12,12 @@ public class HomeController : BaseController
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger, UserManager<User> userManager)
-        : base("Home", "Homes", userManager)
+    public HomeController(
+        ILogger<HomeController> logger,
+        UserManager<User> userManager,
+        MyAppContext context
+    )
+        : base("Home", "Homes", context, userManager)
     {
         _logger = logger;
     }
