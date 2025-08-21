@@ -1,4 +1,4 @@
-span.badge {
+:where(span,a).badge {
     padding-inline: 0.5rem;
     padding-block: 0.25rem;
     border-radius: 1rem;
@@ -16,5 +16,16 @@ span.badge {
     }
     &.secondary {
         background: var(--theme-color-secondary);
+    }
+}
+
+a.badge {
+    cursor: pointer;
+    transition: filter 0.3s ease;
+    &.primary:hover {
+        filter: brightness(125%);
+    }
+    &.secondary:hover {
+filter: brightness(125%);
     }
 }

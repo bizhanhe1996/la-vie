@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using LaVie.Data;
+using LaVie.Extras.Structs;
 using LaVie.Models;
 using LaVie.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -92,6 +93,29 @@ public class RoleController : BaseController
         {
             return View();
         }
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Permissions(string name)
+    {
+        SetIndexBreadcrumbs(
+            new Breadcrumb()
+            {
+                Controller = "Role",
+                Action = "Permissions",
+                Title = $"Permissions of {name}",
+            }
+        );
+
+        var role = await _roleManager.FindByNameAsync(name);
+        if (role == null)
+        {
+            return NotFound();
+        }
+
+        var claims = await _roleManager.GetClaimsAsync(role);
+        List<string> permissions = claims.Select(c => c.Value).ToList();
+        return View(permissions);
     }
 
     private async Task RemoveClaimsOfRole(IdentityRole<int> role, IList<Claim> claims)

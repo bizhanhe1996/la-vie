@@ -42,9 +42,9 @@ public class BaseController : Controller, IActionFilter
         return this;
     }
 
-    protected Controller SetIndexBreadcrumbs()
+    protected Controller SetIndexBreadcrumbs(Breadcrumb? extraItem = null)
     {
-        ViewBag.Path = new Breadcrumb[]
+        ViewBag.Path = new List<Breadcrumb?>
         {
             new()
             {
@@ -53,6 +53,12 @@ public class BaseController : Controller, IActionFilter
                 Title = IndexTitle,
             },
         };
+
+        if (extraItem != null)
+        {
+            ViewBag.Path.Add(extraItem);
+        }
+
         return this;
     }
 

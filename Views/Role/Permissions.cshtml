@@ -1,0 +1,23 @@
+@model List<string>
+@{
+    ViewData["Title"] = "Permissions of role";
+}
+
+<section class="page-bar">
+    @await Html.PartialAsync("Components/_Breadcrumbs")
+    @await Html.PartialAsync("Components/_BackButton")
+</section>
+
+<section class="page-content">
+
+<ul class="page-text">
+@foreach(var permission in Model) {
+    
+    <li>@permission</li>
+    
+}
+</ul>
+
+
+
+</section>

@@ -30,8 +30,10 @@
                         <tr>
                             <td>@(i + 1)</td>
                             <td>@Model[i].Name</td>
-                            <td><span class="badge primary">@ViewBag.Counts[@Model[i].Name]["permissions"]</span></td>
-                            <td><span class="badge primary">@ViewBag.Counts[@Model[i].Name]["users"]</span></td>
+                            <td><a class="badge primary" asp-controller="Role" asp-action="Permissions"
+                                    asp-route-name="@Model[i].Name">@ViewBag.Counts[@Model[i].Name]["permissions"]</a></td>
+                            <td><a class="badge primary" asp-controller="Role" asp-action="Users"
+                                    asp-route-name="@Model[i].Name">@ViewBag.Counts[@Model[i].Name]["users"]</a></td>
                             <td>
                                 <div class="actions">
                                     @await Html.PartialAsync("Components/_UpdateButton", new UpdateButtonStruct("Role",
@@ -66,9 +68,9 @@
                     "Client": false
                 },
                 description: `Roles are assigned to users.
-                                The creation or deletion of roles is not permitted.
-                                You may only modify role assignments to users or 
-                                adjust the permissions associated with each role.`
+                                        The creation or deletion of roles is not permitted.
+                                        You may only modify role assignments to users or 
+                                        adjust the permissions associated with each role.`
             });
         }, 1000);
     </script>
