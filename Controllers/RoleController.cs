@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Text.Json;
 using LaVie.Data;
 using LaVie.Extras.Structs;
 using LaVie.Models;
@@ -103,7 +104,7 @@ public class RoleController : BaseController
             {
                 Controller = "Role",
                 Action = "Permissions",
-                Title = $"Permissions of {name}",
+                Title = $"Permissions of {name.ToLower()}",
             }
         );
 
@@ -114,8 +115,10 @@ public class RoleController : BaseController
         }
 
         var claims = await _roleManager.GetClaimsAsync(role);
-        List<string> permissions = claims.Select(c => c.Value).ToList();
-        return View(permissions);
+        List<string> permissions = [.. claims.Select(c => c.Value)];
+        var groupedPermissions = GroupPermissionsByModule(permissions);
+        ViewBag.CurrentRole = name;
+        return View(groupedPermissions);
     }
 
     private async Task RemoveClaimsOfRole(IdentityRole<int> role, IList<Claim> claims)
@@ -141,5 +144,29 @@ public class RoleController : BaseController
                 ModelState.AddModelError("", $"Failed to add permission {permission}");
             }
         }
+    }
+
+    private Dictionary<string, List<string>> GroupPermissionsByModule(List<string> permissions)
+    {
+        var groupedPermissions = new Dictionary<string, List<string>>();
+        var currentModule = "";
+        var currentAction = "";
+        foreach (var permission in permissions)
+        {
+            var parts = permission.Split("_");
+            currentModule = parts[0];
+            currentAction = parts[1];
+
+            if (groupedPermissions.ContainsKey(currentModule))
+            {
+                groupedPermissions[currentModule].Add(currentAction);
+            }
+            else
+            {
+                groupedPermissions.Add(currentModule, []);
+                groupedPermissions[currentModule].Add(currentAction);
+            }
+        }
+        return groupedPermissions;
     }
 }

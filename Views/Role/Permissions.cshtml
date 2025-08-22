@@ -1,6 +1,6 @@
-@model List<string>
+@model Dictionary<string, List<string>>
 @{
-    ViewData["Title"] = "Permissions of role";
+    ViewData["Title"] = "Permissions of " + ViewBag.CurrentRole + " role";
 }
 
 <section class="page-bar">
@@ -9,15 +9,42 @@
 </section>
 
 <section class="page-content">
-
-<ul class="page-text">
-@foreach(var permission in Model) {
-    
-    <li>@permission</li>
-    
-}
-</ul>
-
-
-
+    @if (Model.Count > 0)
+    {
+        <div class="table-container">
+            <table class="table striped" id="products-table">
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Permissions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var pair in Model) {
+                        <tr>
+                            <td>
+                                @(pair.Key[0]+pair.Key.ToLower()[1..])
+                            </td>
+                            <td>
+                                @foreach(var action in pair.Value) {
+                                    <span class="badge primary">@action.ToLower()</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="100%">
+                            @("Permissions of " + ViewBag.CurrentRole + " role")
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    }
+    else
+    {
+        @await Html.PartialAsync("Components/_Alert", "Nothing found!")
+    }
 </section>
