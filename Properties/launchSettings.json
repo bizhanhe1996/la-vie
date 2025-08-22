@@ -16,7 +16,7 @@
       "applicationUrl": "http://localhost:5076",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ENV_PROJECT_NAME":"Mes Amis"
+        "ENV_PROJECT_NAME":"LA VIE"
       }
     },
     "https": {
